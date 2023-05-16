@@ -1,287 +1,7 @@
-<!-- build time:Mon May 15 2023 23:21:11 GMT+0800 (中国标准时间) --><!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#FFF"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png"><link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="alternate" type="application/rss+xml" title="Hide your thoughts" href="http://blog.itshare.work/rss.xml"><link rel="alternate" type="application/atom+xml" title="Hide your thoughts" href="http://blog.itshare.work/atom.xml"><link rel="alternate" type="application/json" title="Hide your thoughts" href="http://blog.itshare.work/feed.json"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/css/app.css?v=0.2.5"><link rel="canonical" href="http://blog.itshare.work/Ansible/Ansible/"><title>运维自动化工具Ansible(一) - Ansible | Cookie = Hide your thoughts</title><meta name="generator" content="Hexo 6.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">运维自动化工具Ansible(一)</h1><div class="meta"><span class="item" title="创建时间：2023-02-21 19:12:21"><span class="icon"><i class="ic i-calendar"></i> </span><span class="text">发表于</span> <time itemprop="dateCreated datePublished" datetime="2023-02-21T19:12:21+08:00">2023-02-21</time> </span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i> </span><span class="text">本文字数</span> <span>48k</span> <span class="text">字</span> </span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i> </span><span class="text">阅读时长</span> <span>44 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span> <span class="line"></span> <span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">Cookie</a></li></ul><ul class="right"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div id="imgs" class="pjax"><ul><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/20.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/8.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/21.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/12.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/30.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/2.jpg"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"/><use xlink:href="#gentle-wave" x="48" y="3"/><use xlink:href="#gentle-wave" x="48" y="5"/><use xlink:href="#gentle-wave" x="48" y="7"/></g></svg></div><main><div class="inner"><div id="main" class="pjax"><div class="article wrap"><div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i> <span><a href="/">首页</a></span><i class="ic i-angle-right"></i> <span class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Ansible/" itemprop="item" rel="index" title="分类于 Ansible"><span itemprop="name">Ansible</span></a><meta itemprop="position" content="1"></span></div><article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://blog.itshare.work/Ansible/Ansible/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.jpg"><meta itemprop="name" content="yuan kun"><meta itemprop="description" content=", 解决各种服务器、网络、应用等技术问题，致力于保障系统稳定、高效运行"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Hide your thoughts"></span><div class="body md" itemprop="articleBody"><h1 id="Ansible介绍和架构"><a href="#Ansible介绍和架构" class="headerlink" title="Ansible介绍和架构"></a>Ansible介绍和架构</h1><h2 id="Ansible发展史"><a href="#Ansible发展史" class="headerlink" title="Ansible发展史"></a>Ansible发展史</h2><p>Ansible 的名称来自科幻小说《安德的游戏》中跨越时空的即时通信工具，使用它可以在相距数光年的距离，远程实时控制前线的舰队战斗<br>2012-03-09，发布0.0.1版，2015-10-17，Red Hat宣布1.5亿美元收购<br>官网：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYW5zaWJsZS5jb20v">https://www.ansible.com/</span><br>官方文档：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmFuc2libGUuY29tLw==">https://docs.ansible.com/</span></p><h2 id="Ansible-功能"><a href="#Ansible-功能" class="headerlink" title="Ansible 功能"></a>Ansible 功能</h2><ul><li>批量执行远程命令,可以对远程的多台主机同时进行命令的执行</li><li>批量安装和配置软件服务，可以对远程的多台主机进行自动化的方式配置和管理各种服务</li><li>编排高级的企业级复杂的IT架构任务, Ansible的Playbook和role可以轻松实现大型的IT复杂架构</li><li>提供自动化运维工具的开发API, 有很多运维工具,如jumpserver就是基于 ansible 实现自动化管工功能</li></ul><h2 id="Ansible-特点"><a href="#Ansible-特点" class="headerlink" title="Ansible 特点"></a>Ansible 特点</h2><p><strong>优点</strong></p><ul><li>功能丰富的模块：提供了多达数千个的各种功能的模块,完成特定任务只需调用特定模块即可，还</li><li>支持自定义模块，可使用任何编程语言写模块</li><li>使用和部署简单: 无需安装专用代理软件,基于python和SSH(默认已安装)实现</li><li>安全: 基于OpenSSH实现安全通讯无需专用协议</li><li>幂等性：一个任务执行1遍和执行n遍效果一样，不因重复执行带来意外情况,此特性和模块有关</li><li>支持playbook编排任务，YAML格式，编排任务，支持丰富的数据结构</li><li>较强大的多层解决方案 Role</li><li>Python语言实现, 基于Paramiko（python对ssh的实现），PyYAML，Jinja2（模板语言）三个关键模块</li><li>属于红帽(IBM)公司产品,背景强大,未来发展前景光明</li></ul><p><strong>缺点</strong></p><ul><li>如果管理的主机较多时,执行效率不如saltstack高</li><li>当前还不支持像MySQL数据库一样的事务回滚</li></ul><h2 id="Ansible-架构"><a href="#Ansible-架构" class="headerlink" title="Ansible 架构"></a>Ansible 架构</h2><h3 id="Ansible-组成"><a href="#Ansible-组成" class="headerlink" title="Ansible 组成"></a>Ansible 组成</h3><p>组合INVENTORY、API、MODULES、PLUGINS的绿框，为ansible命令工具，其为核心执行工具</p><p><img data-src="/../image.assets/1676984392121.png" alt="1676984392121"></p><ul><li>INVENTORY：Ansible管理主机的清单文件,默认为 &#x2F;etc&#x2F;ansible&#x2F;hosts</li><li>MODULES：Ansible执行命令的功能模块，多数为内置核心模块，也可自定义</li><li>PLUGINS：模块功能的补充，如连接类型插件、循环插件、变量插件、过滤插件等，该功能不常用</li><li>API：供第三方程序调用的应用程序编程接口</li></ul><h3 id="Ansible-命令执行来源"><a href="#Ansible-命令执行来源" class="headerlink" title="Ansible 命令执行来源"></a>Ansible 命令执行来源</h3><ul><li>USER 普通用户，即SYSTEM ADMINISTRATOR</li><li>PLAYBOOKS：任务剧本（任务集），编排定义Ansible任务集的配置文件，由Ansible顺序依次执行，通常是JSON格式的YML文件</li><li>CMDB（配置管理数据库） API 调用</li><li>PUBLIC&#x2F;PRIVATE CLOUD API调用</li><li>USER-&gt; Ansible Playbook -&gt; Ansibile</li></ul><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul><li>执行ansible的主机一般称为管理端, 主控端，中控，master或堡垒机</li><li>主控端Python版本需要2.6或以上</li><li>被控端Python版本小于2.4，需要安装python-simplejson</li><li>被控端如开启SELinux需要安装libselinux-python</li><li>windows 不能做为主控端,只能做为被控制端</li></ul><h1 id="Ansible-安装和常见模块"><a href="#Ansible-安装和常见模块" class="headerlink" title="Ansible 安装和常见模块"></a>Ansible 安装和常见模块</h1><h2 id="Ansible-安装"><a href="#Ansible-安装" class="headerlink" title="Ansible 安装"></a>Ansible 安装</h2><p>ansible的安装方法有多种<br>官方文档</p><pre><code class="text">https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
-https://docs.ansible.com/ansible/latest/installation_guide/index.html
-</code></pre><p>下载</p><pre><code class="text">https://releases.ansible.com/ansible/
-</code></pre><p>pip 下载</p><pre><code class="text">https://pypi.org/project/ansible/
-</code></pre><h3 id="包安装方式"><a href="#包安装方式" class="headerlink" title="包安装方式"></a>包安装方式</h3><pre><code class="text">#CentOS 的EPEL源的rpm包安装
-[root@centos ~]#yum install ansible
-#ubuntu 安装
-[root@ubuntu ~]#apt -y install ansible
-</code></pre><h3 id="pip安装"><a href="#pip安装" class="headerlink" title="pip安装"></a>pip安装</h3><p>pip 是安装Python包的管理器，类似 yum<br>范例: 在rocky8上通过pip3安装ansible</p><pre><code class="text">[root@rocky8 ~]#yum -y install python39 rust
-[root@rocky8 ~]#pip3 install ansible
-[root@rocky8 ~]#ansible --version
-ansible [core 2.12.6]
-config file = None
-configured module search path = [&#39;/root/.ansible/plugins/modules&#39;,
-&#39;/usr/share/ansible/plugins/modules&#39;]
-ansible python module location = /usr/lib/python3.9/site-packages/ansible
-ansible collection location =
-/root/.ansible/collections:/usr/share/ansible/collections
-executable location = /usr/bin/ansible
-python version = 3.9.6 (default, Nov 9 2021, 13:31:27) [GCC 8.5.0 20210514
-(Red Hat 8.5.0-3)]
-jinja version = 3.1.2
-libyaml = True
-[root@rocky8 ~]#ansible-doc -l 2&gt; /dev/null|wc -l
-6763
-</code></pre><p>范例: 安装python3.8 支持ansible2.12以上版本</p><pre><code class="text">[root@rocky8 ~]#yum -y install python38 python38-pip
-[root@rocky8 ~]#pip3 install --upgrade pip -i https://pypi.douban.com/simple
-[root@rocky8 ~]#pip3 install ansible -i https://pypi.douban.com/simple/
-[root@rocky8 ~]#ansible --version
-ansible [core 2.12.6]
-config file = None
-configured module search path = [&#39;/root/.ansible/plugins/modules&#39;,
-&#39;/usr/share/ansible/plugins/modules&#39;]
-ansible python module location = /usr/local/lib/python3.8/site-
-packages/ansible
-ansible collection location =
-/root/.ansible/collections:/usr/share/ansible/collections
-executable location = /usr/local/bin/ansible
-python version = 3.8.8 (default, Nov 9 2021, 13:31:34) [GCC 8.5.0 20210514
-(Red Hat 8.5.0-3)]
-jinja version = 3.1.2
-libyaml = True
-</code></pre><p>范例: 安装默认的python3.6版本会有警报提示</p><pre><code class="text">[root@rocky8 ~]#yum -y install python3
-[root@rocky8 ~]#pip3 install --upgrade pip -i https://pypi.douban.com/simple
-[root@rocky8 ~]#pip3 install ansible -i https://pypi.douban.com/simple/
-[root@rocky8 ~]#ansible --version
-[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the
-controller starting with Ansible 2.12. Current version: 3.6.8 (default, Nov
-9 2021, 14:44:26) [GCC 8.5.0 20210514 (Red Hat 8.5.0-3)]. This feature will be
-removed from ansible-core in version 2.12. Deprecation warnings
-can be disabled by setting deprecation_warnings=False in ansible.cfg.
-/usr/local/lib/python3.6/site-packages/ansible/parsing/vault/__init__.py:44:
-CryptographyDeprecationWarning: Python 3.6 is no longer supported by the Python
-core team. Therefore, support for it is deprecated in cryptography and will be
-removed in a future release.
-from cryptography.exceptions import InvalidSignature
-ansible [core 2.11.12]
-config file = None
-configured module search path = [&#39;/root/.ansible/plugins/modules&#39;,
-&#39;/usr/share/ansible/plugins/modules&#39;]
-ansible python module location = /usr/local/lib/python3.6/site-
-packages/ansible
-ansible collection location =
-/root/.ansible/collections:/usr/share/ansible/collections
-executable location = /usr/local/bin/ansible
-python version = 3.6.8 (default, Nov 9 2021, 14:44:26) [GCC 8.5.0 20210514
-(Red Hat 8.5.0-3)]
-jinja version = 3.0.3
-libyaml = True
-[root@rocky8 ~]#ansible-doc -l 2&gt; /dev/null|wc -l
-6141
-</code></pre><p><img data-src="/../image.assets/1676985923345.png" alt="1676985923345"></p><p>范例</p><pre><code class="text">[root@centos7 ~]#yum -y install python-pip
-[root@centos7 ~]#pip install --upgrade pip
-[root@centos7 ~]#pip install ansible --upgrade
-[root@centos7 ~]#ansible --version
-/usr/lib64/python2.7/site-packages/cryptography/__init__.py:39:
-CryptographyDeprecationWarning: Python 2 is no longer supported by the Python
-core team. Support for it is now deprecated in cryptography, and will be removed
-in a future release.
-CryptographyDeprecationWarning,
-ansible 2.9.12
-config file = None
-configured module search path = [u&#39;/root/.ansible/plugins/modules&#39;,
-u&#39;/usr/share/ansible/plugins/modules&#39;]
-ansible python module location = /usr/lib/python2.7/site-packages/ansible
-executable location = /usr/bin/ansible
-python version = 2.7.5 (default, Apr 2 2020, 13:16:51) [GCC 4.8.5 20150623
-(Red Hat 4.8.5-39)]
-[root@centos7 ~]#ll /opt/etc/ansible/ansible.cfg
--rw-r--r-- 1 wang bin 19980 Aug 11 21:34 /opt/etc/ansible/ansible.cfg
-</code></pre><h3 id="确认安装"><a href="#确认安装" class="headerlink" title="确认安装"></a>确认安装</h3><pre><code class="text">[root@ansible ~]#ansible --version
-ansible 2.9.5
-config file = /etc/ansible/ansible.cfg
-configured module search path = [&#39;/root/.ansible/plugins/modules&#39;,
-&#39;/usr/share/ansible/plugins/modules&#39;]
-ansible python module location = /usr/lib/python3.6/site-packages/ansible
-executable location = /usr/bin/ansible
-python version = 3.6.8 (default, Nov 21 2019, 19:31:34) [GCC 8.3.1 20190507
-(Red Hat 8.3.1-4)]
-</code></pre><h2 id="Ansible-相关文件"><a href="#Ansible-相关文件" class="headerlink" title="Ansible 相关文件"></a>Ansible 相关文件</h2><h3 id="Ansible-配置文件列表"><a href="#Ansible-配置文件列表" class="headerlink" title="Ansible 配置文件列表"></a>Ansible 配置文件列表</h3><ul><li>&#x2F;etc&#x2F;ansible&#x2F;ansible.cfg 主配置文件，配置ansible工作特性,也可以在项目的目录中创建此文件,当前目录下如果也有ansible.cfg,则此文件优先生效,建议每个项目目录下,创建独有的ansible.cfg文<br>件</li><li>&#x2F;etc&#x2F;ansible&#x2F;hosts 主机清单</li><li>&#x2F;etc&#x2F;ansible&#x2F;roles&#x2F; 存放角色的目录</li></ul><h3 id="Ansible-主配置文件"><a href="#Ansible-主配置文件" class="headerlink" title="Ansible 主配置文件"></a>Ansible 主配置文件</h3><p>Ansible 的配置文件可以放在多个不同地方,优先级从高到低顺序如下</p><pre><code class="text">ANSIBLE_CONFIG #环境变量,目录下的文件必须存在才能生效
-./ansible.cfg #当前目录下的ansible.cfg,一般一个项目对应一个专用配置文件,推荐使用
-~/.ansible.cfg #当前用户家目录下的.ansible.cfg
-/etc/ansible/ansible.cfg #系统默认配置文件
-</code></pre><p>Ansible 的默认配置文件 &#x2F;etc&#x2F;ansible&#x2F;ansible.cfg ,其中大部分的配置内容无需进行修改</p><pre><code class="text">[defaults]
-#inventory = /etc/ansible/hosts #主机列表配置文件
-#library = /usr/share/my_modules/ #库文件存放目录
-#remote_tmp = $HOME/.ansible/tmp #临时py命令文件存放在远程主机目录
-#local_tmp = $HOME/.ansible/tmp #本机的临时命令执行目录
-#forks = 5 #默认并发数
-#sudo_user = root #默认sudo 用户
-#ask_sudo_pass = True #每次执行ansible命令是否询问ssh密码
-#ask_pass = True
-#remote_port = 22
-#host_key_checking = False #检查对应服务器的host_key，建议取消此行注释,实现第一次连
-接自动信任目标主机
-#log_path=/var/log/ansible.log #日志文件，建议启用
-#module_name = command #默认模块，可以修改为shell模块
-[privilege_escalation] #普通用户提权配置
-#become=True
-#become_method=sudo
-#become_user=root
-#become_ask_pass=False
-</code></pre><p>范例: 通过环境变量ANSIBLE_CONFIG指定ansible配置文件路径</p><pre><code class="text">[root@rocky8 ~]#cd /data/ansible/
-[root@rocky8 ansible]#cat ansbile.cfg
-[defaults]
-inventory = ./hosts
-[root@rocky8 ansible]#cat hosts
-[ubuntu]
-10.0.0.100
-[centos]
-10.0.0.7
-10.0.0.8
-#定义变量
-[root@rocky8 ansible]#export ANSIBLE_CONFIG=./ansbile.cfg
-[root@rocky8 ansible]#ansible --version
-ansible [core 2.12.6]
-config file = /data/ansible/ansbile.cfg
-configured module search path = [&#39;/root/.ansible/plugins/modules&#39;,
-&#39;/usr/share/ansible/plugins/modules&#39;]
-ansible python module location = /usr/lib/python3.9/site-packages/ansible
-ansible collection location =
-/root/.ansible/collections:/usr/share/ansible/collections
-executable location = /usr/bin/ansible
-
-python version = 3.9.6 (default, Nov 9 2021, 13:31:27) [GCC 8.5.0 20210514
-(Red Hat 8.5.0-3)]
-jinja version = 3.1.2
-libyaml = True
-[root@rocky8 ansible]#ansible --list-hosts all
-hosts (3):
-10.0.0.100
-10.0.0.7
-10.0.0.8
-</code></pre><p>范例: 创建ansible 指定项目专用的配置文件</p><pre><code class="text">[root@ubuntu2004 ~]#ansible --version
-ansible 2.9.6
-config file = /etc/ansible/ansible.cfg
-configured module search path = [&#39;/root/.ansible/plugins/modules&#39;,
-&#39;/usr/share/ansible/plugins/modules&#39;]
-ansible python module location = /usr/lib/python3/dist-packages/ansible
-executable location = /usr/bin/ansible
-python version = 3.8.10 (default, Mar 15 2022, 12:22:08) [GCC 9.4.0]
-[root@ubuntu2004 ~]#mkdir /data/ansible -p
-[root@ubuntu2004 ~]#cd /data/ansible/
-[root@ubuntu2004 ansible]#touch ansible.cfg
-[root@ubuntu2004 ansible]#ansible --version
-ansible 2.9.6
-config file = /data/ansible/ansible.cfg
-configured module search path = [&#39;/root/.ansible/plugins/modules&#39;,
-&#39;/usr/share/ansible/plugins/modules&#39;]
-ansible python module location = /usr/lib/python3/dist-packages/ansible
-executable location = /usr/bin/ansible
-python version = 3.8.10 (default, Mar 15 2022, 12:22:08) [GCC 9.4.0]
-[root@ubuntu2004 ansible]#cd
-[root@ubuntu2004 ~]#ansible --version
-ansible 2.9.6
-config file = /etc/ansible/ansible.cfg
-configured module search path = [&#39;/root/.ansible/plugins/modules&#39;,
-&#39;/usr/share/ansible/plugins/modules&#39;]
-ansible python module location = /usr/lib/python3/dist-packages/ansible
-executable location = /usr/bin/ansible
-python version = 3.8.10 (default, Mar 15 2022, 12:22:08) [GCC 9.4.0]
-</code></pre><p>范例: 当前目录下的ansible的配置文件优先生效</p><pre><code class="text">[root@ansible ~]#ansible --version
-ansible 2.9.17
-config file = /etc/ansible/ansible.cfg
-configured module search path = [&#39;/root/.ansible/plugins/modules&#39;,
-&#39;/usr/share/ansible/plugins/modules&#39;]
-ansible python module location = /usr/lib/python3.6/site-packages/ansible
-executable location = /usr/bin/ansible
-python version = 3.6.8 (default, Apr 16 2020, 01:36:27) [GCC 8.3.1 20191121
-(Red Hat 8.3.1-5)]
-[root@ansible ~]#cp /etc/ansible/ansible.cfg .
-
-[root@ansible ~]#ansible --version
-ansible 2.9.17
-config file = /root/ansible.cfg #注意配置文件路径
-configured module search path = [&#39;/root/.ansible/plugins/modules&#39;,
-&#39;/usr/share/ansible/plugins/modules&#39;]
-ansible python module location = /usr/lib/python3.6/site-packages/ansible
-executable location = /usr/bin/ansible
-python version = 3.6.8 (default, Apr 16 2020, 01:36:27) [GCC 8.3.1 20191121
-(Red Hat 8.3.1-5)]
-[root@ansible ~]#
-</code></pre><h3 id="Inventory-主机清单文件"><a href="#Inventory-主机清单文件" class="headerlink" title="Inventory 主机清单文件"></a>Inventory 主机清单文件</h3><p>ansible的主要功用在于批量主机操作，为了便捷地使用其中的部分主机，可以在inventory 主机清单文件中将其分组组织<br>默认的inventory file为 &#x2F;etc&#x2F;ansible&#x2F;hosts<br>inventory file可以有多个，且也可以通过Dynamic Inventory来动态生成<br>注意:</p><ul><li>生产建议在每个项目目录下创建项目独立的hosts文件</li><li>通过项目目录下的ansible.cfg文件中的 inventory &#x3D; .&#x2F;hosts实现</li></ul><p>官方文档:</p><pre><code class="url">https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
-</code></pre><p><strong>主机清单文件格式</strong><br>inventory文件遵循INI文件风格，中括号中的字符为组名。可以将同一个主机同时归并到多个不同的组中,此外，当如若目标主机使用了非默认的SSH端口，还可以在主机名称之后使用冒号加端口号来标明,如果主机名称遵循相似的命名模式，还可以使用列表的方式标识各主机<br><strong>Inventory 参数说明</strong></p><pre><code class="text">ansible_ssh_host #将要连接的远程主机名.与你想要设定的主机的别名不同的话,可通过此变量设置.
-ansible_ssh_port #ssh端口号.如果不是默认的端口号,通过此变量设置.这种可以使用 ip:端口
-192.168.1.100:2222
-ansible_ssh_user #默认的 ssh 用户名
-ansible_ssh_pass #ssh 密码(这种方式并不安全,我们强烈建议使用 --ask-pass 或 SSH 密钥)
-ansible_sudo_pass #sudo 密码(这种方式并不安全,我们强烈建议使用 --ask-sudo-pass)
-ansible_sudo_exe (new in version 1.8) #sudo 命令路径(适用于1.8及以上版本)
-ansible_connection #与主机的连接类型.比如:local, ssh 或者 paramiko. Ansible 1.2 以前默认使用 paramiko.1.2 以后默认使用 &#39;smart&#39;,&#39;smart&#39; 方式会根据是否支持 ControlPersist,来判断&#39;ssh&#39; 方式是否可行.
-ansible_ssh_private_key_file #ssh 使用的私钥文件.适用于有多个密钥,而你不想使用 SSH 代理的情况.
-ansible_shell_type #目标系统的shell类型.默认情况下,命令的执行使用 &#39;sh&#39; 语法,可设置为&#39;csh&#39; 或 &#39;fish&#39;.
-ansible_python_interpreter #目标主机的 python 路径.适用于的情况: 系统中有多个 Python,或者命令路径不是&quot;/usr/bin/python&quot;,比如 \*BSD, 或者 /usr/bin/python 不是 2.X 版本的Python.之所以不使用 &quot;/usr/bin/env&quot; 机制,因为这要求远程用户的路径设置正确,且要求 &quot;python&quot;可执行程序名不可为 python以外的名字(实际有可能名为python26).与ansible_python_interpreter 的工作方式相同,可设定如 ruby 或 perl 的路径....
-</code></pre><p>范例：</p><pre><code class="text">ntp.wang.org
-[webservers]
-www1.wang.org:2222
-www2.wang.org
-[dbservers]
-db1.wang.org
-db2.wang.org
-db3.wang.org
-#或者
-db[1:3].wang.org
-</code></pre><p>范例: 组嵌套</p><pre><code class="text">[webservers]
-www[1:100].example.com
-[dbservers]
-db-[a:f].example.com
-[appservers]
-10.0.0.[1:100]
-#定义testsrvs组中包括两个其它分组,实现组嵌套
-[testsrvs:children]
-webservers
-dbservers
-</code></pre><p>范例: 基于用户名和密码的ssh连接主机清单</p><pre><code class="text">[test]
-10.0.0.8 ansible_connection=local #指定本地连接,无需ssh配置
-
-#每个主机分别指定用户和密码,ansible_connection=ssh 需要StrictHostKeyChecking no 或者host_key_checking = False
-10.0.0.7 ansible_connection=ssh ansible_ssh_port=2222 ansible_ssh_user=wangansible_ssh_password=123456
-10.0.0.6 ansible_ssh_user=root ansible_ssh_password=123456
-#对每个分组的所有主机统一定义用户和密码,执行ansible命令时显示别名,如web01
-[websrvs]
-web01 ansible_ssh_host=10.0.0.101
-web02 ansible_ssh_host=10.0.0.102
-[websrvs:vars]
-ansible_ssh_password=magedu
-some_host ansible_ssh_port=2222 ansible_ssh_user=manager
-aws_host ansible_ssh_private_key_file=/home/example/.ssh/aws.pem
-freebsd_host ansible_python_interpreter=/usr/local/bin/python
-ruby_module_host ansible_ruby_interpreter=/usr/bin/ruby.1.9.3
-</code></pre><h2 id="Ansible相关工具"><a href="#Ansible相关工具" class="headerlink" title="Ansible相关工具"></a>Ansible相关工具</h2><ul><li><p>&#x2F;usr&#x2F;bin&#x2F;ansible 主程序，临时命令执行工具</p></li><li><p>&#x2F;usr&#x2F;bin&#x2F;ansible-doc 查看配置文档，模块功能查看工具,相当于man</p></li><li><p>&#x2F;usr&#x2F;bin&#x2F;ansible-playbook 定制自动化任务，编排剧本工具,相当于脚本</p></li><li><p>&#x2F;usr&#x2F;bin&#x2F;ansible-pull 远程执行命令的工具</p></li><li><p>&#x2F;usr&#x2F;bin&#x2F;ansible-vault 文件加密工具</p></li><li><p>&#x2F;usr&#x2F;bin&#x2F;ansible-console 基于Console界面与用户交互的执行工具</p></li><li><p>&#x2F;usr&#x2F;bin&#x2F;ansible-galaxy 下载&#x2F;上传优秀代码或Roles模块的官网平台</p></li></ul><p><strong>利用ansible实现管理的主要方式：</strong></p><ul><li><p>Ansible Ad-Hoc 即利用ansible命令，主要用于临时命令使用场景</p></li><li><p>Ansible playbook 主要用于长期规划好的，大型项目的场景，需要有前期的规划过程</p></li></ul><p><strong>ansible 使用前准备</strong><br>ansible 相关工具大多数是通过ssh协议，实现对远程主机的配置管理、应用部署、任务执行等功能<br>建议：使用此工具前，先配置ansible主控端能基于密钥认证的方式联系各个被管理节点<br>范例：利用sshpass批量实现基于key验证脚本1</p><pre><code class="text">[root@centos8 ~]#vim /etc/ssh/ssh_config
-#修改下面一行
-StrictHostKeyChecking no
-[root@centos8 ~]#cat hosts.list
-192.168.32.178
-192.168.32.179
-[root@centos8 ~]#vim push_ssh_key.sh
-#!/bin/bash
-rpm -ql shpass &amp;&gt; /dev/null || yum -y install sshpass
-[ -f /root/.ssh/id_rsa ] || ssh-keygen -f /root/.ssh/id_rsa -P &#39;&#39;
-export SSHPASS=123456
-while read IP;do
-    sshpass -e ssh-copy-id -o StrictHostKeyChecking=no $IP
-
-
-done &lt; hosts.list
-</code></pre><p>范例: 实现基于key验证的脚本2</p><pre><code class="text">[root@centos8 ~]#cat ssh_key.sh
-
-#!/bin/bash
-PLIST=&quot;
-192.168.32.178
-192.168.32.179&quot;
-rpm -q sshpass &amp;&gt; /dev/null || yum -y install sshpass
-[ -f /root/.ssh/id_rsa ] || ssh-keygen -f /root/.ssh/id_rsa -P &#39;&#39;
-export SSHPASS=123456
-for IP in $IPLIST;do
-       &#123; sshpass -e ssh-copy-id -o StrictHostKeyChecking=no $IP; &#125; &amp;
-
-done
-wait
-</code></pre><h3 id="ansible-doc"><a href="#ansible-doc" class="headerlink" title="ansible-doc"></a>ansible-doc</h3><p>此工具用来显示模块帮助,相当于man<br>格式</p><pre><code>ansible-doc [options] [module...]
+<!-- build time:Tue May 16 2023 21:08:35 GMT+0800 (中国标准时间) --><!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#FFF"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png"><link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="alternate" type="application/rss+xml" title="Hide your thoughts" href="http://blog.itshare.work/rss.xml"><link rel="alternate" type="application/atom+xml" title="Hide your thoughts" href="http://blog.itshare.work/atom.xml"><link rel="alternate" type="application/json" title="Hide your thoughts" href="http://blog.itshare.work/feed.json"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/css/app.css?v=0.2.5"><link rel="canonical" href="http://blog.itshare.work/Ansible/Ansible/"><title>运维自动化工具Ansible(一) - Ansible | Cookie = Hide your thoughts</title><meta name="generator" content="Hexo 6.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">运维自动化工具Ansible(一)</h1><div class="meta"><span class="item" title="创建时间：2023-02-21 19:12:21"><span class="icon"><i class="ic i-calendar"></i> </span><span class="text">发表于</span> <time itemprop="dateCreated datePublished" datetime="2023-02-21T19:12:21+08:00">2023-02-21</time> </span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i> </span><span class="text">本文字数</span> <span>46k</span> <span class="text">字</span> </span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i> </span><span class="text">阅读时长</span> <span>42 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span> <span class="line"></span> <span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">Cookie</a></li></ul><ul class="right"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div id="imgs" class="pjax"><ul><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/21.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/4.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/18.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/28.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/19.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/26.jpg"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"/><use xlink:href="#gentle-wave" x="48" y="3"/><use xlink:href="#gentle-wave" x="48" y="5"/><use xlink:href="#gentle-wave" x="48" y="7"/></g></svg></div><main><div class="inner"><div id="main" class="pjax"><div class="article wrap"><div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i> <span><a href="/">首页</a></span><i class="ic i-angle-right"></i> <span class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Ansible/" itemprop="item" rel="index" title="分类于 Ansible"><span itemprop="name">Ansible</span></a><meta itemprop="position" content="1"></span></div><article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://blog.itshare.work/Ansible/Ansible/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.jpg"><meta itemprop="name" content="yuan kun"><meta itemprop="description" content=", 解决各种服务器、网络、应用等技术问题，致力于保障系统稳定、高效运行"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Hide your thoughts"></span><div class="body md" itemprop="articleBody"><h1 id="ansible介绍和架构"><a class="anchor" href="#ansible介绍和架构">#</a> Ansible 介绍和架构</h1><h2 id="ansible发展史"><a class="anchor" href="#ansible发展史">#</a> Ansible 发展史</h2><p>Ansible 的名称来自科幻小说《安德的游戏》中跨越时空的即时通信工具，使用它可以在相距数光年的距离，远程实时控制前线的舰队战斗<br>2012-03-09，发布 0.0.1 版，2015-10-17，Red Hat 宣布 1.5 亿美元收购<br>官网：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYW5zaWJsZS5jb20v">https://www.ansible.com/</span><br>官方文档：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmFuc2libGUuY29tLw==">https://docs.ansible.com/</span></p><h2 id="ansible-功能"><a class="anchor" href="#ansible-功能">#</a> Ansible 功能</h2><ul><li>批量执行远程命令，可以对远程的多台主机同时进行命令的执行</li><li>批量安装和配置软件服务，可以对远程的多台主机进行自动化的方式配置和管理各种服务</li><li>编排高级的企业级复杂的 IT 架构任务，Ansible 的 Playbook 和 role 可以轻松实现大型的 IT 复杂架构</li><li>提供自动化运维工具的开发 API, 有很多运维工具，如 jumpserver 就是基于 ansible 实现自动化管工功能</li></ul><h2 id="ansible-特点"><a class="anchor" href="#ansible-特点">#</a> Ansible 特点</h2><p><strong>优点</strong></p><ul><li>功能丰富的模块：提供了多达数千个的各种功能的模块，完成特定任务只需调用特定模块即可，还</li><li>支持自定义模块，可使用任何编程语言写模块</li><li>使用和部署简单：无需安装专用代理软件，基于 python 和 SSH (默认已安装) 实现</li><li>安全：基于 OpenSSH 实现安全通讯无需专用协议</li><li>幂等性：一个任务执行 1 遍和执行 n 遍效果一样，不因重复执行带来意外情况，此特性和模块有关</li><li>支持 playbook 编排任务，YAML 格式，编排任务，支持丰富的数据结构</li><li>较强大的多层解决方案 Role</li><li>Python 语言实现，基于 Paramiko（python 对 ssh 的实现），PyYAML，Jinja2（模板语言）三个关键模块</li><li>属于红帽 (IBM) 公司产品，背景强大，未来发展前景光明</li></ul><p><strong>缺点</strong></p><ul><li>如果管理的主机较多时，执行效率不如 saltstack 高</li><li>当前还不支持像 MySQL 数据库一样的事务回滚</li></ul><h2 id="ansible-架构"><a class="anchor" href="#ansible-架构">#</a> Ansible 架构</h2><h3 id="ansible-组成"><a class="anchor" href="#ansible-组成">#</a> Ansible 组成</h3><p>组合 INVENTORY、API、MODULES、PLUGINS 的绿框，为 ansible 命令工具，其为核心执行工具</p><p><img data-src="../image.assets/1676984392121.png" alt="1676984392121"></p><ul><li>INVENTORY：Ansible 管理主机的清单文件，默认为 /etc/ansible/hosts</li><li>MODULES：Ansible 执行命令的功能模块，多数为内置核心模块，也可自定义</li><li>PLUGINS：模块功能的补充，如连接类型插件、循环插件、变量插件、过滤插件等，该功能不常用</li><li>API：供第三方程序调用的应用程序编程接口</li></ul><h3 id="ansible-命令执行来源"><a class="anchor" href="#ansible-命令执行来源">#</a> Ansible 命令执行来源</h3><ul><li>USER 普通用户，即 SYSTEM ADMINISTRATOR</li><li>PLAYBOOKS：任务剧本（任务集），编排定义 Ansible 任务集的配置文件，由 Ansible 顺序依次执行，通常是 JSON 格式的 YML 文件</li><li>CMDB（配置管理数据库） API 调用</li><li>PUBLIC/PRIVATE CLOUD API 调用</li><li>USER-&gt; Ansible Playbook -&gt; Ansibile</li></ul><h3 id="注意事项"><a class="anchor" href="#注意事项">#</a> 注意事项</h3><ul><li>执行 ansible 的主机一般称为管理端，主控端，中控，master 或堡垒机</li><li>主控端 Python 版本需要 2.6 或以上</li><li>被控端 Python 版本小于 2.4，需要安装 python-simplejson</li><li>被控端如开启 SELinux 需要安装 libselinux-python</li><li>windows 不能做为主控端，只能做为被控制端</li></ul><h1 id="ansible-安装和常见模块"><a class="anchor" href="#ansible-安装和常见模块">#</a> Ansible 安装和常见模块</h1><h2 id="ansible-安装"><a class="anchor" href="#ansible-安装">#</a> Ansible 安装</h2><p>ansible 的安装方法有多种<br>官方文档</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html</pre></td></tr><tr><td data-num="2"></td><td><pre>https://docs.ansible.com/ansible/latest/installation_guide/index.html</pre></td></tr></table></figure><p>下载</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>https://releases.ansible.com/ansible/</pre></td></tr></table></figure><p>pip 下载</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>https://pypi.org/project/ansible/</pre></td></tr></table></figure><h3 id="包安装方式"><a class="anchor" href="#包安装方式">#</a> 包安装方式</h3><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>#CentOS 的EPEL源的rpm包安装</pre></td></tr><tr><td data-num="2"></td><td><pre>[root@centos ~]#yum install ansible</pre></td></tr><tr><td data-num="3"></td><td><pre>#ubuntu 安装</pre></td></tr><tr><td data-num="4"></td><td><pre>[root@ubuntu ~]#apt -y install ansible</pre></td></tr></table></figure><h3 id="pip安装"><a class="anchor" href="#pip安装">#</a> pip 安装</h3><p>pip 是安装 Python 包的管理器，类似 yum<br>范例：在 rocky8 上通过 pip3 安装 ansible</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@rocky8 ~]#yum -y install python39 rust</pre></td></tr><tr><td data-num="2"></td><td><pre>[root@rocky8 ~]#pip3 install ansible</pre></td></tr><tr><td data-num="3"></td><td><pre>[root@rocky8 ~]#ansible --version</pre></td></tr><tr><td data-num="4"></td><td><pre>ansible [core 2.12.6]</pre></td></tr><tr><td data-num="5"></td><td><pre>config file = None</pre></td></tr><tr><td data-num="6"></td><td><pre>configured module search path = ['/root/.ansible/plugins/modules',</pre></td></tr><tr><td data-num="7"></td><td><pre>'/usr/share/ansible/plugins/modules']</pre></td></tr><tr><td data-num="8"></td><td><pre>ansible python module location = /usr/lib/python3.9/site-packages/ansible</pre></td></tr><tr><td data-num="9"></td><td><pre>ansible collection location =</pre></td></tr><tr><td data-num="10"></td><td><pre>/root/.ansible/collections:/usr/share/ansible/collections</pre></td></tr><tr><td data-num="11"></td><td><pre>executable location = /usr/bin/ansible</pre></td></tr><tr><td data-num="12"></td><td><pre>python version = 3.9.6 (default, Nov 9 2021, 13:31:27) [GCC 8.5.0 20210514</pre></td></tr><tr><td data-num="13"></td><td><pre>(Red Hat 8.5.0-3)]</pre></td></tr><tr><td data-num="14"></td><td><pre>jinja version = 3.1.2</pre></td></tr><tr><td data-num="15"></td><td><pre>libyaml = True</pre></td></tr><tr><td data-num="16"></td><td><pre>[root@rocky8 ~]#ansible-doc -l 2> /dev/null|wc -l</pre></td></tr><tr><td data-num="17"></td><td><pre>6763</pre></td></tr></table></figure><p>范例：安装 python3.8 支持 ansible2.12 以上版本</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@rocky8 ~]#yum -y install python38 python38-pip</pre></td></tr><tr><td data-num="2"></td><td><pre>[root@rocky8 ~]#pip3 install --upgrade pip -i https://pypi.douban.com/simple</pre></td></tr><tr><td data-num="3"></td><td><pre>[root@rocky8 ~]#pip3 install ansible -i https://pypi.douban.com/simple/</pre></td></tr><tr><td data-num="4"></td><td><pre>[root@rocky8 ~]#ansible --version</pre></td></tr><tr><td data-num="5"></td><td><pre>ansible [core 2.12.6]</pre></td></tr><tr><td data-num="6"></td><td><pre>config file = None</pre></td></tr><tr><td data-num="7"></td><td><pre>configured module search path = ['/root/.ansible/plugins/modules',</pre></td></tr><tr><td data-num="8"></td><td><pre>'/usr/share/ansible/plugins/modules']</pre></td></tr><tr><td data-num="9"></td><td><pre>ansible python module location = /usr/local/lib/python3.8/site-</pre></td></tr><tr><td data-num="10"></td><td><pre>packages/ansible</pre></td></tr><tr><td data-num="11"></td><td><pre>ansible collection location =</pre></td></tr><tr><td data-num="12"></td><td><pre>/root/.ansible/collections:/usr/share/ansible/collections</pre></td></tr><tr><td data-num="13"></td><td><pre>executable location = /usr/local/bin/ansible</pre></td></tr><tr><td data-num="14"></td><td><pre>python version = 3.8.8 (default, Nov 9 2021, 13:31:34) [GCC 8.5.0 20210514</pre></td></tr><tr><td data-num="15"></td><td><pre>(Red Hat 8.5.0-3)]</pre></td></tr><tr><td data-num="16"></td><td><pre>jinja version = 3.1.2</pre></td></tr><tr><td data-num="17"></td><td><pre>libyaml = True</pre></td></tr></table></figure><p>范例：安装默认的 python3.6 版本会有警报提示</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@rocky8 ~]#yum -y install python3</pre></td></tr><tr><td data-num="2"></td><td><pre>[root@rocky8 ~]#pip3 install --upgrade pip -i https://pypi.douban.com/simple</pre></td></tr><tr><td data-num="3"></td><td><pre>[root@rocky8 ~]#pip3 install ansible -i https://pypi.douban.com/simple/</pre></td></tr><tr><td data-num="4"></td><td><pre>[root@rocky8 ~]#ansible --version</pre></td></tr><tr><td data-num="5"></td><td><pre>[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the</pre></td></tr><tr><td data-num="6"></td><td><pre>controller starting with Ansible 2.12. Current version: 3.6.8 (default, Nov</pre></td></tr><tr><td data-num="7"></td><td><pre>9 2021, 14:44:26) [GCC 8.5.0 20210514 (Red Hat 8.5.0-3)]. This feature will be</pre></td></tr><tr><td data-num="8"></td><td><pre>removed from ansible-core in version 2.12. Deprecation warnings</pre></td></tr><tr><td data-num="9"></td><td><pre>can be disabled by setting deprecation_warnings=False in ansible.cfg.</pre></td></tr><tr><td data-num="10"></td><td><pre>/usr/local/lib/python3.6/site-packages/ansible/parsing/vault/__init__.py:44:</pre></td></tr><tr><td data-num="11"></td><td><pre>CryptographyDeprecationWarning: Python 3.6 is no longer supported by the Python</pre></td></tr><tr><td data-num="12"></td><td><pre>core team. Therefore, support for it is deprecated in cryptography and will be</pre></td></tr><tr><td data-num="13"></td><td><pre>removed in a future release.</pre></td></tr><tr><td data-num="14"></td><td><pre>from cryptography.exceptions import InvalidSignature</pre></td></tr><tr><td data-num="15"></td><td><pre>ansible [core 2.11.12]</pre></td></tr><tr><td data-num="16"></td><td><pre>config file = None</pre></td></tr><tr><td data-num="17"></td><td><pre>configured module search path = ['/root/.ansible/plugins/modules',</pre></td></tr><tr><td data-num="18"></td><td><pre>'/usr/share/ansible/plugins/modules']</pre></td></tr><tr><td data-num="19"></td><td><pre>ansible python module location = /usr/local/lib/python3.6/site-</pre></td></tr><tr><td data-num="20"></td><td><pre>packages/ansible</pre></td></tr><tr><td data-num="21"></td><td><pre>ansible collection location =</pre></td></tr><tr><td data-num="22"></td><td><pre>/root/.ansible/collections:/usr/share/ansible/collections</pre></td></tr><tr><td data-num="23"></td><td><pre>executable location = /usr/local/bin/ansible</pre></td></tr><tr><td data-num="24"></td><td><pre>python version = 3.6.8 (default, Nov 9 2021, 14:44:26) [GCC 8.5.0 20210514</pre></td></tr><tr><td data-num="25"></td><td><pre>(Red Hat 8.5.0-3)]</pre></td></tr><tr><td data-num="26"></td><td><pre>jinja version = 3.0.3</pre></td></tr><tr><td data-num="27"></td><td><pre>libyaml = True</pre></td></tr><tr><td data-num="28"></td><td><pre>[root@rocky8 ~]#ansible-doc -l 2> /dev/null|wc -l</pre></td></tr><tr><td data-num="29"></td><td><pre>6141</pre></td></tr></table></figure><p><img data-src="../image.assets/1676985923345.png" alt="1676985923345"></p><p>范例</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@centos7 ~]#yum -y install python-pip</pre></td></tr><tr><td data-num="2"></td><td><pre>[root@centos7 ~]#pip install --upgrade pip</pre></td></tr><tr><td data-num="3"></td><td><pre>[root@centos7 ~]#pip install ansible --upgrade</pre></td></tr><tr><td data-num="4"></td><td><pre>[root@centos7 ~]#ansible --version</pre></td></tr><tr><td data-num="5"></td><td><pre>/usr/lib64/python2.7/site-packages/cryptography/__init__.py:39:</pre></td></tr><tr><td data-num="6"></td><td><pre>CryptographyDeprecationWarning: Python 2 is no longer supported by the Python</pre></td></tr><tr><td data-num="7"></td><td><pre>core team. Support for it is now deprecated in cryptography, and will be removed</pre></td></tr><tr><td data-num="8"></td><td><pre>in a future release.</pre></td></tr><tr><td data-num="9"></td><td><pre>CryptographyDeprecationWarning,</pre></td></tr><tr><td data-num="10"></td><td><pre>ansible 2.9.12</pre></td></tr><tr><td data-num="11"></td><td><pre>config file = None</pre></td></tr><tr><td data-num="12"></td><td><pre>configured module search path = [u'/root/.ansible/plugins/modules',</pre></td></tr><tr><td data-num="13"></td><td><pre>u'/usr/share/ansible/plugins/modules']</pre></td></tr><tr><td data-num="14"></td><td><pre>ansible python module location = /usr/lib/python2.7/site-packages/ansible</pre></td></tr><tr><td data-num="15"></td><td><pre>executable location = /usr/bin/ansible</pre></td></tr><tr><td data-num="16"></td><td><pre>python version = 2.7.5 (default, Apr 2 2020, 13:16:51) [GCC 4.8.5 20150623</pre></td></tr><tr><td data-num="17"></td><td><pre>(Red Hat 4.8.5-39)]</pre></td></tr><tr><td data-num="18"></td><td><pre>[root@centos7 ~]#ll /opt/etc/ansible/ansible.cfg</pre></td></tr><tr><td data-num="19"></td><td><pre>-rw-r--r-- 1 wang bin 19980 Aug 11 21:34 /opt/etc/ansible/ansible.cfg</pre></td></tr></table></figure><h3 id="确认安装"><a class="anchor" href="#确认安装">#</a> 确认安装</h3><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@ansible ~]#ansible --version</pre></td></tr><tr><td data-num="2"></td><td><pre>ansible 2.9.5</pre></td></tr><tr><td data-num="3"></td><td><pre>config file = /etc/ansible/ansible.cfg</pre></td></tr><tr><td data-num="4"></td><td><pre>configured module search path = ['/root/.ansible/plugins/modules',</pre></td></tr><tr><td data-num="5"></td><td><pre>'/usr/share/ansible/plugins/modules']</pre></td></tr><tr><td data-num="6"></td><td><pre>ansible python module location = /usr/lib/python3.6/site-packages/ansible</pre></td></tr><tr><td data-num="7"></td><td><pre>executable location = /usr/bin/ansible</pre></td></tr><tr><td data-num="8"></td><td><pre>python version = 3.6.8 (default, Nov 21 2019, 19:31:34) [GCC 8.3.1 20190507</pre></td></tr><tr><td data-num="9"></td><td><pre>(Red Hat 8.3.1-4)]</pre></td></tr></table></figure><h2 id="ansible-相关文件"><a class="anchor" href="#ansible-相关文件">#</a> Ansible 相关文件</h2><h3 id="ansible-配置文件列表"><a class="anchor" href="#ansible-配置文件列表">#</a> Ansible 配置文件列表</h3><ul><li>/etc/ansible/ansible.cfg 主配置文件，配置 ansible 工作特性，也可以在项目的目录中创建此文件，当前目录下如果也有 ansible.cfg, 则此文件优先生效，建议每个项目目录下，创建独有的 ansible.cfg 文<br>件</li><li>/etc/ansible/hosts 主机清单</li><li>/etc/ansible/roles/ 存放角色的目录</li></ul><h3 id="ansible-主配置文件"><a class="anchor" href="#ansible-主配置文件">#</a> Ansible 主配置文件</h3><p>Ansible 的配置文件可以放在多个不同地方，优先级从高到低顺序如下</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>ANSIBLE_CONFIG #环境变量,目录下的文件必须存在才能生效</pre></td></tr><tr><td data-num="2"></td><td><pre>./ansible.cfg #当前目录下的ansible.cfg,一般一个项目对应一个专用配置文件,推荐使用</pre></td></tr><tr><td data-num="3"></td><td><pre>~/.ansible.cfg #当前用户家目录下的.ansible.cfg</pre></td></tr><tr><td data-num="4"></td><td><pre>/etc/ansible/ansible.cfg #系统默认配置文件</pre></td></tr></table></figure><p>Ansible 的默认配置文件 /etc/ansible/ansible.cfg , 其中大部分的配置内容无需进行修改</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[defaults]</pre></td></tr><tr><td data-num="2"></td><td><pre>#inventory = /etc/ansible/hosts #主机列表配置文件</pre></td></tr><tr><td data-num="3"></td><td><pre>#library = /usr/share/my_modules/ #库文件存放目录</pre></td></tr><tr><td data-num="4"></td><td><pre>#remote_tmp = $HOME/.ansible/tmp #临时py命令文件存放在远程主机目录</pre></td></tr><tr><td data-num="5"></td><td><pre>#local_tmp = $HOME/.ansible/tmp #本机的临时命令执行目录</pre></td></tr><tr><td data-num="6"></td><td><pre>#forks = 5 #默认并发数</pre></td></tr><tr><td data-num="7"></td><td><pre>#sudo_user = root #默认sudo 用户</pre></td></tr><tr><td data-num="8"></td><td><pre>#ask_sudo_pass = True #每次执行ansible命令是否询问ssh密码</pre></td></tr><tr><td data-num="9"></td><td><pre>#ask_pass = True</pre></td></tr><tr><td data-num="10"></td><td><pre>#remote_port = 22</pre></td></tr><tr><td data-num="11"></td><td><pre>#host_key_checking = False #检查对应服务器的host_key，建议取消此行注释,实现第一次连</pre></td></tr><tr><td data-num="12"></td><td><pre>接自动信任目标主机</pre></td></tr><tr><td data-num="13"></td><td><pre>#log_path=/var/log/ansible.log #日志文件，建议启用</pre></td></tr><tr><td data-num="14"></td><td><pre>#module_name = command #默认模块，可以修改为shell模块</pre></td></tr><tr><td data-num="15"></td><td><pre>[privilege_escalation] #普通用户提权配置</pre></td></tr><tr><td data-num="16"></td><td><pre>#become=True</pre></td></tr><tr><td data-num="17"></td><td><pre>#become_method=sudo</pre></td></tr><tr><td data-num="18"></td><td><pre>#become_user=root</pre></td></tr><tr><td data-num="19"></td><td><pre>#become_ask_pass=False</pre></td></tr></table></figure><p>范例：通过环境变量 ANSIBLE_CONFIG 指定 ansible 配置文件路径</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@rocky8 ~]#cd /data/ansible/</pre></td></tr><tr><td data-num="2"></td><td><pre>[root@rocky8 ansible]#cat ansbile.cfg</pre></td></tr><tr><td data-num="3"></td><td><pre>[defaults]</pre></td></tr><tr><td data-num="4"></td><td><pre>inventory = ./hosts</pre></td></tr><tr><td data-num="5"></td><td><pre>[root@rocky8 ansible]#cat hosts</pre></td></tr><tr><td data-num="6"></td><td><pre>[ubuntu]</pre></td></tr><tr><td data-num="7"></td><td><pre>10.0.0.100</pre></td></tr><tr><td data-num="8"></td><td><pre>[centos]</pre></td></tr><tr><td data-num="9"></td><td><pre>10.0.0.7</pre></td></tr><tr><td data-num="10"></td><td><pre>10.0.0.8</pre></td></tr><tr><td data-num="11"></td><td><pre>#定义变量</pre></td></tr><tr><td data-num="12"></td><td><pre>[root@rocky8 ansible]#export ANSIBLE_CONFIG=./ansbile.cfg</pre></td></tr><tr><td data-num="13"></td><td><pre>[root@rocky8 ansible]#ansible --version</pre></td></tr><tr><td data-num="14"></td><td><pre>ansible [core 2.12.6]</pre></td></tr><tr><td data-num="15"></td><td><pre>config file = /data/ansible/ansbile.cfg</pre></td></tr><tr><td data-num="16"></td><td><pre>configured module search path = ['/root/.ansible/plugins/modules',</pre></td></tr><tr><td data-num="17"></td><td><pre>'/usr/share/ansible/plugins/modules']</pre></td></tr><tr><td data-num="18"></td><td><pre>ansible python module location = /usr/lib/python3.9/site-packages/ansible</pre></td></tr><tr><td data-num="19"></td><td><pre>ansible collection location =</pre></td></tr><tr><td data-num="20"></td><td><pre>/root/.ansible/collections:/usr/share/ansible/collections</pre></td></tr><tr><td data-num="21"></td><td><pre>executable location = /usr/bin/ansible</pre></td></tr><tr><td data-num="22"></td><td><pre></pre></td></tr><tr><td data-num="23"></td><td><pre>python version = 3.9.6 (default, Nov 9 2021, 13:31:27) [GCC 8.5.0 20210514</pre></td></tr><tr><td data-num="24"></td><td><pre>(Red Hat 8.5.0-3)]</pre></td></tr><tr><td data-num="25"></td><td><pre>jinja version = 3.1.2</pre></td></tr><tr><td data-num="26"></td><td><pre>libyaml = True</pre></td></tr><tr><td data-num="27"></td><td><pre>[root@rocky8 ansible]#ansible --list-hosts all</pre></td></tr><tr><td data-num="28"></td><td><pre>hosts (3):</pre></td></tr><tr><td data-num="29"></td><td><pre>10.0.0.100</pre></td></tr><tr><td data-num="30"></td><td><pre>10.0.0.7</pre></td></tr><tr><td data-num="31"></td><td><pre>10.0.0.8</pre></td></tr></table></figure><p>范例：创建 ansible 指定项目专用的配置文件</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@ubuntu2004 ~]#ansible --version</pre></td></tr><tr><td data-num="2"></td><td><pre>ansible 2.9.6</pre></td></tr><tr><td data-num="3"></td><td><pre>config file = /etc/ansible/ansible.cfg</pre></td></tr><tr><td data-num="4"></td><td><pre>configured module search path = ['/root/.ansible/plugins/modules',</pre></td></tr><tr><td data-num="5"></td><td><pre>'/usr/share/ansible/plugins/modules']</pre></td></tr><tr><td data-num="6"></td><td><pre>ansible python module location = /usr/lib/python3/dist-packages/ansible</pre></td></tr><tr><td data-num="7"></td><td><pre>executable location = /usr/bin/ansible</pre></td></tr><tr><td data-num="8"></td><td><pre>python version = 3.8.10 (default, Mar 15 2022, 12:22:08) [GCC 9.4.0]</pre></td></tr><tr><td data-num="9"></td><td><pre>[root@ubuntu2004 ~]#mkdir /data/ansible -p</pre></td></tr><tr><td data-num="10"></td><td><pre>[root@ubuntu2004 ~]#cd /data/ansible/</pre></td></tr><tr><td data-num="11"></td><td><pre>[root@ubuntu2004 ansible]#touch ansible.cfg</pre></td></tr><tr><td data-num="12"></td><td><pre>[root@ubuntu2004 ansible]#ansible --version</pre></td></tr><tr><td data-num="13"></td><td><pre>ansible 2.9.6</pre></td></tr><tr><td data-num="14"></td><td><pre>config file = /data/ansible/ansible.cfg</pre></td></tr><tr><td data-num="15"></td><td><pre>configured module search path = ['/root/.ansible/plugins/modules',</pre></td></tr><tr><td data-num="16"></td><td><pre>'/usr/share/ansible/plugins/modules']</pre></td></tr><tr><td data-num="17"></td><td><pre>ansible python module location = /usr/lib/python3/dist-packages/ansible</pre></td></tr><tr><td data-num="18"></td><td><pre>executable location = /usr/bin/ansible</pre></td></tr><tr><td data-num="19"></td><td><pre>python version = 3.8.10 (default, Mar 15 2022, 12:22:08) [GCC 9.4.0]</pre></td></tr><tr><td data-num="20"></td><td><pre>[root@ubuntu2004 ansible]#cd</pre></td></tr><tr><td data-num="21"></td><td><pre>[root@ubuntu2004 ~]#ansible --version</pre></td></tr><tr><td data-num="22"></td><td><pre>ansible 2.9.6</pre></td></tr><tr><td data-num="23"></td><td><pre>config file = /etc/ansible/ansible.cfg</pre></td></tr><tr><td data-num="24"></td><td><pre>configured module search path = ['/root/.ansible/plugins/modules',</pre></td></tr><tr><td data-num="25"></td><td><pre>'/usr/share/ansible/plugins/modules']</pre></td></tr><tr><td data-num="26"></td><td><pre>ansible python module location = /usr/lib/python3/dist-packages/ansible</pre></td></tr><tr><td data-num="27"></td><td><pre>executable location = /usr/bin/ansible</pre></td></tr><tr><td data-num="28"></td><td><pre>python version = 3.8.10 (default, Mar 15 2022, 12:22:08) [GCC 9.4.0]</pre></td></tr></table></figure><p>范例：当前目录下的 ansible 的配置文件优先生效</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@ansible ~]#ansible --version</pre></td></tr><tr><td data-num="2"></td><td><pre>ansible 2.9.17</pre></td></tr><tr><td data-num="3"></td><td><pre>config file = /etc/ansible/ansible.cfg</pre></td></tr><tr><td data-num="4"></td><td><pre>configured module search path = ['/root/.ansible/plugins/modules',</pre></td></tr><tr><td data-num="5"></td><td><pre>'/usr/share/ansible/plugins/modules']</pre></td></tr><tr><td data-num="6"></td><td><pre>ansible python module location = /usr/lib/python3.6/site-packages/ansible</pre></td></tr><tr><td data-num="7"></td><td><pre>executable location = /usr/bin/ansible</pre></td></tr><tr><td data-num="8"></td><td><pre>python version = 3.6.8 (default, Apr 16 2020, 01:36:27) [GCC 8.3.1 20191121</pre></td></tr><tr><td data-num="9"></td><td><pre>(Red Hat 8.3.1-5)]</pre></td></tr><tr><td data-num="10"></td><td><pre>[root@ansible ~]#cp /etc/ansible/ansible.cfg .</pre></td></tr><tr><td data-num="11"></td><td><pre></pre></td></tr><tr><td data-num="12"></td><td><pre>[root@ansible ~]#ansible --version</pre></td></tr><tr><td data-num="13"></td><td><pre>ansible 2.9.17</pre></td></tr><tr><td data-num="14"></td><td><pre>config file = /root/ansible.cfg #注意配置文件路径</pre></td></tr><tr><td data-num="15"></td><td><pre>configured module search path = ['/root/.ansible/plugins/modules',</pre></td></tr><tr><td data-num="16"></td><td><pre>'/usr/share/ansible/plugins/modules']</pre></td></tr><tr><td data-num="17"></td><td><pre>ansible python module location = /usr/lib/python3.6/site-packages/ansible</pre></td></tr><tr><td data-num="18"></td><td><pre>executable location = /usr/bin/ansible</pre></td></tr><tr><td data-num="19"></td><td><pre>python version = 3.6.8 (default, Apr 16 2020, 01:36:27) [GCC 8.3.1 20191121</pre></td></tr><tr><td data-num="20"></td><td><pre>(Red Hat 8.3.1-5)]</pre></td></tr><tr><td data-num="21"></td><td><pre>[root@ansible ~]#</pre></td></tr></table></figure><h3 id="inventory-主机清单文件"><a class="anchor" href="#inventory-主机清单文件">#</a> Inventory 主机清单文件</h3><p>ansible 的主要功用在于批量主机操作，为了便捷地使用其中的部分主机，可以在 inventory 主机清单文件中将其分组组织<br>默认的 inventory file 为 /etc/ansible/hosts<br>inventory file 可以有多个，且也可以通过 Dynamic Inventory 来动态生成<br>注意:</p><ul><li>生产建议在每个项目目录下创建项目独立的 hosts 文件</li><li>通过项目目录下的 ansible.cfg 文件中的 inventory = ./hosts 实现</li></ul><p>官方文档:</p><figure class="highlight url"><figcaption data-lang="url"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token scheme">https<span class="token scheme-delimiter">:</span></span><span class="token authority"><span class="token authority-delimiter">//</span><span class="token host">docs.ansible.com</span></span><span class="token path"><span class="token path-separator">/</span>ansible<span class="token path-separator">/</span>latest<span class="token path-separator">/</span>user_guide<span class="token path-separator">/</span>intro_inventory.html</span></pre></td></tr></table></figure><p><strong>主机清单文件格式</strong><br>inventory 文件遵循 INI 文件风格，中括号中的字符为组名。可以将同一个主机同时归并到多个不同的组中，此外，当如若目标主机使用了非默认的 SSH 端口，还可以在主机名称之后使用冒号加端口号来标明，如果主机名称遵循相似的命名模式，还可以使用列表的方式标识各主机<br><strong>Inventory 参数说明</strong></p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>ansible_ssh_host #将要连接的远程主机名.与你想要设定的主机的别名不同的话,可通过此变量设置.</pre></td></tr><tr><td data-num="2"></td><td><pre>ansible_ssh_port #ssh端口号.如果不是默认的端口号,通过此变量设置.这种可以使用 ip:端口</pre></td></tr><tr><td data-num="3"></td><td><pre>192.168.1.100:2222</pre></td></tr><tr><td data-num="4"></td><td><pre>ansible_ssh_user #默认的 ssh 用户名</pre></td></tr><tr><td data-num="5"></td><td><pre>ansible_ssh_pass #ssh 密码(这种方式并不安全,我们强烈建议使用 --ask-pass 或 SSH 密钥)</pre></td></tr><tr><td data-num="6"></td><td><pre>ansible_sudo_pass #sudo 密码(这种方式并不安全,我们强烈建议使用 --ask-sudo-pass)</pre></td></tr><tr><td data-num="7"></td><td><pre>ansible_sudo_exe (new in version 1.8) #sudo 命令路径(适用于1.8及以上版本)</pre></td></tr><tr><td data-num="8"></td><td><pre>ansible_connection #与主机的连接类型.比如:local, ssh 或者 paramiko. Ansible 1.2 以前默认使用 paramiko.1.2 以后默认使用 'smart','smart' 方式会根据是否支持 ControlPersist,来判断'ssh' 方式是否可行.</pre></td></tr><tr><td data-num="9"></td><td><pre>ansible_ssh_private_key_file #ssh 使用的私钥文件.适用于有多个密钥,而你不想使用 SSH 代理的情况.</pre></td></tr><tr><td data-num="10"></td><td><pre>ansible_shell_type #目标系统的shell类型.默认情况下,命令的执行使用 'sh' 语法,可设置为'csh' 或 'fish'.</pre></td></tr><tr><td data-num="11"></td><td><pre>ansible_python_interpreter #目标主机的 python 路径.适用于的情况: 系统中有多个 Python,或者命令路径不是"/usr/bin/python",比如 \*BSD, 或者 /usr/bin/python 不是 2.X 版本的Python.之所以不使用 "/usr/bin/env" 机制,因为这要求远程用户的路径设置正确,且要求 "python"可执行程序名不可为 python以外的名字(实际有可能名为python26).与ansible_python_interpreter 的工作方式相同,可设定如 ruby 或 perl 的路径....</pre></td></tr></table></figure><p>范例：</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>ntp.wang.org</pre></td></tr><tr><td data-num="2"></td><td><pre>[webservers]</pre></td></tr><tr><td data-num="3"></td><td><pre>www1.wang.org:2222</pre></td></tr><tr><td data-num="4"></td><td><pre>www2.wang.org</pre></td></tr><tr><td data-num="5"></td><td><pre>[dbservers]</pre></td></tr><tr><td data-num="6"></td><td><pre>db1.wang.org</pre></td></tr><tr><td data-num="7"></td><td><pre>db2.wang.org</pre></td></tr><tr><td data-num="8"></td><td><pre>db3.wang.org</pre></td></tr><tr><td data-num="9"></td><td><pre>#或者</pre></td></tr><tr><td data-num="10"></td><td><pre>db[1:3].wang.org</pre></td></tr></table></figure><p>范例：组嵌套</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[webservers]</pre></td></tr><tr><td data-num="2"></td><td><pre>www[1:100].example.com</pre></td></tr><tr><td data-num="3"></td><td><pre>[dbservers]</pre></td></tr><tr><td data-num="4"></td><td><pre>db-[a:f].example.com</pre></td></tr><tr><td data-num="5"></td><td><pre>[appservers]</pre></td></tr><tr><td data-num="6"></td><td><pre>10.0.0.[1:100]</pre></td></tr><tr><td data-num="7"></td><td><pre>#定义testsrvs组中包括两个其它分组,实现组嵌套</pre></td></tr><tr><td data-num="8"></td><td><pre>[testsrvs:children]</pre></td></tr><tr><td data-num="9"></td><td><pre>webservers</pre></td></tr><tr><td data-num="10"></td><td><pre>dbservers</pre></td></tr></table></figure><p>范例：基于用户名和密码的 ssh 连接主机清单</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[test]</pre></td></tr><tr><td data-num="2"></td><td><pre>10.0.0.8 ansible_connection=local #指定本地连接,无需ssh配置</pre></td></tr><tr><td data-num="3"></td><td><pre></pre></td></tr><tr><td data-num="4"></td><td><pre>#每个主机分别指定用户和密码,ansible_connection=ssh 需要StrictHostKeyChecking no 或者host_key_checking = False</pre></td></tr><tr><td data-num="5"></td><td><pre>10.0.0.7 ansible_connection=ssh ansible_ssh_port=2222 ansible_ssh_user=wangansible_ssh_password=123456</pre></td></tr><tr><td data-num="6"></td><td><pre>10.0.0.6 ansible_ssh_user=root ansible_ssh_password=123456</pre></td></tr><tr><td data-num="7"></td><td><pre>#对每个分组的所有主机统一定义用户和密码,执行ansible命令时显示别名,如web01</pre></td></tr><tr><td data-num="8"></td><td><pre>[websrvs]</pre></td></tr><tr><td data-num="9"></td><td><pre>web01 ansible_ssh_host=10.0.0.101</pre></td></tr><tr><td data-num="10"></td><td><pre>web02 ansible_ssh_host=10.0.0.102</pre></td></tr><tr><td data-num="11"></td><td><pre>[websrvs:vars]</pre></td></tr><tr><td data-num="12"></td><td><pre>ansible_ssh_password=magedu</pre></td></tr><tr><td data-num="13"></td><td><pre>some_host ansible_ssh_port=2222 ansible_ssh_user=manager</pre></td></tr><tr><td data-num="14"></td><td><pre>aws_host ansible_ssh_private_key_file=/home/example/.ssh/aws.pem</pre></td></tr><tr><td data-num="15"></td><td><pre>freebsd_host ansible_python_interpreter=/usr/local/bin/python</pre></td></tr><tr><td data-num="16"></td><td><pre>ruby_module_host ansible_ruby_interpreter=/usr/bin/ruby.1.9.3</pre></td></tr></table></figure><h2 id="ansible相关工具"><a class="anchor" href="#ansible相关工具">#</a> Ansible 相关工具</h2><ul><li><p>/usr/bin/ansible 主程序，临时命令执行工具</p></li><li><p>/usr/bin/ansible-doc 查看配置文档，模块功能查看工具，相当于 man</p></li><li><p>/usr/bin/ansible-playbook 定制自动化任务，编排剧本工具，相当于脚本</p></li><li><p>/usr/bin/ansible-pull 远程执行命令的工具</p></li><li><p>/usr/bin/ansible-vault 文件加密工具</p></li><li><p>/usr/bin/ansible-console 基于 Console 界面与用户交互的执行工具</p></li><li><p>/usr/bin/ansible-galaxy 下载 / 上传优秀代码或 Roles 模块的官网平台</p></li></ul><p><strong>利用 ansible 实现管理的主要方式：</strong></p><ul><li><p>Ansible Ad-Hoc 即利用 ansible 命令，主要用于临时命令使用场景</p></li><li><p>Ansible playbook 主要用于长期规划好的，大型项目的场景，需要有前期的规划过程</p></li></ul><p><strong>ansible 使用前准备</strong><br>ansible 相关工具大多数是通过 ssh 协议，实现对远程主机的配置管理、应用部署、任务执行等功能<br>建议：使用此工具前，先配置 ansible 主控端能基于密钥认证的方式联系各个被管理节点<br>范例：利用 sshpass 批量实现基于 key 验证脚本 1</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@centos8 ~]#vim /etc/ssh/ssh_config</pre></td></tr><tr><td data-num="2"></td><td><pre>#修改下面一行</pre></td></tr><tr><td data-num="3"></td><td><pre>StrictHostKeyChecking no</pre></td></tr><tr><td data-num="4"></td><td><pre>[root@centos8 ~]#cat hosts.list</pre></td></tr><tr><td data-num="5"></td><td><pre>192.168.32.178</pre></td></tr><tr><td data-num="6"></td><td><pre>192.168.32.179</pre></td></tr><tr><td data-num="7"></td><td><pre>[root@centos8 ~]#vim push_ssh_key.sh</pre></td></tr><tr><td data-num="8"></td><td><pre>#!/bin/bash</pre></td></tr><tr><td data-num="9"></td><td><pre>rpm -ql shpass &amp;> /dev/null || yum -y install sshpass</pre></td></tr><tr><td data-num="10"></td><td><pre>[ -f /root/.ssh/id_rsa ] || ssh-keygen -f /root/.ssh/id_rsa -P ''</pre></td></tr><tr><td data-num="11"></td><td><pre>export SSHPASS=123456</pre></td></tr><tr><td data-num="12"></td><td><pre>while read IP;do</pre></td></tr><tr><td data-num="13"></td><td><pre>	sshpass -e ssh-copy-id -o StrictHostKeyChecking=no $IP</pre></td></tr><tr><td data-num="14"></td><td><pre></pre></td></tr><tr><td data-num="15"></td><td><pre></pre></td></tr><tr><td data-num="16"></td><td><pre>done &lt; hosts.list</pre></td></tr></table></figure><p>范例：实现基于 key 验证的脚本 2</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@centos8 ~]#cat ssh_key.sh</pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre>#!/bin/bash</pre></td></tr><tr><td data-num="4"></td><td><pre>PLIST="</pre></td></tr><tr><td data-num="5"></td><td><pre>192.168.32.178</pre></td></tr><tr><td data-num="6"></td><td><pre>192.168.32.179"</pre></td></tr><tr><td data-num="7"></td><td><pre>rpm -q sshpass &amp;> /dev/null || yum -y install sshpass</pre></td></tr><tr><td data-num="8"></td><td><pre>[ -f /root/.ssh/id_rsa ] || ssh-keygen -f /root/.ssh/id_rsa -P ''</pre></td></tr><tr><td data-num="9"></td><td><pre>export SSHPASS=123456</pre></td></tr><tr><td data-num="10"></td><td><pre>for IP in $IPLIST;do</pre></td></tr><tr><td data-num="11"></td><td><pre>       &#123; sshpass -e ssh-copy-id -o StrictHostKeyChecking=no $IP; &#125; &amp;</pre></td></tr><tr><td data-num="12"></td><td><pre></pre></td></tr><tr><td data-num="13"></td><td><pre>done</pre></td></tr><tr><td data-num="14"></td><td><pre>wait</pre></td></tr></table></figure><h3 id="ansible-doc"><a class="anchor" href="#ansible-doc">#</a> ansible-doc</h3><p>此工具用来显示模块帮助，相当于 man<br>格式</p><pre><code>ansible-doc [options] [module...]
 -l, --list #列出可用模块
 -s, --snippet #显示指定模块的playbook片段
-</code></pre><p>范例: 查看帮助</p><pre><code>[root@rocky ~]# ansible-doc --help
+</code></pre><p>范例：查看帮助</p><pre><code>[root@rocky ~]# ansible-doc --help
 usage: ansible-doc [-h] [--version] [-v] [-M MODULE_PATH] [--playbook-dir BASEDIR]
                    [-t &#123;become,cache,callback,cliconf,connection,httpapi,inventory,lookup,netconf,shell,vars,module,strategy,role,keyword&#125;]
                    [-j] [-r ROLES_PATH] [-e ENTRY_POINT | -s | -F | -l | --metadata-dump] [--no-fail-on-errors]
@@ -291,18 +11,19 @@ plugin documentation tool
 
 positional arguments:
   plugin                Plugin
+
 </code></pre><p>范例：</p><pre><code>#列出所有模块
 ansible-doc -l
 #查看指定模块帮助用法
 ansible-doc ping
 #查看指定模块帮助用法
 ansible-doc -s ping
-</code></pre><p>范例: 查看指定的插件</p><pre><code>[root@rocky ~]# ansible-doc -t connection -l
+</code></pre><p>范例：查看指定的插件</p><pre><code>[root@rocky ~]# ansible-doc -t connection -l
 local        execute on controller                                                                                                 
 paramiko_ssh Run tasks via python ssh (paramiko)                                                                                   
 psrp         Run tasks over Microsoft PowerShell Remoting Protocol                                                                 
 ssh          connect via SSH client binary                                                                                         
-winrm        Run tasks over Microsoft&#39;s WinRM                                                                                      
+winrm        Run tasks over Microsoft's WinRM                                                                                      
 [root@rocky ~]# 
 [root@rocky ~]# ansible-doc -t lookup -l
 config              Lookup current Ansible configuration values                                                                    
@@ -312,7 +33,7 @@ env                 Read the value of environment variables
 file                read file contents                                                                                             
 fileglob            list files matching a pattern                                                                                  
 first_found         return first file found from list                                                                              
-indexed_items       rewrites lists to return &#39;indexed items&#39;                                                                       
+indexed_items       rewrites lists to return 'indexed items'                                                                       
 ini                 read data from an ini file                                                                                     
 inventory_hostnames list of inventory hosts matching a host pattern                                                                
 items               list of items                                                                                                  
@@ -331,7 +52,8 @@ url                 return contents from URL
 varnames            Lookup matching variable names                                                                                 
 vars                Lookup templated value of variables                                                                            
 [root@rocky ~]# 
-</code></pre><h3 id="ansible"><a href="#ansible" class="headerlink" title="ansible"></a>ansible</h3><h4 id="Ansible-Ad-Hoc-介绍"><a href="#Ansible-Ad-Hoc-介绍" class="headerlink" title="Ansible Ad-Hoc 介绍"></a>Ansible Ad-Hoc 介绍</h4><p>Ansible Ad-Hoc 的执行方式的主要工具就是 ansible<br>特点: 一次性的执行,不会保存执行命令信息,只适合临时性或测试性的任务</p><h4 id="ansible-命令用法"><a href="#ansible-命令用法" class="headerlink" title="ansible 命令用法"></a>ansible 命令用法</h4><p>格式：</p><pre><code>ansible &lt;host-pattern&gt; [-m module_name] [-a args]
+
+</code></pre><h3 id="ansible"><a class="anchor" href="#ansible">#</a> ansible</h3><h4 id="ansible-ad-hoc-介绍"><a class="anchor" href="#ansible-ad-hoc-介绍">#</a> Ansible Ad-Hoc 介绍</h4><p>Ansible Ad-Hoc 的执行方式的主要工具就是 ansible<br>特点：一次性的执行，不会保存执行命令信息，只适合临时性或测试性的任务</p><h4 id="ansible-命令用法"><a class="anchor" href="#ansible-命令用法">#</a> ansible 命令用法</h4><p>格式：</p><pre><code>ansible &lt;host-pattern&gt; [-m module_name] [-a args]
 </code></pre><p>选项说明：</p><pre><code>--version #显示版本
 -m module #指定模块，默认为command
 -v #详细过程 -vv -vvv更详细
@@ -352,11 +74,11 @@ ansible all -m ping -u wang -k -b
 #以wang sudo至mage用户执行ping存活检测
 ansible all -m ping -u wang -k -b --become-user=mage
 #以wang sudo至root用户执行ls
-ansible all -m command -u wang -a &#39;ls /root&#39; -b --become-user=root -k -K
-</code></pre><p>范例: 并发执行控制</p><pre><code>#分别执行下面两条命令观察结果
-[root@ansible ~]#ansible all -a &#39;sleep 5&#39; -f1
-[root@ansible ~]#ansible all -a &#39;sleep 5&#39; -f10
-</code></pre><p>范例: 使用普能用户进行远程管理</p><pre><code>#在所有控制端和被控制端创建用户和密码
+ansible all -m command -u wang -a 'ls /root' -b --become-user=root -k -K
+</code></pre><p>范例：并发执行控制</p><pre><code>#分别执行下面两条命令观察结果
+[root@ansible ~]#ansible all -a 'sleep 5' -f1
+[root@ansible ~]#ansible all -a 'sleep 5' -f10
+</code></pre><p>范例：使用普能用户进行远程管理</p><pre><code>#在所有控制端和被控制端创建用户和密码
 [root@rocky8 ~]#useradd wang
 [root@rocky8 ~]#echo wang:123456 | chpasswd
 #在所有被控制端对用户sudo授权
@@ -366,14 +88,14 @@ wang ALL=(ALL) NOPASSWD: ALL
 /etc/sudoers: parsed OK
 #实现从控制端到被控制端的基于key验证
 [root@ansible ~]#su - wang
-wang@ansible:~$ssh-keygen -f ~/.ssh/id_rsa -P &#39;&#39;
-wang@ansible:~$$ssh-copy-id wang@&#39;10.0.0.8&#39;
+wang@ansible:~$ssh-keygen -f ~/.ssh/id_rsa -P ''
+wang@ansible:~$$ssh-copy-id wang@'10.0.0.8'
 #使用普通用户测试连接,默认连接权限不足失败
-wang@ansible:~$ ansible 10.0.0.8 -m shell -a &#39;ls /root&#39;
+wang@ansible:~$ ansible 10.0.0.8 -m shell -a 'ls /root'
 10.0.0.8 | FAILED | rc=2 &gt;&gt;
-ls: cannot open directory &#39;/root&#39;: Permission deniednon-zero return code
+ls: cannot open directory '/root': Permission deniednon-zero return code
 #使用普通用户通过-b选项连接实现sudo提权后连接成功
-wang@ansible:~$ ansible 10.0.0.8 -m shell -a &#39;ls /root&#39; -b --become-user root
+wang@ansible:~$ ansible 10.0.0.8 -m shell -a 'ls /root' -b --become-user root
 10.0.0.8 | CHANGED | rc=0 &gt;&gt;
 anaconda-ks.cfg
 #修改配置文件指定sudo机制
@@ -386,22 +108,22 @@ become_user=root
 become_ask_pass=False
 #再次测试
 [root@ansible ~]#su - wang
-wang@ansible:~$ ansible 10.0.0.8 -m shell -a &#39;ls /root&#39;
+wang@ansible:~$ ansible 10.0.0.8 -m shell -a 'ls /root'
 10.0.0.8 | CHANGED | rc=0 &gt;&gt;
 anaconda-ks.cfg
-</code></pre><p>范例: 使用普通用户连接远程主机执行代替另一个用户身份执行操作</p><pre><code>[root@centos8 ~]#useradd wang
+</code></pre><p>范例：使用普通用户连接远程主机执行代替另一个用户身份执行操作</p><pre><code>[root@centos8 ~]#useradd wang
 [root@centos8 ~]#echo wang:123456 | chpasswd
 #先在被控制端能过sudo对普通用户授权
 [root@centos8 ~]#grep wang /etc/sudoers
 wang ALL=(ALL) NOPASSWD: ALL
 #以wang的用户连接用户,并利用sudo代表mage执行whoami命令
-[root@ansible ~]#ansible 10.0.0.8 -m shell -a &#39;whoami&#39; -u wang -k -b --become-
+[root@ansible ~]#ansible 10.0.0.8 -m shell -a 'whoami' -u wang -k -b --become-
 user=mage
 SSH password: #输入远程主机wang用户ssh连接密码
 10.0.0.8 | CHANGED | rc=0 &gt;&gt;
 mage
-</code></pre><h4 id="ansible的Host-pattern"><a href="#ansible的Host-pattern" class="headerlink" title="ansible的Host-pattern"></a>ansible的Host-pattern</h4><p>用于匹配被控制的主机的列表<br>All ：表示所有Inventory中的所有主机<br>范例</p><pre><code>ansible all -m ping
-</code></pre><p>*:通配符</p><pre><code>ansible &quot;*&quot; -m ping
+</code></pre><h4 id="ansible的host-pattern"><a class="anchor" href="#ansible的host-pattern">#</a> ansible 的 Host-pattern</h4><p>用于匹配被控制的主机的列表<br>All ：表示所有 Inventory 中的所有主机<br>范例</p><pre><code>ansible all -m ping
+</code></pre><p>*: 通配符</p><pre><code>ansible &quot;*&quot; -m ping
 ansible 192.168.1.* -m ping
 ansible &quot;srvs&quot; -m ping
 ansible &quot;10.0.0.6 10.0.0.7&quot; -m ping
@@ -411,11 +133,11 @@ ansible &quot;192.168.1.10:192.168.1.20&quot; -m ping
 ansible &quot;websrvs:&amp;dbsrvs&quot; -m ping
 </code></pre><p>逻辑非</p><pre><code>#在所有主机,但不在websrvs组和dbsrvs组中的主机
 #注意：此处为单引号
-ansible &#39;all:!dbsrvs:!websrvs&#39; -m ping
-</code></pre><p>综合逻辑</p><pre><code>ansible &#39;websrvs:dbsrvs:&amp;appsrvs:!ftpsrvs&#39; -m ping
+ansible 'all:!dbsrvs:!websrvs' -m ping
+</code></pre><p>综合逻辑</p><pre><code>ansible 'websrvs:dbsrvs:&amp;appsrvs:!ftpsrvs' -m ping
 </code></pre><p>正则表达式</p><pre><code>ansible &quot;websrvs:dbsrvs&quot; -m ping
 ansible &quot;~(web|db).*\.magedu\.com&quot; -m ping
-</code></pre><h5 id="ansible-命令的执行过程"><a href="#ansible-命令的执行过程" class="headerlink" title="ansible 命令的执行过程"></a>ansible 命令的执行过程</h5><ol><li>加载自己的配置文件,默认&#x2F;etc&#x2F;ansible&#x2F;ansible.cfg</li><li>查找主机清单中对应的主机或主机组</li><li>加载自己对应的模块文件，如：command</li><li>通过ansible将模块或命令生成对应的临时py文件，并将该文件传输至远程服务器的对应执行用户<br>$HOME&#x2F;.ansible&#x2F;tmp&#x2F;ansible-tmp-数字&#x2F;XXX.PY文件</li><li>给文件+x执行</li><li>执行并返回结果</li><li>删除临时py文件，退出</li></ol><h5 id="ansible-命令的执行状态"><a href="#ansible-命令的执行状态" class="headerlink" title="ansible 命令的执行状态"></a>ansible 命令的执行状态</h5><pre><code>[root@centos8 ~]#grep -A 14 &#39;\[colors\]&#39; /etc/ansible/ansible.cfg
+</code></pre><h5 id="ansible-命令的执行过程"><a class="anchor" href="#ansible-命令的执行过程">#</a> ansible 命令的执行过程</h5><ol><li>加载自己的配置文件，默认 /etc/ansible/ansible.cfg</li><li>查找主机清单中对应的主机或主机组</li><li>加载自己对应的模块文件，如：command</li><li>通过 ansible 将模块或命令生成对应的临时 py 文件，并将该文件传输至远程服务器的对应执行用户<br>$HOME/.ansible/tmp/ansible-tmp - 数字 / XXX.PY 文件</li><li>给文件 + x 执行</li><li>执行并返回结果</li><li>删除临时 py 文件，退出</li></ol><h5 id="ansible-命令的执行状态"><a class="anchor" href="#ansible-命令的执行状态">#</a> ansible 命令的执行状态</h5><pre><code>[root@centos8 ~]#grep -A 14 '\[colors\]' /etc/ansible/ansible.cfg
 [colors]
 #highlight = white
 #verbose = blue
@@ -430,8 +152,8 @@ ansible &quot;~(web|db).*\.magedu\.com&quot; -m ping
 #diff_add = green
 #diff_remove = red
 #diff_lines = cyan
-</code></pre><ul><li>绿色：执行成功并且对目标主机不需要做改变的操作</li><li>黄色：执行成功并且对目标主机做变更</li><li>红色：执行失败</li></ul><h3 id="ansible-console"><a href="#ansible-console" class="headerlink" title="ansible-console"></a>ansible-console</h3><p>此工具可交互执行命令，支持tab，ansible 2.0+新增<br>提示符格式：</p><pre><code>执行用户@当前操作的主机组 (当前组的主机数量)[f:并发数]$
-</code></pre><p>常用子命令：</p><ul><li>设置并发数： forks n 例如： forks 10</li><li>切换组： cd 主机组 例如： cd web</li><li>列出当前组主机列表： list</li><li>列出所有的内置命令： ?或help</li></ul><p>范例</p><pre><code>[root@ansible ~]#ansible-console
+</code></pre><ul><li>绿色：执行成功并且对目标主机不需要做改变的操作</li><li>黄色：执行成功并且对目标主机做变更</li><li>红色：执行失败</li></ul><h3 id="ansible-console"><a class="anchor" href="#ansible-console">#</a> ansible-console</h3><p>此工具可交互执行命令，支持 tab，ansible 2.0 + 新增<br>提示符格式：</p><pre><code>执行用户@当前操作的主机组 (当前组的主机数量)[f:并发数]$
+</code></pre><p>常用子命令：</p><ul><li>设置并发数： forks n 例如： forks 10</li><li>切换组： cd 主机组 例如： cd web</li><li>列出当前组主机列表： list</li><li>列出所有的内置命令： ? 或 help</li></ul><p>范例</p><pre><code>[root@ansible ~]#ansible-console
 Welcome to the ansible console.
 Type help or ? to list commands.
 root@all (3)[f:5]$ ping
@@ -468,7 +190,7 @@ root@websrvs (2)[f:5]$ forks 10
 root@websrvs (2)[f:10]$ cd appsrvs
 root@appsrvs (2)[f:5]$ yum name=httpd state=present
 root@appsrvs (2)[f:5]$ service name=httpd state=started
-</code></pre><h3 id="ansible-playbook"><a href="#ansible-playbook" class="headerlink" title="ansible-playbook"></a>ansible-playbook</h3><p>此工具用于执行编写好的 playbook 任务<br>范例：</p><pre><code>ansible-playbook hello.yml
+</code></pre><h3 id="ansible-playbook"><a class="anchor" href="#ansible-playbook">#</a> ansible-playbook</h3><p>此工具用于执行编写好的 playbook 任务<br>范例：</p><pre><code>ansible-playbook hello.yml
 cat hello.yml
 ---
 #hello world yml file
@@ -478,7 +200,7 @@ cat hello.yml
   tasks:
   - name: hello world
     command: /usr/bin/wall hello world
-</code></pre><h3 id="ansible-vault"><a href="#ansible-vault" class="headerlink" title="ansible-vault"></a>ansible-vault</h3><p>此工具可以用于加密解密yml文件<br>格式：</p><pre><code>ansible-vault [create|decrypt|edit|encrypt|rekey|view]
+</code></pre><h3 id="ansible-vault"><a class="anchor" href="#ansible-vault">#</a> ansible-vault</h3><p>此工具可以用于加密解密 yml 文件<br>格式：</p><pre><code>ansible-vault [create|decrypt|edit|encrypt|rekey|view]
 </code></pre><p>范例</p><pre><code>ansible-vault encrypt hello.yml #加密
 ansible-vault decrypt hello.yml #解密
 ansible-vault view hello.yml #查看
@@ -496,7 +218,7 @@ ansible-playbook --vault-password-file pass.txt hello.yml
 ault-password-file=pass.txt
 #可以直接执行加密文件
 ansible-playbook hello.yml
-</code></pre><h3 id="ansible-galaxy"><a href="#ansible-galaxy" class="headerlink" title="ansible-galaxy"></a>ansible-galaxy</h3><p>Galaxy 是一个免费网站, 类似于github网站, 网站上发布了很多的共享的roles角色。<br>Ansible 提供了ansible-galaxy命令行工具连接 <span class="exturl" data-url="aHR0cHM6Ly9nYWxheHkuYW5zaWJsZS5jb20v">https://galaxy.ansible.com</span> 网站下载相应的roles, 进行init(初始化、search( 查拘、install(安装、 remove(移除)等操作。</p><p><img data-src="/../image.assets/1677156776774.png" alt="1677156776774"></p><p>范例：</p><pre><code>#搜索项目
+</code></pre><h3 id="ansible-galaxy"><a class="anchor" href="#ansible-galaxy">#</a> ansible-galaxy</h3><p>Galaxy 是一个免费网站，类似于 github 网站，网站上发布了很多的共享的 roles 角色。<br>Ansible 提供了 ansible-galaxy 命令行工具连接 <span class="exturl" data-url="aHR0cHM6Ly9nYWxheHkuYW5zaWJsZS5jb20=">https://galaxy.ansible.com</span> 网站下载相应的 roles, 进行 init (初始化、search ( 查拘、install (安装、 remove (移除) 等操作。</p><p><img data-src="../image.assets/1677156776774.png" alt="1677156776774"></p><p>范例：</p><pre><code>#搜索项目
 [root@ansible ~]#ansible-galaxy search lamp
 #列出所有已安装的galaxy
 ansible-galaxy list
@@ -505,35 +227,35 @@ ansible-galaxy install geerlingguy.mysql
 ansible-galaxy install geerlingguy.redis
 #删除galaxy
 ansible-galaxy remove geerlingguy.redis
-</code></pre><h2 id="Ansible常用模块"><a href="#Ansible常用模块" class="headerlink" title="Ansible常用模块"></a>Ansible常用模块</h2><p>2015年12月只270多个模块<br>2016年12年26日ansible 1.9.2 有540个模块<br>2018年01月12日ansible 2.3.8 有1378个模块<br>2018年05月28日ansible 2.5.3 有1562个模块<br>2018年07月15日ansible 2.6.3 有1852个模块<br>2018年11月19日ansible 2.7.2 有2080个模块<br>2020年03月02日ansible 2.9.5 有3387个模块<br>2021年12月22日ansible 2.11.8 有6141个模块<br>2022年06月04日ansible 2.12.6 有6763个模块<br>虽然模块众多，但最常用的模块也就2，30个而已，针对特定业务只需要熟悉10几个模块即可<br>常用模块帮助文档参考：</p><pre><code>https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html
+</code></pre><h2 id="ansible常用模块"><a class="anchor" href="#ansible常用模块">#</a> Ansible 常用模块</h2><p>2015 年 12 月只 270 多个模块<br>2016 年 12 年 26 日 ansible 1.9.2 有 540 个模块<br>2018 年 01 月 12 日 ansible 2.3.8 有 1378 个模块<br>2018 年 05 月 28 日 ansible 2.5.3 有 1562 个模块<br>2018 年 07 月 15 日 ansible 2.6.3 有 1852 个模块<br>2018 年 11 月 19 日 ansible 2.7.2 有 2080 个模块<br>2020 年 03 月 02 日 ansible 2.9.5 有 3387 个模块<br>2021 年 12 月 22 日 ansible 2.11.8 有 6141 个模块<br>2022 年 06 月 04 日 ansible 2.12.6 有 6763 个模块<br>虽然模块众多，但最常用的模块也就 2，30 个而已，针对特定业务只需要熟悉 10 几个模块即可<br>常用模块帮助文档参考：</p><pre><code>https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html
 https://docs.ansible.com/ansible/2.9/modules/list_of_all_modules.html
 https://docs.ansible.com/ansible/latest/modules/list_of_all_modules.html
 https://docs.ansible.com/ansible/latest/modules/modules_by_category.html
-</code></pre><h3 id="Command-模块"><a href="#Command-模块" class="headerlink" title="Command 模块"></a>Command 模块</h3><p>功能：在远程主机执行命令，此为默认模块，可忽略 -m 选项<br>注意：此命令不支持 $VARNAME &lt; &gt; | ; &amp; 等，可用shell模块实现<br>注意：此模块不具有幂等性<br>常见选项</p><pre><code>chdir=dir #执行命令前,先切换至目录dir
+</code></pre><h3 id="command-模块"><a class="anchor" href="#command-模块">#</a> Command 模块</h3><p>功能：在远程主机执行命令，此为默认模块，可忽略 -m 选项<br>注意：此命令不支持 $VARNAME &lt; &gt; | ; &amp; 等，可用 shell 模块实现<br>注意：此模块不具有幂等性<br>常见选项</p><pre><code>chdir=dir #执行命令前,先切换至目录dir
 creates=file #当file不存在时才会执行
 removes=file #当file存在时才会执行
-</code></pre><p>范例：</p><pre><code>[root@ansible ~]#ansible websrvs -m command -a &#39;chdir=/etc cat centos-release&#39;
+</code></pre><p>范例：</p><pre><code>[root@ansible ~]#ansible websrvs -m command -a 'chdir=/etc cat centos-release'
 10.0.0.7 | CHANGED | rc=0 &gt;&gt;
 CentOS Linux release 7.7.1908 (Core)
 10.0.0.8 | CHANGED | rc=0 &gt;&gt;
 CentOS Linux release 8.1.1911 (Core)
-[root@ansible ~]#ansible websrvs -m command -a &#39;chdir=/etc creates=/data/f1.txt cat centos-release&#39;
+[root@ansible ~]#ansible websrvs -m command -a 'chdir=/etc creates=/data/f1.txt cat centos-release'
 10.0.0.7 | CHANGED | rc=0 &gt;&gt;
 CentOS Linux release 7.7.1908 (Core)
 10.0.0.8 | SUCCESS | rc=0 &gt;&gt;
 skipped, since /data/f1.txt exists
-[root@ansible ~]#ansible websrvs -m command -a &#39;chdir=/etc removes=/data/f1.txt cat centos-release&#39;
+[root@ansible ~]#ansible websrvs -m command -a 'chdir=/etc removes=/data/f1.txt cat centos-release'
 10.0.0.7 | SUCCESS | rc=0 &gt;&gt;
 skipped, since /data/f1.txt does not exist
 10.0.0.8 | CHANGED | rc=0 &gt;&gt;
 CentOS Linux release 8.1.1911 (Core)
-ansible websrvs -m command -a &#39;service vsftpd start&#39;
-ansible websrvs -m command -a &#39;echo magedu |passwd --stdin wang&#39;
-ansible websrvs -m command -a &#39;rm -rf /data/&#39;
-ansible websrvs -m command -a &#39;echo hello &gt; /data/hello.log&#39;
+ansible websrvs -m command -a 'service vsftpd start'
+ansible websrvs -m command -a 'echo magedu |passwd --stdin wang'
+ansible websrvs -m command -a 'rm -rf /data/'
+ansible websrvs -m command -a 'echo hello &gt; /data/hello.log'
 
 ansible websrvs -m command -a &quot;echo $HOSTNAME&quot;
-</code></pre><h3 id="Shell-模块"><a href="#Shell-模块" class="headerlink" title="Shell 模块"></a>Shell 模块</h3><p>功能：和command相似，用shell执行命令,支持各种符号,比如:*,$, &gt; , 相当于增强版的command模块<br>注意：此模块不具有幂等性,建议能不能就用此模块,最好使用专用模块<br>常见选项</p><pre><code>chdir=dir #执行命令前,先切换至目录dir
+</code></pre><h3 id="shell-模块"><a class="anchor" href="#shell-模块">#</a> Shell 模块</h3><p>功能：和 command 相似，用 shell 执行命令，支持各种符号，比如:*,$, &gt; , 相当于增强版的 command 模块<br>注意：此模块不具有幂等性，建议能不能就用此模块，最好使用专用模块<br>常见选项</p><pre><code>chdir=dir #执行命令前,先切换至目录dir
 creates=file #当file不存在时才会执行
 removes=file #当file存在时才会执行
 </code></pre><p>范例：</p><pre><code>[root@ansible ~]#ansible websrvs -m shell -a &quot;echo $HOSTNAME&quot;
@@ -541,40 +263,40 @@ removes=file #当file存在时才会执行
 ansible
 10.0.0.8 | CHANGED | rc=0 &gt;&gt;
 ansible
-[root@ansible ~]#ansible websrvs -m shell -a &#39;echo $HOSTNAME&#39;
+[root@ansible ~]#ansible websrvs -m shell -a 'echo $HOSTNAME'
 10.0.0.7 | CHANGED | rc=0 &gt;&gt;
 centos7.wangxiaochun.com
 10.0.0.8 | CHANGED | rc=0 &gt;&gt;
 centos8.localdomain
-[root@ansible ~]#ansible websrvs -m shell -a &#39;echo centos | passwd --stdin wang&#39;
+[root@ansible ~]#ansible websrvs -m shell -a 'echo centos | passwd --stdin wang'
 10.0.0.7 | CHANGED | rc=0 &gt;&gt;
 Changing password for user wang.
 passwd: all authentication tokens updated successfully.
 10.0.0.8 | CHANGED | rc=0 &gt;&gt;
 Changing password for user wang.
 passwd: all authentication tokens updated successfully.
-[root@ansible ~]#ansible websrvs -m shell -a &#39;ls -l /etc/shadow&#39;
+[root@ansible ~]#ansible websrvs -m shell -a 'ls -l /etc/shadow'
 10.0.0.7 | CHANGED | rc=0 &gt;&gt;
 ---------- 1 root root 889 Mar 2 14:34 /etc/shadow
 10.0.0.8 | CHANGED | rc=0 &gt;&gt;
 ---------- 1 root root 944 Mar 2 14:34 /etc/shadow
-[root@ansible ~]#ansible websrvs -m shell -a &#39;echo hello &gt; /data/hello.log&#39;
+[root@ansible ~]#ansible websrvs -m shell -a 'echo hello &gt; /data/hello.log'
 10.0.0.7 | CHANGED | rc=0 &gt;&gt;
 10.0.0.8 | CHANGED | rc=0 &gt;&gt;
-[root@ansible ~]#ansible websrvs -m shell -a &#39;cat /data/hello.log&#39;
+[root@ansible ~]#ansible websrvs -m shell -a 'cat /data/hello.log'
 10.0.0.7 | CHANGED | rc=0 &gt;&gt;
 hello
 10.0.0.8 | CHANGED | rc=0 &gt;&gt;
 hello
-</code></pre><p>注意：调用bash执行命令 类似 cat &#x2F;tmp&#x2F;test.md | awk -F’|’ ‘{print $1,$2}’ &amp;&gt; &#x2F;tmp&#x2F;example.txt 这些复杂命令，即使使用shell也可能会失败，解决办法：写到脚本时，copy到远程，执行，再把需要的结果拉回执行命令的机器<br>范例：将shell模块代替command，设为模块</p><pre><code>[root@ansible ~]#vim /etc/ansible/ansible.cfg
+</code></pre><p>注意：调用 bash 执行命令 类似 cat /tmp/test.md | awk -F'|' '{print $1,$2}' &amp;&gt; /tmp/example.txt 这些复杂命令，即使使用 shell 也可能会失败，解决办法：写到脚本时，copy 到远程，执行，再把需要的结果拉回执行命令的机器<br>范例：将 shell 模块代替 command，设为模块</p><pre><code>[root@ansible ~]#vim /etc/ansible/ansible.cfg
 #修改下面一行
 module_name = shell
-</code></pre><h3 id="Script-模块"><a href="#Script-模块" class="headerlink" title="Script 模块"></a>Script 模块</h3><p>功能：在远程主机上运行ansible服务器上的脚本(无需执行权限)<br>注意：此模块不具有幂等性<br>常见选项</p><pre><code>chdir=dir #执行命令前,先切换至目录dir
+</code></pre><h3 id="script-模块"><a class="anchor" href="#script-模块">#</a> Script 模块</h3><p>功能：在远程主机上运行 ansible 服务器上的脚本 (无需执行权限)<br>注意：此模块不具有幂等性<br>常见选项</p><pre><code>chdir=dir #执行命令前,先切换至目录dir
 cmd #指定ansible主机的命令
 creates=file #当file不存在时才会执行
 removes=file #当file存在时才会执行
 </code></pre><p>范例：</p><pre><code>ansible websrvs -m script -a /data/test.sh
-</code></pre><h3 id="Copy-模块"><a href="#Copy-模块" class="headerlink" title="Copy 模块"></a>Copy 模块</h3><p>功能：复制ansible服务器主控端或远程的本机的文件到远程主机<br>注意: src&#x3D;file 如果是没指明路径,则为当前目录或当前目录下的files目录下的file文件<br>常见选项</p><pre><code>src #控制端的源文件路径
+</code></pre><h3 id="copy-模块"><a class="anchor" href="#copy-模块">#</a> Copy 模块</h3><p>功能：复制 ansible 服务器主控端或远程的本机的文件到远程主机<br>注意: src=file 如果是没指明路径，则为当前目录或当前目录下的 files 目录下的 file 文件<br>常见选项</p><pre><code>src #控制端的源文件路径
 dest #被控端的文件路径
 owner #属主
 group #属组
@@ -585,14 +307,14 @@ remote_src #no是默认值,表示src文件在ansible主机,yes表示src文件在
 </code></pre><p>范例:</p><pre><code>#如目标存在，默认覆盖，此处指定先备
 ansible websrvs -m copy -a &quot;src=/root/test1.sh dest=/tmp/test2.sh owner=wang mode=600 backup=yes&quot;
 #指定内容，直接生成目标文件
-ansible websrvs -m copy -a &quot;content=&#39;wang 123456\nxiao 654321\n&#39; dest=/etc/rsync.pas owner=root group=root mode=0600&quot;
+ansible websrvs -m copy -a &quot;content='wang 123456\nxiao 654321\n' dest=/etc/rsync.pas owner=root group=root mode=0600&quot;
 #复制/etc目录自身,注意/etc/后面没有/
 ansible websrvs -m copy -a &quot;src=/etc dest=/backup&quot;
 #复制/etc/下的文件，不包括/etc/目录自身,注意/etc/后面有/
 ansible websrvs -m copy -a &quot;src=/etc/ dest=/backup&quot;
 #复制/etc/suders,并校验语法
 ansible websrvs -m copy -a &quot;src=/etc/suders dest=/etc/sudoers.edit remote_src=yes validate=/usr/sbin/visudo -csf %s&quot;
-</code></pre><h3 id="Get-url-模块"><a href="#Get-url-模块" class="headerlink" title="Get_url 模块"></a>Get_url 模块</h3><p>功能: 用于将文件从http、https或ftp下载到被管理机节点上<br>常用参数如下：</p><pre><code>url #下载文件的URL,支持HTTP，HTTPS或FTP协议
+</code></pre><h3 id="get_url-模块"><a class="anchor" href="#get_url-模块">#</a> Get_url 模块</h3><p>功能：用于将文件从 http、https 或 ftp 下载到被管理机节点上<br>常用参数如下：</p><pre><code>url #下载文件的URL,支持HTTP，HTTPS或FTP协议
 dest #下载到目标路径（绝对路径），如果目标是一个目录，就用原文件名，如果目标设置了名称就用目标
 设置的名称
 owner #指定属主
@@ -603,16 +325,16 @@ force #如果yes，dest不是目录，将每次下载文件，如果内容改变
 checksum #对目标文件在下载后计算摘要，以确保其完整性
 #示例: checksum=&quot;sha256:D98291AC[...]B6DC7B97&quot;,
 checksum=&quot;sha256:http://example.com/path/sha256sum.txt&quot;
-url_username #用于HTTP基本认证的用户名。 对于允许空密码的站点，此参数可以不使用`url_password&#39;
-url_password #用于HTTP基本认证的密码。 如果未指定`url_username&#39;参数，则不会使用`url_password&#39;参数
+url_username #用于HTTP基本认证的用户名。 对于允许空密码的站点，此参数可以不使用`url_password'
+url_password #用于HTTP基本认证的密码。 如果未指定`url_username'参数，则不会使用`url_password'参数
 validate_certs #如果“no”，SSL证书将不会被验证。 适用于自签名证书在私有网站上使用
 timeout #URL请求的超时时间,秒为单位
-</code></pre><p>范例: 下载并MD5验证</p><pre><code>[root@ansible ~]#ansible websrvs -m get_url -a &#39;url=http://nginx.org/download/nginx-1.18.0.tar.gz dest=/usr/local/src/nginx.tar.gz checksum=&quot;md5:b2d33d24d89b8b1f87ff5d251aa27eb8&quot;&#39;
-</code></pre><h3 id="Fetch-模块"><a href="#Fetch-模块" class="headerlink" title="Fetch 模块"></a>Fetch 模块</h3><p>功能：从远程主机提取文件至ansible的主控端，copy相反，目前不支持目录<br>常见选项</p><pre><code>src #被控制端的源文件路径,只支持文件
+</code></pre><p>范例：下载并 MD5 验证</p><pre><code>[root@ansible ~]#ansible websrvs -m get_url -a 'url=http://nginx.org/download/nginx-1.18.0.tar.gz dest=/usr/local/src/nginx.tar.gz checksum=&quot;md5:b2d33d24d89b8b1f87ff5d251aa27eb8&quot;'
+</code></pre><h3 id="fetch-模块"><a class="anchor" href="#fetch-模块">#</a> Fetch 模块</h3><p>功能：从远程主机提取文件至 ansible 的主控端，copy 相反，目前不支持目录<br>常见选项</p><pre><code>src #被控制端的源文件路径,只支持文件
 dest #ansible控制端的目录路径
-</code></pre><p>范例：</p><pre><code>ansible websrvs -m fetch -a &#39;src=/root/test.sh dest=/data/scripts&#39;
-</code></pre><p>范例：</p><pre><code>[root@ansible ~]#ansible all -m fetch -a &#39;src=/etc/redhat-release
-dest=/data/os&#39;
+</code></pre><p>范例：</p><pre><code>ansible websrvs -m fetch -a 'src=/root/test.sh dest=/data/scripts'
+</code></pre><p>范例：</p><pre><code>[root@ansible ~]#ansible all -m fetch -a 'src=/etc/redhat-release
+dest=/data/os'
 [root@ansible ~]#tree /data/os/
 /data/os/
 ├── 10.0.0.6
@@ -625,7 +347,7 @@ dest=/data/os&#39;
 └── etc
 └── redhat-release
 6 directories, 3 files
-</code></pre><h3 id="File-模块"><a href="#File-模块" class="headerlink" title="File 模块"></a>File 模块</h3><p>功能：设置文件属性,创建文件,目录和软链接等<br>常见选项</p><pre><code>path #在被控端创建的路径
+</code></pre><h3 id="file-模块"><a class="anchor" href="#file-模块">#</a> File 模块</h3><p>功能：设置文件属性，创建文件，目录和软链接等<br>常见选项</p><pre><code>path #在被控端创建的路径
 owner #属主
 group #属组
 mode #权限
@@ -636,23 +358,23 @@ state #状态
 =hard #硬链接
 recurse #yes表示递归授权
 </code></pre><p>范例：</p><pre><code>#创建空文件
-ansible all -m file -a &#39;path=/data/test.txt state=touch&#39;
-ansible all -m file -a &#39;path=/data/test.txt state=absent&#39;
+ansible all -m file -a 'path=/data/test.txt state=touch'
+ansible all -m file -a 'path=/data/test.txt state=absent'
 ansible all -m file -a &quot;path=/root/test.sh owner=wang mode=755&quot;
 #创建目录
 ansible all -m file -a &quot;path=/data/mysql state=directory owner=mysql group=mysql&quot;
 #创建软链接
-ansible all -m file -a &#39;src=/data/testfile path|dest|name=/data/testfile-link state=link&#39;
+ansible all -m file -a 'src=/data/testfile path|dest|name=/data/testfile-link state=link'
 #创建目录
-ansible all -m file -a &#39;path=/data/testdir state=directory&#39;
+ansible all -m file -a 'path=/data/testdir state=directory'
 #递归修改目录属性,但不递归至子目录
 ansible all -m file -a &quot;path=/data/mysql state=directory owner=mysql group=mysql&quot;
 #递归修改目录及子目录的属性
 ansible all -m file -a &quot;path=/data/mysql state=directory owner=mysql group=mysql recurse=yes&quot;
-</code></pre><h3 id="stat-模块"><a href="#stat-模块" class="headerlink" title="stat 模块"></a>stat 模块</h3><p>功能：检查文件或文件系统的状态<br>注意：对于Windows目标，请改用win_stat模块</p><p>常见选项</p><pre><code>path #文件/对象的完整路径（必须）
+</code></pre><h3 id="stat-模块"><a class="anchor" href="#stat-模块">#</a> stat 模块</h3><p>功能：检查文件或文件系统的状态<br>注意：对于 Windows 目标，请改用 win_stat 模块</p><p>常见选项</p><pre><code>path #文件/对象的完整路径（必须）
 </code></pre><p>常用的返回值判断：</p><pre><code>exists： 判断是否存在
 isuid： 调用用户的ID与所有者ID是否匹配
-</code></pre><p>范例:</p><pre><code>[root@ansible ~]#ansible 127.0.0.1 -m stat -a &#39;path=/etc/passwd&#39;
+</code></pre><p>范例:</p><pre><code>[root@ansible ~]#ansible 127.0.0.1 -m stat -a 'path=/etc/passwd'
 127.0.0.1 | SUCCESS =&gt; &#123;
 &quot;changed&quot;: false,
 &quot;stat&quot;: &#123;
@@ -752,29 +474,29 @@ PLAY RECAP
 skipped=0 rescued=0 ignored=0
 10.0.0.8 : ok=3 changed=0 unreachable=0 failed=0
 skipped=0 rescued=0 ignored=0
-</code></pre><h3 id="unarchive-模块"><a href="#unarchive-模块" class="headerlink" title="unarchive 模块"></a>unarchive 模块</h3><p>功能：解包解压缩<br>实现有两种用法：</p><ul><li>将ansible主机上的压缩包传到远程主机后解压缩至特定目录，设置remote_src&#x3D;no,此为默认值,可省略</li><li>将远程本主机上或非ansible的其它主机的某个压缩包解压缩到远程主机本机的指定路径下，需要设置remote_src&#x3D;yes</li></ul><p>常见参数：</p><pre><code>remote_src #和copy功能一样且选项互斥，yes表示源文件在远程被控主机或其它非ansible的其它主机上，no表示文件在ansible主机上,默认值为no, 此选项代替copy选项
+</code></pre><h3 id="unarchive-模块"><a class="anchor" href="#unarchive-模块">#</a> unarchive 模块</h3><p>功能：解包解压缩<br>实现有两种用法：</p><ul><li>将 ansible 主机上的压缩包传到远程主机后解压缩至特定目录，设置 remote_src=no, 此为默认值，可省略</li><li>将远程本主机上或非 ansible 的其它主机的某个压缩包解压缩到远程主机本机的指定路径下，需要设置 remote_src=yes</li></ul><p>常见参数：</p><pre><code>remote_src #和copy功能一样且选项互斥，yes表示源文件在远程被控主机或其它非ansible的其它主机上，no表示文件在ansible主机上,默认值为no, 此选项代替copy选项
 copy #默认为yes，当copy=yes，拷贝的文件是从ansible主机复制到远程主机上，如果设置为copy=no，会在远程主机上寻找src源文件,此选项已废弃
 src #源路径，可以是ansible主机上的路径，也可以是远程主机(被管理端或者第三方主机)上的路径，如果是远程主机上的路径，则需要设置remote_src=yes
 dest #远程主机上的目标路径
 mode #设置解压缩后的文件权限
 creates=/path/file #当绝对路径/path/file不存在时才会执行
-</code></pre><p>范例：</p><pre><code>ansible all -m unarchive -a &#39;src=/data/foo.tgz dest=/var/lib/foo owner=wang group=bin&#39;
+</code></pre><p>范例：</p><pre><code>ansible all -m unarchive -a 'src=/data/foo.tgz dest=/var/lib/foo owner=wang group=bin'
 
-ansible all -m unarchive -a &#39;src=/tmp/foo.zip dest=/data  mode=0777&#39;
+ansible all -m unarchive -a 'src=/tmp/foo.zip dest=/data  mode=0777'
 
-ansible all -m unarchive -a &#39;src=https://example.com/example.zip dest=/data &#39;
+ansible all -m unarchive -a 'src=https://example.com/example.zip dest=/data '
 
-ansible websrvs -m unarchive -a &#39;src=https://releases.ansible.com/ansible/ansible-2.1.6.0-0.1.rc1.tar.gz dest=/data/ owner=root remote_src=yes&#39;
+ansible websrvs -m unarchive -a 'src=https://releases.ansible.com/ansible/ansible-2.1.6.0-0.1.rc1.tar.gz dest=/data/ owner=root remote_src=yes'
 
-ansible websrvs -m unarchive -a &#39;src=http://nginx.org/download/nginx- 1.18.0.tar.gz dest=/usr/local/src/ remote_src=yes&#39;&#39;
-</code></pre><h3 id="Archive-模块"><a href="#Archive-模块" class="headerlink" title="Archive 模块"></a>Archive 模块</h3><p>功能：打包压缩保存在被管理节点</p><p>常见选项</p><pre><code>path #压缩的文件或目录
+ansible websrvs -m unarchive -a 'src=http://nginx.org/download/nginx- 1.18.0.tar.gz dest=/usr/local/src/ remote_src=yes''
+</code></pre><h3 id="archive-模块"><a class="anchor" href="#archive-模块">#</a> Archive 模块</h3><p>功能：打包压缩保存在被管理节点</p><p>常见选项</p><pre><code>path #压缩的文件或目录
 dest #压缩后的文件
 format #压缩格式,支持gz,bz2,xz,tar,zip
-</code></pre><p>范例：</p><pre><code>ansible websrvs -m archive -a &#39;path=/var/log/ dest=/data/log.tar.bz2 format=bz2 owner=wang mode=0600&#39;
-</code></pre><h3 id="Hostname-模块"><a href="#Hostname-模块" class="headerlink" title="Hostname 模块"></a>Hostname 模块</h3><p>功能：管理主机名<br>常见选项</p><pre><code>name #修改后的主机名称
+</code></pre><p>范例：</p><pre><code>ansible websrvs -m archive -a 'path=/var/log/ dest=/data/log.tar.bz2 format=bz2 owner=wang mode=0600'
+</code></pre><h3 id="hostname-模块"><a class="anchor" href="#hostname-模块">#</a> Hostname 模块</h3><p>功能：管理主机名<br>常见选项</p><pre><code>name #修改后的主机名称
 </code></pre><p>范例：</p><pre><code>ansible node1 -m hostname -a &quot;name=websrv&quot;
-ansible 10.0.0.18 -m hostname -a &#39;name=node18.wang.org&#39;
-</code></pre><h3 id="Cron-模块"><a href="#Cron-模块" class="headerlink" title="Cron 模块"></a>Cron 模块</h3><p>功能：计划任务<br>支持时间：minute，hour，day，month，weekday<br>常见选项</p><pre><code>name #描述脚本的作用
+ansible 10.0.0.18 -m hostname -a 'name=node18.wang.org'
+</code></pre><h3 id="cron-模块"><a class="anchor" href="#cron-模块">#</a> Cron 模块</h3><p>功能：计划任务<br>支持时间：minute，hour，day，month，weekday<br>常见选项</p><pre><code>name #描述脚本的作用
 minute #分钟
 hour #小时
 weekday #周
@@ -785,20 +507,20 @@ job #任务
 #!/bin/bash
 mysqldump -A -F --single-transaction --master-data=2 -q -uroot |gzip &gt; /data/mysql_`date +%F_%T`.sql.gz
 #创建任务
-ansible 10.0.0.8 -m cron -a &#39;hour=2 minute=30 weekday=1-5 name=&quot;backup mysql&quot; job=/root/mysql_backup.sh&#39;
+ansible 10.0.0.8 -m cron -a 'hour=2 minute=30 weekday=1-5 name=&quot;backup mysql&quot; job=/root/mysql_backup.sh'
 
-ansible websrvs -m cron -a &quot;minute=*/5 job=&#39;/usr/sbin/ntpdate ntp.aliyun.com &amp;&gt;/dev/null&#39; name=Synctime&quot;
+ansible websrvs -m cron -a &quot;minute=*/5 job='/usr/sbin/ntpdate ntp.aliyun.com &amp;&gt;/dev/null' name=Synctime&quot;
 
 #禁用计划任务
-ansible websrvs -m cron -a &quot;minute=*/5 job=&#39;/usr/sbin/ntpdate 172.20.0.1 &amp;&gt;/dev/null&#39; name=Synctime disabled=yes&quot;
+ansible websrvs -m cron -a &quot;minute=*/5 job='/usr/sbin/ntpdate 172.20.0.1 &amp;&gt;/dev/null' name=Synctime disabled=yes&quot;
 
 #启用计划任务
-ansible websrvs -m cron -a &quot;minute=*/5 job=&#39;/usr/sbin/ntpdate 172.20.0.1 &amp;&gt; /dev/null&#39; name=Synctime disabled=no&quot;
+ansible websrvs -m cron -a &quot;minute=*/5 job='/usr/sbin/ntpdate 172.20.0.1 &amp;&gt; /dev/null' name=Synctime disabled=no&quot;
 
 #删除任务
-ansible websrvs -m cron -a &quot;name=&#39;backup mysql&#39; state=absent&quot;
-ansible websrvs -m cron -a &#39;state=absent name=Synctime&#39;
-</code></pre><h3 id="Yum-和-Apt-模块"><a href="#Yum-和-Apt-模块" class="headerlink" title="Yum 和 Apt 模块"></a>Yum 和 Apt 模块</h3><p>功能：管理软件包<br>yum 管理软件包，只支持RHEL，CentOS，fedora，不支持Ubuntu其它版本<br>apt 模块管理 Debian 相关版本的软件包<br>yum常见选项</p><pre><code>name #软件包名称
+ansible websrvs -m cron -a &quot;name='backup mysql' state=absent&quot;
+ansible websrvs -m cron -a 'state=absent name=Synctime'
+</code></pre><h3 id="yum-和-apt-模块"><a class="anchor" href="#yum-和-apt-模块">#</a> Yum 和 Apt 模块</h3><p>功能：管理软件包<br>yum 管理软件包，只支持 RHEL，CentOS，fedora，不支持 Ubuntu 其它版本<br>apt 模块管理 Debian 相关版本的软件包<br>yum 常见选项</p><pre><code>name #软件包名称
 state #状态
 =present #安装,此为默认值
 =absent #删除
@@ -808,27 +530,27 @@ enablerepo #启用哪个仓库安装
 disablerepo #不使用哪些仓库的包
 exclude #排除指定的包
 validate #是否检验,默认为yes
-</code></pre><p>范例：</p><pre><code>[root@ansible ~]#ansible websrvs -m yum -a &#39;name=httpd state=present&#39;
+</code></pre><p>范例：</p><pre><code>[root@ansible ~]#ansible websrvs -m yum -a 'name=httpd state=present'
 #安装zabbix agent rpm包
 
-[root@ansible ~]#ansible websrvs -m yum -a &#39;name=https://mirrors.tuna.tsinghua.edu.cn/zabbix/zabbix/5.0/rhel/8/x86_64/zabbix-agent2-5.0.24-1.el8.x86_64.rpm state=present validate_certs=no&#39;
+[root@ansible ~]#ansible websrvs -m yum -a 'name=https://mirrors.tuna.tsinghua.edu.cn/zabbix/zabbix/5.0/rhel/8/x86_64/zabbix-agent2-5.0.24-1.el8.x86_64.rpm state=present validate_certs=no'
 
 #启用epel源进行安装
-[root@ansible ~]#ansible websrvs -m yum -a &#39;name=nginx state=present enablerepo=epel&#39;
+[root@ansible ~]#ansible websrvs -m yum -a 'name=nginx state=present enablerepo=epel'
 
 #升级除kernel和foo开头以外的所有包
-[root@ansible ~]#ansible websrvs -m yum -a &#39;name=* state=lastest exclude=kernel*,foo*&#39;
+[root@ansible ~]#ansible websrvs -m yum -a 'name=* state=lastest exclude=kernel*,foo*'
 
 #删除
-[root@ansible ~]#ansible websrvs -m yum -a &#39;name=httpd state=absent&#39;
-[root@ansible ~]#ansible websrvs -m yum -a &#39;name=sl,cowsay&#39;
-</code></pre><h3 id="yum-repository-模块"><a href="#yum-repository-模块" class="headerlink" title="yum_repository 模块"></a>yum_repository 模块</h3><p>功能: 此模块实现yum的仓库配置管理<br>常见选项</p><pre><code>name #仓库id
+[root@ansible ~]#ansible websrvs -m yum -a 'name=httpd state=absent'
+[root@ansible ~]#ansible websrvs -m yum -a 'name=sl,cowsay'
+</code></pre><h3 id="yum_repository-模块"><a class="anchor" href="#yum_repository-模块">#</a> yum_repository 模块</h3><p>功能：此模块实现 yum 的仓库配置管理<br>常见选项</p><pre><code>name #仓库id
 description #仓库描述名称,对应配置文件中的name=
 baseurl #仓库的地址
 gpgcheck #验证开启
 gpgkey #仓库公钥路径
 state=absen  #删除
-</code></pre><p>范例：</p><pre><code>ansible websrvs -m yum_repository -a &#39;name=ansible_nginx description=&quot;nginx repo&quot; baseurl=&quot;http://nginx.org/packages/centos/$releasever/$basearch/&quot; gpgcheck=yes gpgkey=&quot;https://nginx.org/keys/nginx_signing.key&quot;&#39;
+</code></pre><p>范例：</p><pre><code>ansible websrvs -m yum_repository -a 'name=ansible_nginx description=&quot;nginx repo&quot; baseurl=&quot;http://nginx.org/packages/centos/$releasever/$basearch/&quot; gpgcheck=yes gpgkey=&quot;https://nginx.org/keys/nginx_signing.key&quot;'
 
 [root@rocky8 ~]#cat /etc/yum.repos.d/ansible_nginx.repo
 [ansible_nginx]
@@ -836,7 +558,7 @@ baseurl = http://nginx.org/packages/centos/$releasever/$basearch/
 gpgcheck = 1
 gpgkey = https://nginx.org/keys/nginx_signing.key
 name = nginx repo
-</code></pre><h3 id="Service-模块"><a href="#Service-模块" class="headerlink" title="Service 模块"></a>Service 模块</h3><p>此模块和sytemd功能相似,选项很多相同<br>功能：管理服务<br>常见选项</p><pre><code>name #服务名称
+</code></pre><h3 id="service-模块"><a class="anchor" href="#service-模块">#</a> Service 模块</h3><p>此模块和 sytemd 功能相似，选项很多相同<br>功能：管理服务<br>常见选项</p><pre><code>name #服务名称
 state #服务状态
 =started #启动
 =stopped #停止
@@ -844,15 +566,15 @@ state #服务状态
 =reloaded #重载
 enabled #开启自启动
 daemon_reload #加载新的配置文件,适用于systemd模块
-</code></pre><p>范例：</p><pre><code>ansible all -m service -a &#39;name=httpd state=started enabled=yes&#39;
-ansible all -m service -a &#39;name=httpd state=stopped&#39;
-ansible all -m service -a &#39;name=httpd state=reloaded&#39;
-ansible all -m shell -a &quot;sed -i &#39;s/^Listen 80/Listen 8080/&#39;
+</code></pre><p>范例：</p><pre><code>ansible all -m service -a 'name=httpd state=started enabled=yes'
+ansible all -m service -a 'name=httpd state=stopped'
+ansible all -m service -a 'name=httpd state=reloaded'
+ansible all -m shell -a &quot;sed -i 's/^Listen 80/Listen 8080/'
 /etc/httpd/conf/httpd.conf&quot;
-ansible all -m service -a &#39;name=httpd state=restarted&#39;
+ansible all -m service -a 'name=httpd state=restarted'
 #重启动指定网卡服务
-ansible all -m service -a &#39;name=network state=absent args=eth0&#39;
-</code></pre><h3 id="User-模块"><a href="#User-模块" class="headerlink" title="User 模块"></a>User 模块</h3><p>功能：管理用户<br>常见选项</p><pre><code>name #创建的名称
+ansible all -m service -a 'name=network state=absent args=eth0'
+</code></pre><h3 id="user-模块"><a class="anchor" href="#user-模块">#</a> User 模块</h3><p>功能：管理用户<br>常见选项</p><pre><code>name #创建的名称
 uid #指定uid
 group #指定基本组
 shell #登录shell类型默认/bin/bash
@@ -867,27 +589,27 @@ generate_ssh_key #创建私钥
 ssh_keyu_bits #私钥位数
 ssh_key_file #私钥文件路径
 </code></pre><p>范例：</p><pre><code>#创建用户
-ansible all -m user -a &#39;name=user1 comment=&quot;test user&quot; uid=2048 home=/app/user1group=root&#39;
-ansible all -m user -a &#39;name=nginx comment=nginx uid=88 group=nginxgroups=&quot;root,daemon&quot; shell=/sbin/nologin system=yes create_home=nohome=/data/nginx non_unique=yes&#39;
+ansible all -m user -a 'name=user1 comment=&quot;test user&quot; uid=2048 home=/app/user1group=root'
+ansible all -m user -a 'name=nginx comment=nginx uid=88 group=nginxgroups=&quot;root,daemon&quot; shell=/sbin/nologin system=yes create_home=nohome=/data/nginx non_unique=yes'
 #remove=yes表示删除用户及家目录等数据,默认remove=no
-ansible all -m user -a &#39;name=nginx state=absent remove=yes&#39;
+ansible all -m user -a 'name=nginx state=absent remove=yes'
 #生成123456加密的密码
 ansible localhost -m debug -a &quot;msg=&#123;&#123; '123456'| password_hash('sha512','salt')&#125;&#125;&quot; localhost | SUCCESS =&gt; &#123; &quot;msg&quot;: &quot;$6$salt$MktMKPZJ6t59GfxcJU20DwcwQzfMvOlHFVZiOVD71w.&quot;
 &#125;
 #用上面创建的密码创建用户
-ansible websrvs -m user -a &#39;name=www group=www system=yes shell=/sbin/nlogin password=&quot;$6$salt$MktMKPZJ6t59GfxcJU20DwcwQzfMvOlHFVZiOVD71w.&quot;&#39;
+ansible websrvs -m user -a 'name=www group=www system=yes shell=/sbin/nlogin password=&quot;$6$salt$MktMKPZJ6t59GfxcJU20DwcwQzfMvOlHFVZiOVD71w.&quot;'
 #创建用户test,并生成4096bit的私钥
-ansible websrvs -m user -a &#39;name=test generate_ssh_key=yes ssh_key_bits=4096 ssh_key_file=.ssh/id_rsa&#39;
-</code></pre><h3 id="Group-模块"><a href="#Group-模块" class="headerlink" title="Group 模块"></a>Group 模块</h3><p>功能：管理组<br>常见选项</p><pre><code>name #指定组名称
+ansible websrvs -m user -a 'name=test generate_ssh_key=yes ssh_key_bits=4096 ssh_key_file=.ssh/id_rsa'
+</code></pre><h3 id="group-模块"><a class="anchor" href="#group-模块">#</a> Group 模块</h3><p>功能：管理组<br>常见选项</p><pre><code>name #指定组名称
 gid #指定gid
 state
 =present #创建,默认
 =absent #删除
 </code></pre><p>范例：</p><pre><code>#创建组
-ansible websrvs -m group -a &#39;name=nginx gid=88 system=yes&#39;
+ansible websrvs -m group -a 'name=nginx gid=88 system=yes'
 #删除组
-ansible websrvs -m group -a &#39;name=nginx state=absent&#39;
-</code></pre><h3 id="Lineinfile-模块"><a href="#Lineinfile-模块" class="headerlink" title="Lineinfile 模块"></a>Lineinfile 模块</h3><p>ansible在使用sed进行替换时，经常会遇到需要转义的问题，而且ansible在遇到特殊符号进行替换时，<br>会存在问题，无法正常进行替换 。</p><p>ansible自身提供了两个模块：lineinfile模块和replace模块，可以方便的进行替换一般在ansible当中去修改某个文件的单行进行替换的时候需要使用lineinfile模块<br>功能：相当于sed，主要用于修改一行的文件内容<br>常见选项</p><pre><code>path #被控端文件的路径
+ansible websrvs -m group -a 'name=nginx state=absent'
+</code></pre><h3 id="lineinfile-模块"><a class="anchor" href="#lineinfile-模块">#</a> Lineinfile 模块</h3><p>ansible 在使用 sed 进行替换时，经常会遇到需要转义的问题，而且 ansible 在遇到特殊符号进行替换时，<br>会存在问题，无法正常进行替换 。</p><p>ansible 自身提供了两个模块：lineinfile 模块和 replace 模块，可以方便的进行替换一般在 ansible 当中去修改某个文件的单行进行替换的时候需要使用 lineinfile 模块<br>功能：相当于 sed，主要用于修改一行的文件内容<br>常见选项</p><pre><code>path #被控端文件的路径
 regexp #正则匹配语法格式,表示被替换的内容
 line #替换为的内容
 state #absent表示删除
@@ -904,35 +626,35 @@ group #指定组
 #注意
 regexp参数 ：使用正则表达式匹配对应的行，当替换文本时，如果有多行文本都能被匹配，则只有最后面被
 匹配到的那行文本才会被替换，当删除文本时，如果有多行文本都能被匹配，这么这些行都会被删除。
-</code></pre><p>注意: 如果想进行多行匹配进行替换需要使用replace模块<br>范例：</p><pre><code>#修改监听端口
-ansible websrvs -m lineinfile -a &quot;path=/etc/httpd/conf/httpd.conf regexp=&#39;^Listen&#39; line=&#39;Listen 8080&#39;&quot;
+</code></pre><p>注意：如果想进行多行匹配进行替换需要使用 replace 模块<br>范例：</p><pre><code>#修改监听端口
+ansible websrvs -m lineinfile -a &quot;path=/etc/httpd/conf/httpd.conf regexp='^Listen' line='Listen 8080'&quot;
 
 #修改SELinux
-ansible all -m lineinfile -a &quot;path=/etc/selinux/config regexp=&#39;^SELINUX=&#39;line=&#39;SELINUX=disabled&#39;&quot;
+ansible all -m lineinfile -a &quot;path=/etc/selinux/config regexp='^SELINUX='line='SELINUX=disabled'&quot;
 
 #添加网关
-ansible webservers -m lineinfile -a &#39;path=/etc/sysconfig/network-scripts/ifcfg-eth0 line=&quot;GATEWAY=10.0.0.254&quot;&#39;
+ansible webservers -m lineinfile -a 'path=/etc/sysconfig/network-scripts/ifcfg-eth0 line=&quot;GATEWAY=10.0.0.254&quot;'
 
 #给主机增加一个网关，但需要增加到NAME=下面
-ansible webservers -m lineinfile -a &#39;path=/etc/sysconfig/network-scripts/ifcfg-eth0 insertafter=&quot;^NAME=&quot; line=&quot;GATEWAY=10.0.0.254&quot;&#39;
+ansible webservers -m lineinfile -a 'path=/etc/sysconfig/network-scripts/ifcfg-eth0 insertafter=&quot;^NAME=&quot; line=&quot;GATEWAY=10.0.0.254&quot;'
 #效果如下
 cat /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 NAME=eth0
 GATEWAY=10.0.0.254
 #给主机增加一个网关，但需要增加到NAME=上面
-ansible webservers -m lineinfile -a &#39;path=/etc/sysconfig/network-scripts/ifcfg-
-eth0 insertbefore=&quot;^NAME=&quot; line=&quot;GATEWAY=10.0.0.254&quot;&#39;
+ansible webservers -m lineinfile -a 'path=/etc/sysconfig/network-scripts/ifcfg-
+eth0 insertbefore=&quot;^NAME=&quot; line=&quot;GATEWAY=10.0.0.254&quot;'
 #效果如下
 cat /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 GATEWAY=10.0.0.254
 NAME=eth0
 #删除网关
-ansible webservers -m lineinfile -a &#39;path=/etc/sysconfig/network-scripts/ifcfg-eth0 regexp=&quot;^GATEWAY&quot; state=absent&#39;
+ansible webservers -m lineinfile -a 'path=/etc/sysconfig/network-scripts/ifcfg-eth0 regexp=&quot;^GATEWAY&quot; state=absent'
 #删除#开头的行
-ansible all -m lineinfile -a &#39;dest=/etc/fstab state=absent regexp=&quot;^#&quot;&#39;
-</code></pre><h3 id="Replace-模块"><a href="#Replace-模块" class="headerlink" title="Replace 模块"></a>Replace 模块</h3><p>该模块有点类似于sed命令，主要也是基于正则进行匹配和替换，建议使用<br>功能: 多行修改替换<br>常见选项</p><pre><code>path #被控端文件的路径
+ansible all -m lineinfile -a 'dest=/etc/fstab state=absent regexp=&quot;^#&quot;'
+</code></pre><h3 id="replace-模块"><a class="anchor" href="#replace-模块">#</a> Replace 模块</h3><p>该模块有点类似于 sed 命令，主要也是基于正则进行匹配和替换，建议使用<br>功能：多行修改替换<br>常见选项</p><pre><code>path #被控端文件的路径
 regexp #正则匹配语法格式,表示被替换的内容
 replace #替换为的内容
 after #插入到替换内容前面,
@@ -941,11 +663,11 @@ backup #修改前先备份
 mode #指定权限
 owner #指定用户
 group #指定组
-</code></pre><p>范例</p><pre><code>ansible all -m replace -a &quot;path=/etc/fstab regexp=&#39;^(UUID.*)&#39; replace=&#39;#\1&#39;&quot;
-ansible all -m replace -a &quot;path=/etc/fstab regexp=&#39;^#(UUID.*)&#39; replace=&#39;\1&#39;&quot;
-</code></pre><h3 id="SELinux-模块"><a href="#SELinux-模块" class="headerlink" title="SELinux 模块"></a>SELinux 模块</h3><p>功能: 该模块管理 SELInux 策略<br>常见选项</p><pre><code>policy #指定SELINUXTYPE=targeted
+</code></pre><p>范例</p><pre><code>ansible all -m replace -a &quot;path=/etc/fstab regexp='^(UUID.*)' replace='#\1'&quot;
+ansible all -m replace -a &quot;path=/etc/fstab regexp='^#(UUID.*)' replace='\1'&quot;
+</code></pre><h3 id="selinux-模块"><a class="anchor" href="#selinux-模块">#</a> SELinux 模块</h3><p>功能：该模块管理 SELInux 策略<br>常见选项</p><pre><code>policy #指定SELINUXTYPE=targeted
 state #指定SELINUX=disabled
-</code></pre><p>范例</p><pre><code>[root@rocky ansible-apps]# ansible 192.168.32.132 -m selinux -a &#39;state=disabled&#39;
+</code></pre><p>范例</p><pre><code>[root@rocky ansible-apps]# ansible 192.168.32.132 -m selinux -a 'state=disabled'
 192.168.32.132 | FAILED! =&gt; &#123;
     &quot;msg&quot;: &quot;The module selinux was redirected to ansible.posix.selinux, which could not be loaded.&quot;
 &#125;
@@ -958,26 +680,27 @@ state #指定SELINUX=disabled
 
 
 # 再次执行，显示成功
-[root@rocky ansible-apps]# ansible 192.168.32.132 -m selinux -a &#39;state=disabled&#39;
-[WARNING]: SELinux state temporarily changed from &#39;enforcing&#39; to &#39;permissive&#39;. State change will take effect next reboot.
+[root@rocky ansible-apps]# ansible 192.168.32.132 -m selinux -a 'state=disabled'
+[WARNING]: SELinux state temporarily changed from 'enforcing' to 'permissive'. State change will take effect next reboot.
 192.168.32.132 | CHANGED =&gt; &#123;
     &quot;ansible_facts&quot;: &#123;
         &quot;discovered_interpreter_python&quot;: &quot;/usr/libexec/platform-python&quot;
     &#125;,
     &quot;changed&quot;: true,
     &quot;configfile&quot;: &quot;/etc/selinux/config&quot;,
-    &quot;msg&quot;: &quot;Config SELinux state changed from &#39;enforcing&#39; to &#39;disabled&#39;&quot;,
+    &quot;msg&quot;: &quot;Config SELinux state changed from 'enforcing' to 'disabled'&quot;,
     &quot;policy&quot;: &quot;targeted&quot;,
     &quot;reboot_required&quot;: true,
     &quot;state&quot;: &quot;disabled&quot;
 &#125;
-</code></pre><h3 id="reboot-模块"><a href="#reboot-模块" class="headerlink" title="reboot 模块"></a>reboot 模块</h3><p>功能: 重启<br>常见选项</p><pre><code>msg #重启提示
+
+</code></pre><h3 id="reboot-模块"><a class="anchor" href="#reboot-模块">#</a> reboot 模块</h3><p>功能：重启<br>常见选项</p><pre><code>msg #重启提示
 pre_reboot_delay #重启前延迟时间的秒数
 post_reboot_delay #重启后延迟时间的秒数后,再验证系统正常启动
 reboot_timeout #重启后延迟时间再执行测试成功与否的命令
 test_command #执行测试成功与否的命令
-</code></pre><p>范例:</p><pre><code>[root@ansible ~]#ansible websrvs -m reboot -a &#39;msg=&quot;host will be reboot&quot;&#39;
-</code></pre><h3 id="mount-模块"><a href="#mount-模块" class="headerlink" title="mount 模块"></a>mount 模块</h3><p>功能: 挂载和卸载文件系统<br>常见选项</p><pre><code>src #源设备路径，或网络地址
+</code></pre><p>范例:</p><pre><code>[root@ansible ~]#ansible websrvs -m reboot -a 'msg=&quot;host will be reboot&quot;'
+</code></pre><h3 id="mount-模块"><a class="anchor" href="#mount-模块">#</a> mount 模块</h3><p>功能：挂载和卸载文件系统<br>常见选项</p><pre><code>src #源设备路径，或网络地址
 path #挂载至本地哪个路径下
 fstype #设备类型； nfs
 opts #挂载的选项
@@ -987,14 +710,14 @@ state #挂载还是卸载
 =mounted #临时挂载
 =unmounted #临时卸载
 </code></pre><p>范例:</p><pre><code>#修改fstab文件永久挂载,但不立即生效
-mount websrvs -m mount -a &#39;src=&quot;UUID=b3e48f45-f933-4c8e-a700-22a159ec9077&quot; path=/home fstype=xfs opts=noatime state=present&#39;
+mount websrvs -m mount -a 'src=&quot;UUID=b3e48f45-f933-4c8e-a700-22a159ec9077&quot; path=/home fstype=xfs opts=noatime state=present'
 #临时取消挂载
-mount websrvs -m mount -a &#39;path=/home fstype=xfs opts=noatime state=unmounted&#39;
+mount websrvs -m mount -a 'path=/home fstype=xfs opts=noatime state=unmounted'
 #永久挂载,并立即生效
-ansible websrvs -m mount -a &#39;src=10.0.0.8:/data/wordpress path=/var/www/html/wp- content/uploads opts=&quot;_netdev&quot; state=mounted&#39;
+ansible websrvs -m mount -a 'src=10.0.0.8:/data/wordpress path=/var/www/html/wp- content/uploads opts=&quot;_netdev&quot; state=mounted'
 #永久卸载,并立即生效
-ansible websrvs -m mount -a &#39;src=10.0.0.8:/data/wordpress path=/var/www/html/wp- content/uploads state=absent&#39;
-</code></pre><h3 id="Setup-模块"><a href="#Setup-模块" class="headerlink" title="Setup 模块"></a>Setup 模块</h3><p>功能： setup 模块来收集主机的系统信息，这些 facts 信息可以直接以变量的形式使用，但是如果主机<br>较多，会影响执行速度<br>可以使用 gather_facts: no 来禁止 Ansible 收集 facts 信息<br>常见选项</p><pre><code>filter #指定过滤条件
+ansible websrvs -m mount -a 'src=10.0.0.8:/data/wordpress path=/var/www/html/wp- content/uploads state=absent'
+</code></pre><h3 id="setup-模块"><a class="anchor" href="#setup-模块">#</a> Setup 模块</h3><p>功能： setup 模块来收集主机的系统信息，这些 facts 信息可以直接以变量的形式使用，但是如果主机<br>较多，会影响执行速度<br>可以使用 gather_facts: no 来禁止 Ansible 收集 facts 信息<br>常见选项</p><pre><code>filter #指定过滤条件
 </code></pre><p>范例:</p><pre><code>ansible all -m setup
 ansible all -m setup -a &quot;filter=ansible_nodename&quot;
 ansible all -m setup -a &quot;filter=ansible_hostname&quot;  #  主机名称
@@ -1011,8 +734,8 @@ ansible all -m setup -a &quot;filter=ansible_all_ipv4_addresses&quot;
 ansible all -m setup -a &quot;filter=ansible_architecture&quot;
 ansible all -m setup -a &quot;filter=ansible_uptime_seconds&quot;
 ansible all -m setup -a &quot;filter=ansible_processor*&quot;
-ansible all -m setup -a &#39;filter=ansible_env&#39;
-</code></pre><p>范例：</p><pre><code>[root@ansible ~]#ansible all -m setup -a &#39;filter=ansible_python_version&#39;
+ansible all -m setup -a 'filter=ansible_env'
+</code></pre><p>范例：</p><pre><code>[root@ansible ~]#ansible all -m setup -a 'filter=ansible_python_version'
 10.0.0.7 | SUCCESS =&gt; &#123;
 &quot;ansible_facts&quot;: &#123;
 &quot;ansible_python_version&quot;: &quot;2.7.5&quot;,
@@ -1035,8 +758,8 @@ ansible all -m setup -a &#39;filter=ansible_env&#39;
 &quot;changed&quot;: false
 &#125;
 [root@ansible ~]#
-</code></pre><p>范例：取IP地址</p><pre><code>#取所有IP
-ansible 10.0.0.101 -m setup -a &#39;filter=ansible_all_ipv4_addresses&#39;
+</code></pre><p>范例：取 IP 地址</p><pre><code>#取所有IP
+ansible 10.0.0.101 -m setup -a 'filter=ansible_all_ipv4_addresses'
 10.0.0.101 | SUCCESS =&gt; &#123;
 &quot;ansible_facts&quot;: &#123;
 &quot;ansible_all_ipv4_addresses&quot;: [
@@ -1052,7 +775,7 @@ ansible 10.0.0.101 -m setup -a &#39;filter=ansible_all_ipv4_addresses&#39;
 &quot;changed&quot;: false
 &#125;
 #取默认IP
-ansible all -m setup -a &#39;filter=&quot;ansible_default_ipv4&quot;&#39;
+ansible all -m setup -a 'filter=&quot;ansible_default_ipv4&quot;'
 10.0.0.101 | SUCCESS =&gt; &#123;
 &quot;ansible_facts&quot;: &#123;
 &quot;ansible_default_ipv4&quot;: &#123;
@@ -1070,10 +793,10 @@ ansible all -m setup -a &#39;filter=&quot;ansible_default_ipv4&quot;&#39;
 &#125;,
 &quot;changed&quot;: false
 &#125;
-</code></pre><h3 id="debug-模块"><a href="#debug-模块" class="headerlink" title="debug 模块"></a>debug 模块</h3><p>功能: 此模块可以用于输出信息,并且通过 msg 定制输出的信息内容,功能类似于echo命令<br>注意: msg后面的变量有时需要加 “ “ 引起来<br>常见选项</p><pre><code>msg #指定命令输出的信息
+</code></pre><h3 id="debug-模块"><a class="anchor" href="#debug-模块">#</a> debug 模块</h3><p>功能：此模块可以用于输出信息，并且通过 msg 定制输出的信息内容，功能类似于 echo 命令<br>注意: msg 后面的变量有时需要加 &quot; &quot; 引起来<br>常见选项</p><pre><code>msg #指定命令输出的信息
 var #指定变量名,和msg互斥
 verbosity #详细度
-</code></pre><p>范例: debug 模块默认输出Hello world</p><pre><code>[root@ansible ~]#ansible 10.0.0.18 -m debug
+</code></pre><p>范例: debug 模块默认输出 Hello world</p><pre><code>[root@ansible ~]#ansible 10.0.0.18 -m debug
 10.0.0.18 | SUCCESS =&gt; &#123;
 &quot;msg&quot;: &quot;Hello world!&quot;
 &#125;
@@ -1102,7 +825,7 @@ PLAY RECAP
 skipped=0 rescued=0 ignored=0
 10.0.0.8 : ok=2 changed=0 unreachable=0 failed=0
 skipped=0 rescued=0 ignored=0
-</code></pre><p>范例: 利用debug 模块输出变量</p><pre><code>[root@centos8 ~]#cat debug.yaml
+</code></pre><p>范例：利用 debug 模块输出变量</p><pre><code>[root@centos8 ~]#cat debug.yaml
 ---
 - hosts: websrvs
 tasks:
@@ -1135,7 +858,7 @@ PLAY RECAP
 skipped=0 rescued=0 ignored=0
 10.0.0.8 : ok=2 changed=0 unreachable=0 failed=0
 skipped=0 rescued=0 ignored=0
-</code></pre><p>范例: 显示字符串特定字符</p><pre><code># cat debug.yml
+</code></pre><p>范例：显示字符串特定字符</p><pre><code># cat debug.yml
 - hosts: all
   gather_facts: no
   vars:
@@ -1153,89 +876,89 @@ ok: [test1] =&gt; &#123;
 &quot;msg&quot;: &quot;2&quot;
 &quot;msg&quot;: &quot;3&quot;
 &#125;
-</code></pre><h3 id="sysctl-模块"><a href="#sysctl-模块" class="headerlink" title="sysctl 模块"></a>sysctl 模块</h3><p>功能: 修改内核参数<br>常见选项</p><pre><code>name #内核参数
+</code></pre><h3 id="sysctl-模块"><a class="anchor" href="#sysctl-模块">#</a> sysctl 模块</h3><p>功能：修改内核参数<br>常见选项</p><pre><code>name #内核参数
 value #指定值
 state #是否保存在sysctl.conf文件中,默认present
 sysctl_set #使用sysctl -w 验证值生效
-</code></pre><p>范例:</p><pre><code>ansible websrvs -m sysctl -a &#39;name=net.ipv4.ip_forward value=1 state=present&#39;
-</code></pre><p>范例: 内核参数优化</p><pre><code>- name: Change Port Range
+</code></pre><p>范例:</p><pre><code>ansible websrvs -m sysctl -a 'name=net.ipv4.ip_forward value=1 state=present'
+</code></pre><p>范例：内核参数优化</p><pre><code>- name: Change Port Range
   sysctl:
     name: net.ipv4.ip_local_port_range
-    value: &#39;1024 65000&#39;
-    sysctl_set: yes
+	value: '1024 65000'
+	sysctl_set: yes
 - name: Enabled Forward
   sysctl:
-    name: net.ipv4.ip_forward
-    value: &#39;1&#39;
-    sysctl_set: yes
+	name: net.ipv4.ip_forward
+	value: '1'
+	sysctl_set: yes
 - name: Enabled tcp_reuse
   sysctl:
     name: net.ipv4.tcp_tw_reuse
-    value: &#39;1&#39;
+    value: '1'
     sysctl_set: yes
 - name: Chanage tcp tw_buckets
   sysctl:
     name: net.ipv4.tcp_max_tw_buckets
-    value: &#39;5000&#39;
+    value: '5000'
     sysctl_set: yes
 - name: Chanage tcp_syncookies
   sysctl:
     name: net.ipv4.tcp_syncookies
-    value: &#39;1&#39;
+    value: '1'
     sysctl_set: yes
 - name: Chanage tcp max_syn_backlog
   sysctl:
     name: net.ipv4.tcp_max_syn_backlog
-    value: &#39;8192&#39;
+    value: '8192'
     sysctl_set: yes
 - name: Chanage tcp Established Maxconn
   sysctl:
     name: net.core.somaxconn
-    value: &#39;32768&#39;
+    value: '32768'
     sysctl_set: yes
     state: present
 - name: Chanage tcp_syn_retries
   sysctl:
     name: net.ipv4.tcp_syn_retries
-    value: &#39;2&#39;
+    value: '2'
     sysctl_set: yes
     state: present
 - name: Chanage net.ipv4.tcp_synack_retries
   sysctl:
     name: net.ipv4.tcp_synack_retries
-    value: &#39;2&#39;
+    value: '2'
     sysctl_set: yes
     state: presen
-</code></pre><h3 id="pam-limits"><a href="#pam-limits" class="headerlink" title="pam_limits"></a>pam_limits</h3><p>功能: 管理资源限制<br>范例</p><pre><code>- name: Change Limit /etc/security/limit.conf
+</code></pre><h3 id="pam_limits"><a class="anchor" href="#pam_limits">#</a> pam_limits</h3><p>功能：管理资源限制<br>范例</p><pre><code>- name: Change Limit /etc/security/limit.conf
   pam_limits:
   domain: &quot;*&quot;
     limit_type: &quot;&#123;&#123; item.limit_type &#125;&#125;&quot;
     limit_item: &quot;&#123;&#123; item.limit_item &#125;&#125;&quot;
     value: &quot;&#123;&#123; item.value &#125;&#125;&quot;
   loop:
-    - &#123; limit_type: &#39;soft&#39;, limit_item: &#39;nofile&#39;,value: &#39;100000&#39; &#125;
-    - &#123; limit_type: &#39;hard&#39;, limit_item: &#39;nofile&#39;,value: &#39;10000&#39; &#125;
-</code></pre><h3 id="apt-repository-模块"><a href="#apt-repository-模块" class="headerlink" title="apt_repository 模块"></a>apt_repository 模块</h3><p>功能: 此模块实现apt的仓库配置管理<br>常见选项</p><pre><code>repo #仓库信息
+    - &#123; limit_type: 'soft', limit_item: 'nofile',value: '100000' &#125;
+    - &#123; limit_type: 'hard', limit_item: 'nofile',value: '10000' &#125;
+</code></pre><h3 id="apt_repository-模块"><a class="anchor" href="#apt_repository-模块">#</a> apt_repository 模块</h3><p>功能：此模块实现 apt 的仓库配置管理<br>常见选项</p><pre><code>repo #仓库信息
 state #添加或删除
 update_cache #是否apt update,默认yes
 filename #仓库文件,默认放在/etc/apt/sources.list.d/file.list
-</code></pre><p>范例:</p><pre><code>ansible ubuntu-servers -m apt_repository -a &#39;repo=&quot;deb
-http://archive.canonical.com/ubuntu focal partner&quot; filename=google-chrome&#39;
+</code></pre><p>范例:</p><pre><code>ansible ubuntu-servers -m apt_repository -a 'repo=&quot;deb
+http://archive.canonical.com/ubuntu focal partner&quot; filename=google-chrome'
 [root@ubuntu2004 ~]#cat /etc/apt/sources.list.d/google-chrome.list
 deb http://archive.canonical.com/ubuntu focal partner
-</code></pre><h3 id="apt-key-模块"><a href="#apt-key-模块" class="headerlink" title="apt_key 模块"></a>apt_key 模块</h3><p>功能: 添加和删除apt key<br>常见选项</p><pre><code>url #key路径
+</code></pre><h3 id="apt_key-模块"><a class="anchor" href="#apt_key-模块">#</a> apt_key 模块</h3><p>功能：添加和删除 apt key<br>常见选项</p><pre><code>url #key路径
 state #添加或删除
-</code></pre><p>范例: 生成ceph仓库配置</p><pre><code>#先导入key,注意先后顺序
+</code></pre><p>范例：生成 ceph 仓库配置</p><pre><code>#先导入key,注意先后顺序
 ansible ubuntu-servers -m apt_key -a
-&#39;url=https://download.ceph.com/keys/release.asc state=present&#39;
+'url=https://download.ceph.com/keys/release.asc state=present'
 #再生成apt配置,如果不导入key此步会出错
-ansible ubuntu-servers -m apt_repository -a &#39;repo=&quot;deb
+ansible ubuntu-servers -m apt_repository -a 'repo=&quot;deb
 http://mirror.tuna.tsinghua.edu.cn/ceph/debian-pacific focal main&quot;
-filename=ansible_ceph&#39;
+filename=ansible_ceph'
 #验证结果
 [root@ubuntu2004 ~]#cat /etc/apt/sources.list.d/ansible_ceph.list
 deb http://mirror.tuna.tsinghua.edu.cn/ceph/debian-pacific focal main
-</code></pre><h3 id="其它模块"><a href="#其它模块" class="headerlink" title="其它模块"></a>其它模块</h3><p>ansible 还提供了很多针对各种应用的模块,比如</p><pre><code>nginx_status_info
+</code></pre><h3 id="其它模块"><a class="anchor" href="#其它模块">#</a> 其它模块</h3><p>ansible 还提供了很多针对各种应用的模块，比如</p><pre><code>nginx_status_info
 nginx_status_facts
 mysql_db #需要安装MySQL-python包
 mysql_user #需要安装MySQL-python包
@@ -1244,4 +967,4 @@ mongodb*
 postgresql*
 haproxy
 git
-</code></pre></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i> </span><span class="text">更新于</span> <time title="修改时间：2023-05-02 21:57:07" itemprop="dateModified" datetime="2023-05-02T21:57:07+08:00">2023-05-02</time></span></div><div id="copyright"><ul><li class="author"><strong>本文作者： </strong>yuan kun <i class="ic i-at"><em>@</em></i>Hide your thoughts</li><li class="link"><strong>本文链接：</strong> <a href="http://blog.itshare.work/Ansible/Ansible/" title="运维自动化工具Ansible(一)">http://blog.itshare.work/Ansible/Ansible/</a></li><li class="license"><strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/Docker/docker-compose%E9%83%A8%E7%BD%B2MySQL/" itemprop="url" rel="prev" data-background-image="http:&#x2F;&#x2F;oss.itshare.work&#x2F;itshare-work-images&#x2F;25.jpg" title="docker-compose部署MySql"><span class="type">上一篇</span> <span class="category"><i class="ic i-flag"></i> Docker</span><h3>docker-compose部署MySql</h3></a></div><div class="item right"><a href="/Ansible/Ansible2/" itemprop="url" rel="next" data-background-image="http:&#x2F;&#x2F;oss.itshare.work&#x2F;itshare-work-images&#x2F;18.jpg" title="运维自动化工具Ansible(二)"><span class="type">下一篇</span> <span class="category"><i class="ic i-flag"></i> Ansible</span><h3>运维自动化工具Ansible(二)</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ansible%E4%BB%8B%E7%BB%8D%E5%92%8C%E6%9E%B6%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">Ansible介绍和架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ansible%E5%8F%91%E5%B1%95%E5%8F%B2"><span class="toc-number">1.1.</span> <span class="toc-text">Ansible发展史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ansible-%E5%8A%9F%E8%83%BD"><span class="toc-number">1.2.</span> <span class="toc-text">Ansible 功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ansible-%E7%89%B9%E7%82%B9"><span class="toc-number">1.3.</span> <span class="toc-text">Ansible 特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ansible-%E6%9E%B6%E6%9E%84"><span class="toc-number">1.4.</span> <span class="toc-text">Ansible 架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ansible-%E7%BB%84%E6%88%90"><span class="toc-number">1.4.1.</span> <span class="toc-text">Ansible 组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ansible-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%9D%A5%E6%BA%90"><span class="toc-number">1.4.2.</span> <span class="toc-text">Ansible 命令执行来源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.4.3.</span> <span class="toc-text">注意事项</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ansible-%E5%AE%89%E8%A3%85%E5%92%8C%E5%B8%B8%E8%A7%81%E6%A8%A1%E5%9D%97"><span class="toc-number">2.</span> <span class="toc-text">Ansible 安装和常见模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ansible-%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">Ansible 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="toc-number">2.1.1.</span> <span class="toc-text">包安装方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pip%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.2.</span> <span class="toc-text">pip安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E8%AE%A4%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.3.</span> <span class="toc-text">确认安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ansible-%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">Ansible 相关文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ansible-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%88%97%E8%A1%A8"><span class="toc-number">2.2.1.</span> <span class="toc-text">Ansible 配置文件列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ansible-%E4%B8%BB%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.2.</span> <span class="toc-text">Ansible 主配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inventory-%E4%B8%BB%E6%9C%BA%E6%B8%85%E5%8D%95%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.3.</span> <span class="toc-text">Inventory 主机清单文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ansible%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7"><span class="toc-number">2.3.</span> <span class="toc-text">Ansible相关工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-doc"><span class="toc-number">2.3.1.</span> <span class="toc-text">ansible-doc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible"><span class="toc-number">2.3.2.</span> <span class="toc-text">ansible</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ansible-Ad-Hoc-%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">Ansible Ad-Hoc 介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ansible-%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">ansible 命令用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ansible%E7%9A%84Host-pattern"><span class="toc-number">2.3.2.3.</span> <span class="toc-text">ansible的Host-pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ansible-%E5%91%BD%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">2.3.2.3.1.</span> <span class="toc-text">ansible 命令的执行过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ansible-%E5%91%BD%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E7%8A%B6%E6%80%81"><span class="toc-number">2.3.2.3.2.</span> <span class="toc-text">ansible 命令的执行状态</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-console"><span class="toc-number">2.3.3.</span> <span class="toc-text">ansible-console</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-playbook"><span class="toc-number">2.3.4.</span> <span class="toc-text">ansible-playbook</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-vault"><span class="toc-number">2.3.5.</span> <span class="toc-text">ansible-vault</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-galaxy"><span class="toc-number">2.3.6.</span> <span class="toc-text">ansible-galaxy</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.</span> <span class="toc-text">Ansible常用模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Command-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.1.</span> <span class="toc-text">Command 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shell-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.2.</span> <span class="toc-text">Shell 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Script-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.3.</span> <span class="toc-text">Script 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Copy-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.4.</span> <span class="toc-text">Copy 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-url-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.5.</span> <span class="toc-text">Get_url 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fetch-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.6.</span> <span class="toc-text">Fetch 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#File-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.7.</span> <span class="toc-text">File 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stat-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.8.</span> <span class="toc-text">stat 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unarchive-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.9.</span> <span class="toc-text">unarchive 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Archive-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.10.</span> <span class="toc-text">Archive 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hostname-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.11.</span> <span class="toc-text">Hostname 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cron-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.12.</span> <span class="toc-text">Cron 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Yum-%E5%92%8C-Apt-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.13.</span> <span class="toc-text">Yum 和 Apt 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum-repository-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.14.</span> <span class="toc-text">yum_repository 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Service-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.15.</span> <span class="toc-text">Service 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#User-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.16.</span> <span class="toc-text">User 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Group-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.17.</span> <span class="toc-text">Group 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lineinfile-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.18.</span> <span class="toc-text">Lineinfile 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Replace-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.19.</span> <span class="toc-text">Replace 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SELinux-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.20.</span> <span class="toc-text">SELinux 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reboot-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.21.</span> <span class="toc-text">reboot 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mount-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.22.</span> <span class="toc-text">mount 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Setup-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.23.</span> <span class="toc-text">Setup 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#debug-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.24.</span> <span class="toc-text">debug 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sysctl-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.25.</span> <span class="toc-text">sysctl 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pam-limits"><span class="toc-number">2.4.26.</span> <span class="toc-text">pam_limits</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#apt-repository-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.27.</span> <span class="toc-text">apt_repository 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#apt-key-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.28.</span> <span class="toc-text">apt_key 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.29.</span> <span class="toc-text">其它模块</span></a></li></ol></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li class="active"><a href="/Ansible/Ansible/" rel="bookmark" title="运维自动化工具Ansible(一)">运维自动化工具Ansible(一)</a></li><li><a href="/Ansible/Ansible2/" rel="bookmark" title="运维自动化工具Ansible(二)">运维自动化工具Ansible(二)</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="image" itemprop="image" alt="yuan kun" data-src="/images/avatar.jpg"><p class="name" itemprop="name">yuan kun</p><div class="description" itemprop="description">解决各种服务器、网络、应用等技术问题，致力于保障系统稳定、高效运行</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">16</span> <span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">7</span> <span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">3</span> <span class="name">标签</span></a></div></nav><div class="social"><span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==" title="https:&#x2F;&#x2F;github.com&#x2F;amehime&#x2F;hexo-theme-shoka"><i class="ic i-github"></i></span></div><ul class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于</a></li><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></div></div></div><ul id="quick"><li class="prev pjax"><a href="/Docker/docker-compose%E9%83%A8%E7%BD%B2MySQL/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/Ansible/Ansible2/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/zabbix/" title="分类于 zabbix">zabbix</a></div><span><a href="/zabbix/zabbix5%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85/" title="zabbix5部署安装">zabbix5部署安装</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Kubernetes/" title="分类于 Kubernetes">Kubernetes</a></div><span><a href="/Kubernetes/%E6%90%AD%E5%BB%BAKubernetes%E9%9B%86%E7%BE%A4/" title="搭建Kubernetes集群">搭建Kubernetes集群</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Ansible/" title="分类于 Ansible">Ansible</a></div><span><a href="/Ansible/Ansible/" title="运维自动化工具Ansible(一)">运维自动化工具Ansible(一)</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Docker/" title="分类于 Docker">Docker</a></div><span><a href="/Docker/docker-compose%E9%83%A8%E7%BD%B2MySQL/" title="docker-compose部署MySql">docker-compose部署MySql</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/MySQL/" title="分类于 MySQL">MySQL</a></div><span><a href="/MySQL/MySQL%E9%9B%86%E7%BE%A4/" title="MySQL集群">MySQL集群</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/MySQL/" title="分类于 MySQL">MySQL</a></div><span><a href="/MySQL/MySQL/" title="MySQL数据库基础和安装使用">MySQL数据库基础和安装使用</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Linux/" title="分类于 Linux">Linux</a></div><span><a href="/Linux/DNS/" title="DNS服务">DNS服务</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Docker/" title="分类于 Docker">Docker</a></div><span><a href="/Docker/Docker%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" title="Docker镜像加速">Docker镜像加速</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Linux/" title="分类于 Linux">Linux</a></div><span><a href="/Linux/Disk/" title="磁盘存储和文件系统管理">磁盘存储和文件系统管理</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Linux/" title="分类于 Linux">Linux</a> <i class="ic i-angle-right"></i> <a href="/categories/Linux/tomcat/" title="分类于 tomcat">tomcat</a></div><span><a href="/Linux/tomcat/tomcat/" title="tomcat">tomcat</a></span></li></ul></div></div><div class="status"><div class="copyright">&copy; 2022 – <span itemprop="copyrightYear">2023</span> <span class="with-love"><i class="ic i-sakura rotate"></i> </span><span class="author" itemprop="copyrightHolder">yuan kun @ Cookie</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i> </span><span title="站点总字数">400k 字</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="ic i-coffee"></i> </span><span title="站点阅读时长">6:04</span></div><div class="powered-by">基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL={path:"Ansible/Ansible/",favicon:{show:"（●´3｀●）やれやれだぜ",hide:"(´Д｀)大変だ！"},search:{placeholder:"文章搜索",empty:"关于 「 ${query} 」，什么也没搜到",stats:"${time} ms 内找到 ${hits} 条结果"},valine:!0,fancybox:!0,copyright:'复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',ignores:[function(e){return e.includes("#")},function(e){return new RegExp(LOCAL.path+"$").test(e)}]}</script><script src="https://cdn.polyfill.io/v2/polyfill.js"></script><script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script><script src="/js/app.js?v=0.2.5"></script></body></html><!-- rebuild by hrmmi -->
+</code></pre></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i> </span><span class="text">更新于</span> <time title="修改时间：2023-05-02 21:57:07" itemprop="dateModified" datetime="2023-05-02T21:57:07+08:00">2023-05-02</time></span></div><div id="copyright"><ul><li class="author"><strong>本文作者： </strong>yuan kun <i class="ic i-at"><em>@</em></i>Hide your thoughts</li><li class="link"><strong>本文链接：</strong> <a href="http://blog.itshare.work/Ansible/Ansible/" title="运维自动化工具Ansible(一)">http://blog.itshare.work/Ansible/Ansible/</a></li><li class="license"><strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/Docker/docker-compose%E9%83%A8%E7%BD%B2MySQL/" itemprop="url" rel="prev" data-background-image="http:&#x2F;&#x2F;oss.itshare.work&#x2F;itshare-work-images&#x2F;12.jpg" title="docker-compose部署MySql"><span class="type">上一篇</span> <span class="category"><i class="ic i-flag"></i> Docker</span><h3>docker-compose部署MySql</h3></a></div><div class="item right"><a href="/Ansible/Ansible2/" itemprop="url" rel="next" data-background-image="http:&#x2F;&#x2F;oss.itshare.work&#x2F;itshare-work-images&#x2F;26.jpg" title="运维自动化工具Ansible(二)"><span class="type">下一篇</span> <span class="category"><i class="ic i-flag"></i> Ansible</span><h3>运维自动化工具Ansible(二)</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ansible%E4%BB%8B%E7%BB%8D%E5%92%8C%E6%9E%B6%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">Ansible 介绍和架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ansible%E5%8F%91%E5%B1%95%E5%8F%B2"><span class="toc-number">1.1.</span> <span class="toc-text">Ansible 发展史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ansible-%E5%8A%9F%E8%83%BD"><span class="toc-number">1.2.</span> <span class="toc-text">Ansible 功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ansible-%E7%89%B9%E7%82%B9"><span class="toc-number">1.3.</span> <span class="toc-text">Ansible 特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ansible-%E6%9E%B6%E6%9E%84"><span class="toc-number">1.4.</span> <span class="toc-text">Ansible 架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-%E7%BB%84%E6%88%90"><span class="toc-number">1.4.1.</span> <span class="toc-text">Ansible 组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%9D%A5%E6%BA%90"><span class="toc-number">1.4.2.</span> <span class="toc-text">Ansible 命令执行来源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.4.3.</span> <span class="toc-text">注意事项</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ansible-%E5%AE%89%E8%A3%85%E5%92%8C%E5%B8%B8%E8%A7%81%E6%A8%A1%E5%9D%97"><span class="toc-number">2.</span> <span class="toc-text">Ansible 安装和常见模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ansible-%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">Ansible 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="toc-number">2.1.1.</span> <span class="toc-text">包安装方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pip%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.2.</span> <span class="toc-text">pip 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E8%AE%A4%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.3.</span> <span class="toc-text">确认安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ansible-%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">Ansible 相关文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%88%97%E8%A1%A8"><span class="toc-number">2.2.1.</span> <span class="toc-text">Ansible 配置文件列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-%E4%B8%BB%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.2.</span> <span class="toc-text">Ansible 主配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inventory-%E4%B8%BB%E6%9C%BA%E6%B8%85%E5%8D%95%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.3.</span> <span class="toc-text">Inventory 主机清单文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ansible%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7"><span class="toc-number">2.3.</span> <span class="toc-text">Ansible 相关工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-doc"><span class="toc-number">2.3.1.</span> <span class="toc-text">ansible-doc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible"><span class="toc-number">2.3.2.</span> <span class="toc-text">ansible</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ansible-ad-hoc-%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">Ansible Ad-Hoc 介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ansible-%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">ansible 命令用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ansible%E7%9A%84host-pattern"><span class="toc-number">2.3.2.3.</span> <span class="toc-text">ansible 的 Host-pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ansible-%E5%91%BD%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">2.3.2.3.1.</span> <span class="toc-text">ansible 命令的执行过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ansible-%E5%91%BD%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E7%8A%B6%E6%80%81"><span class="toc-number">2.3.2.3.2.</span> <span class="toc-text">ansible 命令的执行状态</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-console"><span class="toc-number">2.3.3.</span> <span class="toc-text">ansible-console</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-playbook"><span class="toc-number">2.3.4.</span> <span class="toc-text">ansible-playbook</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-vault"><span class="toc-number">2.3.5.</span> <span class="toc-text">ansible-vault</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ansible-galaxy"><span class="toc-number">2.3.6.</span> <span class="toc-text">ansible-galaxy</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.</span> <span class="toc-text">Ansible 常用模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#command-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.1.</span> <span class="toc-text">Command 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.2.</span> <span class="toc-text">Shell 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#script-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.3.</span> <span class="toc-text">Script 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#copy-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.4.</span> <span class="toc-text">Copy 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get_url-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.5.</span> <span class="toc-text">Get_url 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fetch-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.6.</span> <span class="toc-text">Fetch 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#file-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.7.</span> <span class="toc-text">File 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stat-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.8.</span> <span class="toc-text">stat 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unarchive-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.9.</span> <span class="toc-text">unarchive 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#archive-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.10.</span> <span class="toc-text">Archive 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hostname-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.11.</span> <span class="toc-text">Hostname 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cron-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.12.</span> <span class="toc-text">Cron 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum-%E5%92%8C-apt-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.13.</span> <span class="toc-text">Yum 和 Apt 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum_repository-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.14.</span> <span class="toc-text">yum_repository 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#service-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.15.</span> <span class="toc-text">Service 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#user-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.16.</span> <span class="toc-text">User 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#group-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.17.</span> <span class="toc-text">Group 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lineinfile-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.18.</span> <span class="toc-text">Lineinfile 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.19.</span> <span class="toc-text">Replace 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#selinux-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.20.</span> <span class="toc-text">SELinux 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reboot-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.21.</span> <span class="toc-text">reboot 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mount-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.22.</span> <span class="toc-text">mount 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setup-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.23.</span> <span class="toc-text">Setup 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#debug-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.24.</span> <span class="toc-text">debug 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sysctl-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.25.</span> <span class="toc-text">sysctl 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pam_limits"><span class="toc-number">2.4.26.</span> <span class="toc-text">pam_limits</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#apt_repository-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.27.</span> <span class="toc-text">apt_repository 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#apt_key-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.28.</span> <span class="toc-text">apt_key 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.29.</span> <span class="toc-text">其它模块</span></a></li></ol></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li class="active"><a href="/Ansible/Ansible/" rel="bookmark" title="运维自动化工具Ansible(一)">运维自动化工具Ansible(一)</a></li><li><a href="/Ansible/Ansible2/" rel="bookmark" title="运维自动化工具Ansible(二)">运维自动化工具Ansible(二)</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="image" itemprop="image" alt="yuan kun" data-src="/images/avatar.jpg"><p class="name" itemprop="name">yuan kun</p><div class="description" itemprop="description">解决各种服务器、网络、应用等技术问题，致力于保障系统稳定、高效运行</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">15</span> <span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">7</span> <span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">3</span> <span class="name">标签</span></a></div></nav><div class="social"><span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==" title="https:&#x2F;&#x2F;github.com&#x2F;amehime&#x2F;hexo-theme-shoka"><i class="ic i-github"></i></span></div><ul class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于</a></li><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></div></div></div><ul id="quick"><li class="prev pjax"><a href="/Docker/docker-compose%E9%83%A8%E7%BD%B2MySQL/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/Ansible/Ansible2/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/MySQL/" title="分类于 MySQL">MySQL</a></div><span><a href="/MySQL/MySQL/" title="MySQL数据库基础和安装使用">MySQL数据库基础和安装使用</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/zabbix/" title="分类于 zabbix">zabbix</a></div><span><a href="/zabbix/zabbix5%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85/" title="zabbix5部署安装">zabbix5部署安装</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Linux/" title="分类于 Linux">Linux</a></div><span><a href="/Linux/Disk/" title="磁盘存储和文件系统管理">磁盘存储和文件系统管理</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Ansible/" title="分类于 Ansible">Ansible</a></div><span><a href="/Ansible/Ansible2/" title="运维自动化工具Ansible(二)">运维自动化工具Ansible(二)</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Kubernetes/" title="分类于 Kubernetes">Kubernetes</a></div><span><a href="/Kubernetes/k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/" title="Kubernetes详细教程">Kubernetes详细教程</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Linux/" title="分类于 Linux">Linux</a> <i class="ic i-angle-right"></i> <a href="/categories/Linux/tomcat/" title="分类于 tomcat">tomcat</a></div><span><a href="/Linux/tomcat/tomcat/" title="tomcat">tomcat</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Docker/" title="分类于 Docker">Docker</a></div><span><a href="/Docker/docker-install/" title="Docker安装部署">Docker安装部署</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Kubernetes/" title="分类于 Kubernetes">Kubernetes</a></div><span><a href="/Kubernetes/%E6%90%AD%E5%BB%BAKubernetes%E9%9B%86%E7%BE%A4/" title="搭建Kubernetes集群">搭建Kubernetes集群</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Kubernetes/" title="分类于 Kubernetes">Kubernetes</a></div><span><a href="/Kubernetes/Kubernetes%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="Kubernetes读书笔记">Kubernetes读书笔记</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Ansible/" title="分类于 Ansible">Ansible</a></div><span><a href="/Ansible/Ansible/" title="运维自动化工具Ansible(一)">运维自动化工具Ansible(一)</a></span></li></ul></div></div><div class="status"><div class="copyright">&copy; 2022 – <span itemprop="copyrightYear">2023</span> <span class="with-love"><i class="ic i-sakura rotate"></i> </span><span class="author" itemprop="copyrightHolder">yuan kun @ Cookie</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i> </span><span title="站点总字数">271k 字</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="ic i-coffee"></i> </span><span title="站点阅读时长">4:06</span></div><div class="powered-by">基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL={path:"Ansible/Ansible/",favicon:{show:"（●´3｀●）やれやれだぜ",hide:"(´Д｀)大変だ！"},search:{placeholder:"文章搜索",empty:"关于 「 ${query} 」，什么也没搜到",stats:"${time} ms 内找到 ${hits} 条结果"},valine:!0,fancybox:!0,copyright:'复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',ignores:[function(e){return e.includes("#")},function(e){return new RegExp(LOCAL.path+"$").test(e)}]}</script><script src="https://cdn.polyfill.io/v2/polyfill.js"></script><script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script><script src="/js/app.js?v=0.2.5"></script></body></html><!-- rebuild by hrmmi -->
