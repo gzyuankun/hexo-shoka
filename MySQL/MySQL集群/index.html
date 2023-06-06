@@ -1,27 +1,148 @@
-<!-- build time:Tue Jun 06 2023 19:23:36 GMT+0800 (中国标准时间) --><!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#FFF"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png"><link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="alternate" type="application/rss+xml" title="Hide your thoughts" href="http://blog.itshare.work/rss.xml"><link rel="alternate" type="application/atom+xml" title="Hide your thoughts" href="http://blog.itshare.work/atom.xml"><link rel="alternate" type="application/json" title="Hide your thoughts" href="http://blog.itshare.work/feed.json"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/css/app.css?v=0.2.5"><meta name="keywords" content="MySQL基础"><link rel="canonical" href="http://blog.itshare.work/MySQL/MySQL%E9%9B%86%E7%BE%A4/"><title>MySQL集群 - MySQL | Cookie = Hide your thoughts</title><meta name="generator" content="Hexo 6.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">MySQL集群</h1><div class="meta"><span class="item" title="创建时间：2022-11-23 13:38:00"><span class="icon"><i class="ic i-calendar"></i> </span><span class="text">发表于</span> <time itemprop="dateCreated datePublished" datetime="2022-11-23T13:38:00+08:00">2022-11-23</time> </span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i> </span><span class="text">本文字数</span> <span>17k</span> <span class="text">字</span> </span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i> </span><span class="text">阅读时长</span> <span>16 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span> <span class="line"></span> <span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">Cookie</a></li></ul><ul class="right"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div id="imgs" class="pjax"><ul><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/7.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/13.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/9.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/28.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/10.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/6.jpg"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"/><use xlink:href="#gentle-wave" x="48" y="3"/><use xlink:href="#gentle-wave" x="48" y="5"/><use xlink:href="#gentle-wave" x="48" y="7"/></g></svg></div><main><div class="inner"><div id="main" class="pjax"><div class="article wrap"><div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i> <span><a href="/">首页</a></span><i class="ic i-angle-right"></i> <span class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/MySQL/" itemprop="item" rel="index" title="分类于 MySQL"><span itemprop="name">MySQL</span></a><meta itemprop="position" content="1"></span></div><article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://blog.itshare.work/MySQL/MySQL%E9%9B%86%E7%BE%A4/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.jpg"><meta itemprop="name" content="yuan kun"><meta itemprop="description" content=", 解决各种服务器、网络、应用等技术问题，致力于保障系统稳定、高效运行"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Hide your thoughts"></span><div class="body md" itemprop="articleBody"><h1 id="mysql集群"><a class="anchor" href="#mysql集群">#</a> MySQL 集群</h1><h2 id="主从复制架构和原理"><a class="anchor" href="#主从复制架构和原理">#</a> 主从复制架构和原理</h2><h3 id="mysql主从复制"><a class="anchor" href="#mysql主从复制">#</a> MySQL 主从复制</h3><ul><li>读写分离</li><li>复制：每个节点都有相同的数据集，向外扩展，基于二进制日志的单向复制</li></ul><h3 id="复制的功用"><a class="anchor" href="#复制的功用">#</a> 复制的功用</h3><ul><li>负载均衡读操作</li><li>备份</li><li>高可用和故障切换</li><li>数据分布</li><li>MySQL 升级</li></ul><h3 id="复制架构"><a class="anchor" href="#复制架构">#</a> 复制架构</h3><p><strong>一主一从复制架构</strong></p><p><img data-src="../image.assets/1669185369127.png" alt="1669185369127"></p><p><strong>一主多从复制架构</strong></p><p><img data-src="../image.assets/1669185402487.png" alt="1669185402487"></p><h3 id="主从复制原理"><a class="anchor" href="#主从复制原理">#</a> 主从复制原理</h3><p><img data-src="../image.assets/1669185434299.png" alt="1669185434299"></p><h3 id="主从复制相关线程"><a class="anchor" href="#主从复制相关线程">#</a> 主从复制相关线程</h3><ul><li>主节点：<br>dump Thread：为每个 Slave 的 I/O Thread 启动一个 dump 线程，用于向其发送 binary log events</li><li>从节点：<br>I/O Thread：向 Master 请求二进制日志事件，并保存于中继日志中<br>SQL Thread：从中继日志中读取日志事件，在本地完成重放</li></ul><h3 id="跟复制功能相关的文件"><a class="anchor" href="#跟复制功能相关的文件">#</a> 跟复制功能相关的文件：</h3><ul><li><span class="exturl" data-url="aHR0cDovL21hc3Rlci5pbmZv">master.info</span>：用于保存 slave 连接至 master 时的相关信息，例如账号、密码、服务器地址等</li><li><span class="exturl" data-url="aHR0cDovL3JlbGF5LWxvZy5pbmZv">relay-log.info</span>：保存在当前 slave 节点上已经复制的当前二进制日志和本地 relay log 日志的对应关<br>系</li><li>mysql-relay-bin.00000#: 中继日志，保存从主节点复制过来的二进制日志，本质就是二进制日志</li></ul><p>说明:</p><pre><code>范例: 中继日志
+<!-- build time:Tue Jun 06 2023 19:27:33 GMT+0800 (中国标准时间) --><!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#FFF"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png"><link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="alternate" type="application/rss+xml" title="Hide your thoughts" href="http://blog.itshare.work/rss.xml"><link rel="alternate" type="application/atom+xml" title="Hide your thoughts" href="http://blog.itshare.work/atom.xml"><link rel="alternate" type="application/json" title="Hide your thoughts" href="http://blog.itshare.work/feed.json"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/css/app.css?v=0.2.5"><meta name="keywords" content="MySQL基础"><link rel="canonical" href="http://blog.itshare.work/MySQL/MySQL%E9%9B%86%E7%BE%A4/"><title>MySQL集群 - MySQL | Cookie = Hide your thoughts</title><meta name="generator" content="Hexo 6.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">MySQL集群</h1><div class="meta"><span class="item" title="创建时间：2022-11-23 13:38:00"><span class="icon"><i class="ic i-calendar"></i> </span><span class="text">发表于</span> <time itemprop="dateCreated datePublished" datetime="2022-11-23T13:38:00+08:00">2022-11-23</time> </span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i> </span><span class="text">本文字数</span> <span>18k</span> <span class="text">字</span> </span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i> </span><span class="text">阅读时长</span> <span>16 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span> <span class="line"></span> <span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">Cookie</a></li></ul><ul class="right"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div id="imgs" class="pjax"><ul><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/19.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/21.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/26.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/12.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/24.jpg"></li><li class="item" data-background-image="http://oss.itshare.work/itshare-work-images/16.jpg"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"/><use xlink:href="#gentle-wave" x="48" y="3"/><use xlink:href="#gentle-wave" x="48" y="5"/><use xlink:href="#gentle-wave" x="48" y="7"/></g></svg></div><main><div class="inner"><div id="main" class="pjax"><div class="article wrap"><div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i> <span><a href="/">首页</a></span><i class="ic i-angle-right"></i> <span class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/MySQL/" itemprop="item" rel="index" title="分类于 MySQL"><span itemprop="name">MySQL</span></a><meta itemprop="position" content="1"></span></div><article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://blog.itshare.work/MySQL/MySQL%E9%9B%86%E7%BE%A4/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.jpg"><meta itemprop="name" content="yuan kun"><meta itemprop="description" content=", 解决各种服务器、网络、应用等技术问题，致力于保障系统稳定、高效运行"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Hide your thoughts"></span><div class="body md" itemprop="articleBody"><h1 id="MySQL集群"><a href="#MySQL集群" class="headerlink" title="MySQL集群"></a>MySQL集群</h1><h2 id="主从复制架构和原理"><a href="#主从复制架构和原理" class="headerlink" title="主从复制架构和原理"></a>主从复制架构和原理</h2><h3 id="MySQL主从复制"><a href="#MySQL主从复制" class="headerlink" title="MySQL主从复制"></a>MySQL主从复制</h3><ul><li>读写分离</li><li>复制：每个节点都有相同的数据集，向外扩展，基于二进制日志的单向复制</li></ul><h3 id="复制的功用"><a href="#复制的功用" class="headerlink" title="复制的功用"></a>复制的功用</h3><ul><li>负载均衡读操作</li><li>备份</li><li>高可用和故障切换</li><li>数据分布</li><li>MySQL升级</li></ul><h3 id="复制架构"><a href="#复制架构" class="headerlink" title="复制架构"></a>复制架构</h3><p><strong>一主一从复制架构</strong></p><p><img data-src="/../image.assets/1669185369127.png" alt="1669185369127"></p><p><strong>一主多从复制架构</strong></p><p><img data-src="/../image.assets/1669185402487.png" alt="1669185402487"></p><h3 id="主从复制原理"><a href="#主从复制原理" class="headerlink" title="主从复制原理"></a>主从复制原理</h3><p><img data-src="/../image.assets/1669185434299.png" alt="1669185434299"></p><h3 id="主从复制相关线程"><a href="#主从复制相关线程" class="headerlink" title="主从复制相关线程"></a>主从复制相关线程</h3><ul><li>主节点：<br>dump Thread：为每个Slave的I&#x2F;O Thread启动一个dump线程，用于向其发送binary log events</li><li>从节点：<br>I&#x2F;O Thread：向Master请求二进制日志事件，并保存于中继日志中<br>SQL Thread：从中继日志中读取日志事件，在本地完成重放</li></ul><h3 id="跟复制功能相关的文件："><a href="#跟复制功能相关的文件：" class="headerlink" title="跟复制功能相关的文件："></a>跟复制功能相关的文件：</h3><ul><li>master.info：用于保存slave连接至master时的相关信息，例如账号、密码、服务器地址等</li><li>relay-log.info：保存在当前slave节点上已经复制的当前二进制日志和本地relay log日志的对应关<br>系</li><li>mysql-relay-bin.00000#: 中继日志,保存从主节点复制过来的二进制日志,本质就是二进制日志</li></ul><p>说明:</p><pre><code>范例: 中继日志
 MySQL8.0 取消 master.info 和 relay-log.info文件
-</code></pre><h3 id="实现主从复制配置"><a class="anchor" href="#实现主从复制配置">#</a> 实现主从复制配置</h3><p>官网参考</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>https://dev.mysql.com/doc/refman/8.0/en/replication-configuration.html</pre></td></tr><tr><td data-num="2"></td><td><pre>https://dev.mysql.com/doc/refman/5.7/en/replication-configuration.html</pre></td></tr><tr><td data-num="3"></td><td><pre>https://dev.mysql.com/doc/refman/5.5/en/replication-configuration.html</pre></td></tr><tr><td data-num="4"></td><td><pre>https://mariadb.com/kb/en/library/setting-up-replication/</pre></td></tr></table></figure><ul><li>MySQL 版本：5.7.38</li><li>centos7.9</li></ul><p><strong>主节点配置</strong></p><p>（1）启用二进制日志</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>vim /etc/my.cnf</pre></td></tr><tr><td data-num="2"></td><td><pre>[mysqld]</pre></td></tr><tr><td data-num="3"></td><td><pre>log_bin</pre></td></tr></table></figure><p>(2) 为当前节点设置一个全局唯一的 ID 号</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[mysqld]</pre></td></tr><tr><td data-num="2"></td><td><pre>server-id=#</pre></td></tr><tr><td data-num="3"></td><td><pre>log-basename=master #可选项，设置datadir中日志名称，确保不依赖主机名</pre></td></tr></table></figure><p><strong>说明</strong></p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>server-id的取值范围</pre></td></tr><tr><td data-num="2"></td><td><pre>1 to 4294967295 (>= MariaDB 10.2.2)，默认值为1，MySQL8.0默认值为1</pre></td></tr><tr><td data-num="3"></td><td><pre>0 to 4294967295 (&lt;= MariaDB 10.2.1)，默认值为0，如果从节点为0，所有master都将拒绝此</pre></td></tr><tr><td data-num="4"></td><td><pre>slave的连接</pre></td></tr></table></figure><p><img data-src="../image.assets/1669215296538.png" alt="1669215296538"></p><p><strong>注意：修改配置文件后重启 mysql 服务</strong></p><p>（3）创建有复制权限的用户账号</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>#MySQL8.0 分成两步实现</pre></td></tr><tr><td data-num="2"></td><td><pre># 创建用户</pre></td></tr><tr><td data-num="3"></td><td><pre>mysql> create user test@'192.168.179.165' identified by'123456';</pre></td></tr><tr><td data-num="4"></td><td><pre>Query OK, 0 rows affected (0.02 sec)</pre></td></tr><tr><td data-num="5"></td><td><pre></pre></td></tr><tr><td data-num="6"></td><td><pre>mysql> </pre></td></tr><tr><td data-num="7"></td><td><pre># 赋予权限</pre></td></tr><tr><td data-num="8"></td><td><pre>mysql> grant replication slave on *.* to test@'192.168.179.165';</pre></td></tr><tr><td data-num="9"></td><td><pre>Query OK, 0 rows affected (0.01 sec)</pre></td></tr><tr><td data-num="10"></td><td><pre></pre></td></tr><tr><td data-num="11"></td><td><pre>mysql> </pre></td></tr><tr><td data-num="12"></td><td><pre></pre></td></tr><tr><td data-num="13"></td><td><pre>#其他</pre></td></tr><tr><td data-num="14"></td><td><pre>mysql> GRANT REPLICATION SLAVE ON *.* TO 'test'@'HOST' IDENTIFIED BY '123456';</pre></td></tr></table></figure><p>(4) 完全备份数据库</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@centos7 ~]# mysqldum -A -F --master-data=1 --single-transaction > /backup/all_`date +%F`.sql</pre></td></tr></table></figure><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@centos7 backup]# ll /backup/</pre></td></tr><tr><td data-num="2"></td><td><pre>total 1216</pre></td></tr><tr><td data-num="3"></td><td><pre>-rw-r--r-- 1 root root 1244691 Nov 23 23:07 all_2022-11-23.sql</pre></td></tr><tr><td data-num="4"></td><td><pre>[root@centos7 backup]#</pre></td></tr></table></figure><p><strong>从节点配置</strong></p><p>(1) 修改从节点 server-id, 不能和主节点 server-id 一致</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[mysqld]</pre></td></tr><tr><td data-num="2"></td><td><pre>server-id=2</pre></td></tr><tr><td data-num="3"></td><td><pre>#或者使用如下配置</pre></td></tr><tr><td data-num="4"></td><td><pre>[mysqld]</pre></td></tr><tr><td data-num="5"></td><td><pre>server_id=# #为当前节点设置一个全局惟的ID号</pre></td></tr><tr><td data-num="6"></td><td><pre>log-bin</pre></td></tr><tr><td data-num="7"></td><td><pre>read_only=ON #设置数据库只读，针对supper user无效</pre></td></tr><tr><td data-num="8"></td><td><pre>relay_log=relay-log #relay log的文件路径，默认值hostname-relay-bin</pre></td></tr><tr><td data-num="9"></td><td><pre>relay_log_index=relay-log.index #默认值hostname-relay-bin.index</pre></td></tr></table></figure><p>（2）使用有复制权限的用户账号连接至主服务器，并启动复制线程</p><p>从节点导入主节点完全备份的数据</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre># 关闭二进制日志</pre></td></tr><tr><td data-num="2"></td><td><pre>mysql> set sql_log_bin=0;</pre></td></tr><tr><td data-num="3"></td><td><pre>Query OK, 0 rows affected (0.00 sec)</pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>mysql> </pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre># 还原备份</pre></td></tr><tr><td data-num="8"></td><td><pre>mysql> source all_2022-11-23.sql;</pre></td></tr><tr><td data-num="9"></td><td><pre></pre></td></tr><tr><td data-num="10"></td><td><pre># 开启二进制日志</pre></td></tr><tr><td data-num="11"></td><td><pre>mysql> set sql_log_bin=1;</pre></td></tr><tr><td data-num="12"></td><td><pre>Query OK, 0 rows affected (0.00 sec)</pre></td></tr><tr><td data-num="13"></td><td><pre></pre></td></tr><tr><td data-num="14"></td><td><pre>mysql> </pre></td></tr><tr><td data-num="15"></td><td><pre># 开启线程</pre></td></tr><tr><td data-num="16"></td><td><pre>mysql> start slave;</pre></td></tr><tr><td data-num="17"></td><td><pre>Query OK, 0 rows affected, 1 warning (0.03 sec)</pre></td></tr><tr><td data-num="18"></td><td><pre></pre></td></tr><tr><td data-num="19"></td><td><pre>mysql></pre></td></tr></table></figure><p>mysql 客户端命令行执行如下内容</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>CHANGE MASTER TO MASTER_HOST='192.168.179.170', MASTER_USER='test',MASTER_PASSWORD='123456',MASTER_LOG_FILE='mysql-bin.000007', MASTER_LOG_POS=154;</pre></td></tr></table></figure><p>MASTER_LOG_FILE='mysql-bin.000007', MASTER_LOG_POS=154; 的值可以从备份 sql 文件中找到，如图所示：</p><p><img data-src="../image.assets/1669262500961.png" alt="1669262500961"></p><p>最后启动复制线程</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>start slave</pre></td></tr></table></figure><p>扩展：</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>show slave status\G  # 查看相关状态信息</pre></td></tr></table></figure><p><img data-src="../image.assets/1669262596413.png" alt="1669262596413"></p><p>从节点更换主节点</p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>>mysql stop slave;  #停止复制线程</pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre>>mysql reset slave all;   # 清除信息 </pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>再次使用有复制权限的用户账号连接至主服务器，并启动复制线程</pre></td></tr></table></figure><h3 id="级联复制"><a class="anchor" href="#级联复制">#</a> 级联复制</h3><p>案例：三台主机实现级联复制</p><p><img data-src="../image.assets/1669306551265.png" alt="1669306551265"></p><p><strong>步骤</strong></p><pre><code># 192.168.179.170充当master
+</code></pre><h3 id="实现主从复制配置"><a href="#实现主从复制配置" class="headerlink" title="实现主从复制配置"></a>实现主从复制配置</h3><p>官网参考</p><pre><code class="text">https://dev.mysql.com/doc/refman/8.0/en/replication-configuration.html
+https://dev.mysql.com/doc/refman/5.7/en/replication-configuration.html
+https://dev.mysql.com/doc/refman/5.5/en/replication-configuration.html
+https://mariadb.com/kb/en/library/setting-up-replication/
+</code></pre><ul><li>MySQL版本：5.7.38</li><li>centos7.9</li></ul><p><strong>主节点配置</strong></p><p>（1）启用二进制日志</p><pre><code class="text">vim /etc/my.cnf
+[mysqld]
+log_bin
+</code></pre><p>(2)为当前节点设置一个全局唯一的ID号</p><pre><code class="text">[mysqld]
+server-id=#
+log-basename=master #可选项，设置datadir中日志名称，确保不依赖主机名
+</code></pre><p><strong>说明</strong></p><pre><code class="text">server-id的取值范围
+1 to 4294967295 (&gt;= MariaDB 10.2.2)，默认值为1，MySQL8.0默认值为1
+0 to 4294967295 (&lt;= MariaDB 10.2.1)，默认值为0，如果从节点为0，所有master都将拒绝此
+slave的连接
+</code></pre><p><img data-src="/../image.assets/1669215296538.png" alt="1669215296538"></p><p><strong>注意：修改配置文件后重启mysql服务</strong></p><p>（3）创建有复制权限的用户账号</p><pre><code class="text">#MySQL8.0 分成两步实现
+# 创建用户
+mysql&gt; create user test@&#39;192.168.179.165&#39; identified by&#39;123456&#39;;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql&gt; 
+# 赋予权限
+mysql&gt; grant replication slave on *.* to test@&#39;192.168.179.165&#39;;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql&gt; 
+
+#其他
+mysql&gt; GRANT REPLICATION SLAVE ON *.* TO &#39;test&#39;@&#39;HOST&#39; IDENTIFIED BY &#39;123456&#39;;
+</code></pre><p>(4)完全备份数据库</p><pre><code class="text">[root@centos7 ~]# mysqldum -A -F --master-data=1 --single-transaction &gt; /backup/all_`date +%F`.sql
+</code></pre><pre><code class="text">[root@centos7 backup]# ll /backup/
+total 1216
+-rw-r--r-- 1 root root 1244691 Nov 23 23:07 all_2022-11-23.sql
+[root@centos7 backup]# 
+</code></pre><p><strong>从节点配置</strong></p><p>(1)修改从节点server-id,不能和主节点server-id一致</p><pre><code class="text">[mysqld]
+server-id=2
+#或者使用如下配置
+[mysqld]
+server_id=# #为当前节点设置一个全局惟的ID号
+log-bin
+read_only=ON #设置数据库只读，针对supper user无效
+relay_log=relay-log #relay log的文件路径，默认值hostname-relay-bin
+relay_log_index=relay-log.index #默认值hostname-relay-bin.index
+</code></pre><p>（2）使用有复制权限的用户账号连接至主服务器，并启动复制线程</p><p>从节点导入主节点完全备份的数据</p><pre><code class="text"># 关闭二进制日志
+mysql&gt; set sql_log_bin=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; 
+
+# 还原备份
+mysql&gt; source all_2022-11-23.sql;
+
+# 开启二进制日志
+mysql&gt; set sql_log_bin=1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; 
+# 开启线程
+mysql&gt; start slave;
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql&gt; 
+</code></pre><p>mysql客户端命令行执行如下内容</p><pre><code class="text">CHANGE MASTER TO MASTER_HOST=&#39;192.168.179.170&#39;, MASTER_USER=&#39;test&#39;,MASTER_PASSWORD=&#39;123456&#39;,MASTER_LOG_FILE=&#39;mysql-bin.000007&#39;, MASTER_LOG_POS=154;
+</code></pre><p>MASTER_LOG_FILE&#x3D;’mysql-bin.000007’, MASTER_LOG_POS&#x3D;154;的值可以从备份sql文件中找到，如图所示：</p><p><img data-src="/../image.assets/1669262500961.png" alt="1669262500961"></p><p>最后启动复制线程</p><pre><code class="text">start slave
+</code></pre><p>扩展：</p><pre><code class="text">show slave status\G  # 查看相关状态信息
+</code></pre><p><img data-src="/../image.assets/1669262596413.png" alt="1669262596413"></p><p>从节点更换主节点</p><pre><code class="text">&gt;mysql stop slave;  #停止复制线程
+
+&gt;mysql reset slave all;   # 清除信息 
+
+再次使用有复制权限的用户账号连接至主服务器，并启动复制线程
+</code></pre><h3 id="级联复制"><a href="#级联复制" class="headerlink" title="级联复制"></a>级联复制</h3><p>案例：三台主机实现级联复制</p><p><img data-src="/../image.assets/1669306551265.png" alt="1669306551265"></p><p><strong>步骤</strong></p><pre><code># 192.168.179.170充当master
 # 192.168.179.171充当slave1
 # 192.168.179.157充当slave2
 # 操作系统：centos7.9
 #MySQL版本：5.7.38
-</code></pre><p><strong>在 master 上实现，即 192.168.179.170</strong></p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre># 在master上实现，即192.168.179.170</pre></td></tr><tr><td data-num="2"></td><td><pre>vim /etc/my.cnf</pre></td></tr><tr><td data-num="3"></td><td><pre>[mysqld]</pre></td></tr><tr><td data-num="4"></td><td><pre>server-id=170</pre></td></tr><tr><td data-num="5"></td><td><pre>log-bin=/data/mysql/mysql-bin</pre></td></tr></table></figure><p><img data-src="../image.assets/1669342445575.png" alt="1669342445575"></p><p><strong>重启服务</strong></p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@centos7 ~]# systemctl restart mysql</pre></td></tr><tr><td data-num="2"></td><td><pre>[root@centos7 ~]#</pre></td></tr></table></figure><p><strong>创建具有复制权限的账号</strong></p><pre><code>mysql&gt; grant replication slave on *.* to 'test'@'192.168.179.%' identified by '123456';
+</code></pre><p><strong>在master上实现，即192.168.179.170</strong></p><pre><code class="text"># 在master上实现，即192.168.179.170
+vim /etc/my.cnf
+[mysqld]
+server-id=170
+log-bin=/data/mysql/mysql-bin
+</code></pre><p><img data-src="/../image.assets/1669342445575.png" alt="1669342445575"></p><p><strong>重启服务</strong></p><pre><code class="text">[root@centos7 ~]# systemctl restart mysql
+[root@centos7 ~]# 
+</code></pre><p><strong>创建具有复制权限的账号</strong></p><pre><code>mysql&gt; grant replication slave on *.* to &#39;test&#39;@&#39;192.168.179.%&#39; identified by &#39;123456&#39;;
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 mysql&gt; 
-</code></pre><p><strong>完全备份</strong></p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>[root@centos7 ~]# mysqldump  -uroot -p123456 -A -F --single-transaction --master-data=1 > /data/all.sql;</pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre>[root@centos7 ~]# scp /data/all.sql root@192.168.179.171:/data</pre></td></tr><tr><td data-num="4"></td><td><pre>[root@centos7 ~]# scp /data/all.sql root@192.168.179.157:/data</pre></td></tr></table></figure><p><strong>在中间级联实现</strong></p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>#在中间级联实现,即192.168.179.171</pre></td></tr><tr><td data-num="2"></td><td><pre>#修改配置文件</pre></td></tr><tr><td data-num="3"></td><td><pre>vim /etc/my.cnf</pre></td></tr><tr><td data-num="4"></td><td><pre>[mysqld]</pre></td></tr><tr><td data-num="5"></td><td><pre>server-id=171</pre></td></tr><tr><td data-num="6"></td><td><pre>log-bin=/data/mysql/slave1-bin</pre></td></tr><tr><td data-num="7"></td><td><pre>read-only</pre></td></tr><tr><td data-num="8"></td><td><pre>log_slave_updates #级联复制中间节点的必选项,MySQL8.0此为默认值,可以不要人为添加</pre></td></tr><tr><td data-num="9"></td><td><pre></pre></td></tr><tr><td data-num="10"></td><td><pre>#重启mysql</pre></td></tr><tr><td data-num="11"></td><td><pre>service mysqld restart或者systemctl restart mysql</pre></td></tr><tr><td data-num="12"></td><td><pre></pre></td></tr><tr><td data-num="13"></td><td><pre># 还原数据库</pre></td></tr><tr><td data-num="14"></td><td><pre>vim /data/all.sql</pre></td></tr></table></figure><p><img data-src="../image.assets/1669343598599.png" alt="1669343598599"></p><figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tr><td data-num="1"></td><td><pre>mysql> set sql_log_bin=0;</pre></td></tr><tr><td data-num="2"></td><td><pre>Query OK, 0 rows affected (0.00 sec)</pre></td></tr><tr><td data-num="3"></td><td><pre></pre></td></tr><tr><td data-num="4"></td><td><pre>mysql> </pre></td></tr><tr><td data-num="5"></td><td><pre>mysql> source /data/all.sql;</pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre>mysql> show master logs;</pre></td></tr><tr><td data-num="8"></td><td><pre>+-------------------+-----------+</pre></td></tr><tr><td data-num="9"></td><td><pre>| Log_name          | File_size |</pre></td></tr><tr><td data-num="10"></td><td><pre>+-------------------+-----------+</pre></td></tr><tr><td data-num="11"></td><td><pre>| slave1-bin.000001 |       801 |</pre></td></tr><tr><td data-num="12"></td><td><pre>| slave1-bin.000002 |       458 |</pre></td></tr><tr><td data-num="13"></td><td><pre>+-------------------+-----------+</pre></td></tr><tr><td data-num="14"></td><td><pre>2 rows in set (0.01 sec)</pre></td></tr><tr><td data-num="15"></td><td><pre></pre></td></tr><tr><td data-num="16"></td><td><pre>mysql> </pre></td></tr><tr><td data-num="17"></td><td><pre></pre></td></tr><tr><td data-num="18"></td><td><pre></pre></td></tr><tr><td data-num="19"></td><td><pre>mysql> set sql_log_bin=1;</pre></td></tr><tr><td data-num="20"></td><td><pre>Query OK, 0 rows affected (0.00 sec)</pre></td></tr><tr><td data-num="21"></td><td><pre></pre></td></tr><tr><td data-num="22"></td><td><pre>mysql> </pre></td></tr><tr><td data-num="23"></td><td><pre></pre></td></tr><tr><td data-num="24"></td><td><pre>mysql> start slave;</pre></td></tr><tr><td data-num="25"></td><td><pre>Query OK, 0 rows affected (0.01 sec)</pre></td></tr><tr><td data-num="26"></td><td><pre></pre></td></tr><tr><td data-num="27"></td><td><pre>mysql></pre></td></tr></table></figure><p><strong>在第三个节点 slave 上实现</strong></p><pre><code>vim /etc/my.cnf
+</code></pre><p><strong>完全备份</strong></p><pre><code class="text">[root@centos7 ~]# mysqldump  -uroot -p123456 -A -F --single-transaction --master-data=1 &gt; /data/all.sql;
+
+[root@centos7 ~]# scp /data/all.sql root@192.168.179.171:/data
+[root@centos7 ~]# scp /data/all.sql root@192.168.179.157:/data
+</code></pre><p><strong>在中间级联实现</strong></p><pre><code class="text">#在中间级联实现,即192.168.179.171
+#修改配置文件
+vim /etc/my.cnf
+[mysqld]
+server-id=171
+log-bin=/data/mysql/slave1-bin
+read-only
+log_slave_updates #级联复制中间节点的必选项,MySQL8.0此为默认值,可以不要人为添加
+
+#重启mysql
+service mysqld restart或者systemctl restart mysql
+
+# 还原数据库
+vim /data/all.sql
+</code></pre><p><img data-src="/../image.assets/1669343598599.png" alt="1669343598599"></p><pre><code class="text">mysql&gt; set sql_log_bin=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; 
+mysql&gt; source /data/all.sql;
+
+mysql&gt; show master logs;
++-------------------+-----------+
+| Log_name          | File_size |
++-------------------+-----------+
+| slave1-bin.000001 |       801 |
+| slave1-bin.000002 |       458 |
++-------------------+-----------+
+2 rows in set (0.01 sec)
+
+mysql&gt; 
+
+
+mysql&gt; set sql_log_bin=1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; 
+
+mysql&gt; start slave;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql&gt; 
+</code></pre><p><strong>在第三个节点slave上实现</strong></p><pre><code>vim /etc/my.cnf
 [mysqld]
 server-id=157
 log-bin=/data/mysql/slave2-bin
 
 # 还原数据库
 vim /data/all.sql
-</code></pre><p><img data-src="../image.assets/1669346692481.png" alt="1669346692481"></p><pre><code>mysql&gt; set sql_log_bin=0;
+</code></pre><p><img data-src="/../image.assets/1669346692481.png" alt="1669346692481"></p><pre><code>mysql&gt; set sql_log_bin=0;
 mysql&gt; source /data/all.sql
 mysql&gt; set sql_log_bin=1;
 mysql&gt; start slave;
-</code></pre><h3 id="半同步复制"><a class="anchor" href="#半同步复制">#</a> 半同步复制</h3><p><img data-src="../image.assets/1669367459560.png" alt="1669367459560"></p><p>范例：centos7.9 在 MySQL5.7.38 实现半同步复制</p><pre><code># 主服务器配置，安装semisync_slave.so插件
-mysql&gt; INSTALL PLUGIN rpl_semi_sync_master SONAME 'semisync_master.so';
+</code></pre><h3 id="半同步复制"><a href="#半同步复制" class="headerlink" title="半同步复制"></a>半同步复制</h3><p><img data-src="/../image.assets/1669367459560.png" alt="1669367459560"></p><p>范例：centos7.9在MySQL5.7.38实现半同步复制</p><pre><code># 主服务器配置，安装semisync_slave.so插件
+mysql&gt; INSTALL PLUGIN rpl_semi_sync_master SONAME &#39;semisync_master.so&#39;;
 Query OK, 0 rows affected (0.05 sec)
 
 mysql&gt; 
@@ -37,7 +158,7 @@ systemctl restart mysql
 
 #slave服务器配置
 #安装semisync_slave.so插件
-mysql&gt; INSTALL PLUGIN rpl_semi_sync_master SONAME 'semisync_master.so';
+mysql&gt; INSTALL PLUGIN rpl_semi_sync_master SONAME &#39;semisync_master.so&#39;;
 Query OK, 0 rows affected (0.05 sec)
 
 #注意:如果已经实现主从复制,需要stop slave;start slave;
@@ -67,15 +188,14 @@ Query OK, 1 row affected (3.00 sec)
 
 mysql&gt; 
 # 设置的是三秒内无法同步返回成功，所以看到是3S后返回成功
-
-</code></pre><h3 id="实战案例利用mycat实现mysql的读写分离"><a class="anchor" href="#实战案例利用mycat实现mysql的读写分离">#</a> 实战案例：利用 Mycat 实现 MySQL 的读写分离</h3><p><img data-src="../image.assets/1669456007835.png" alt="1669456007835"></p><p><strong>所有主机系统环境</strong></p><pre><code>centos7.9
+</code></pre><h3 id="实战案例：利用Mycat实现MySQL的读写分离"><a href="#实战案例：利用Mycat实现MySQL的读写分离" class="headerlink" title="实战案例：利用Mycat实现MySQL的读写分离"></a>实战案例：利用Mycat实现MySQL的读写分离</h3><p><img data-src="/../image.assets/1669456007835.png" alt="1669456007835"></p><p><strong>所有主机系统环境</strong></p><pre><code>centos7.9
 </code></pre><p><strong>服务器三台</strong></p><pre><code>mycat-server 192.168.179.157 #内存建议2G以上
 mysql-master 192.168.179.170 MySQL 5.7
 mysql-slave  192.168.179.171 MySQL 5.7
-</code></pre><p><strong>关闭 SELinux 和防火墙</strong></p><pre><code>systemctl stop firewalld
+</code></pre><p><strong>关闭SELinux和防火墙</strong></p><pre><code>systemctl stop firewalld
 setenforce 0
 时间同步
-</code></pre><p><img data-src="../image.assets/1669455589146.png" alt="1669455589146"></p><p><strong>注意：主从复制的过程省略，参考实现主从复制过程</strong></p><p><strong>代理服务器上安装 Mycat</strong></p><p>下载地址:<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL015Q0FUQXBhY2hlL015Y2F0LVNlcnZlci9yZWxlYXNlcy90YWcvTXljYXQtc2VydmVyLTEuNi43LjQtcmVsZWFzZQ==">https://github.com/MyCATApache/Mycat-Server/releases/tag/Mycat-server-1.6.7.4-release</span></p><pre><code># 安装jdk
+</code></pre><p><img data-src="/../image.assets/1669455589146.png" alt="1669455589146"></p><p><strong>注意：主从复制的过程省略，参考实现主从复制过程</strong></p><p><strong>代理服务器上安装Mycat</strong></p><p>下载地址:<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL015Q0FUQXBhY2hlL015Y2F0LVNlcnZlci9yZWxlYXNlcy90YWcvTXljYXQtc2VydmVyLTEuNi43LjQtcmVsZWFzZQ==">https://github.com/MyCATApache/Mycat-Server/releases/tag/Mycat-server-1.6.7.4-release</span></p><pre><code># 安装jdk
 [root@centos7 ~]# yum install -y java
 
 # 验证
@@ -91,7 +211,7 @@ OpenJDK 64-Bit Server VM (build 25.352-b08, mixed mode)
 [root@centos7 ~]# 
 
 #配置环境变量
-[root@centos7 ~]# echo 'PATH=/apps/mycat/bin:$PATH' &gt; /etc/profile.d/mycat.sh
+[root@centos7 ~]# echo &#39;PATH=/apps/mycat/bin:$PATH&#39; &gt; /etc/profile.d/mycat.sh
 [root@centos7 ~]# source /etc/profile.d/mycat.sh
 
 #注意: 此步启动较慢,需要等一会儿,另外如果内存太小,会导致无法启动
@@ -121,7 +241,7 @@ Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
 owners.
 
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.
 
 mysql&gt; show databases;
 +----------+
@@ -134,10 +254,10 @@ mysql&gt; show databases;
 mysql&gt; 
 
 # 在主节点上创建账号用于mycat数据读写分离
-mysql&gt;create user admin@'192.168.179.%' identified by'123456';
+mysql&gt;create user admin@&#39;192.168.179.%&#39; identified by&#39;123456&#39;;
 
 # 赋予权限
-mysql&gt; grant all on *.* to 'admin'@'192.168.179.%' IDENTIFIED BY '123456';
+mysql&gt; grant all on *.* to &#39;admin&#39;@&#39;192.168.179.%&#39; IDENTIFIED BY &#39;123456&#39;;
 Query OK, 0 rows affected, 1 warning (0.01 sec)
 
 # 刷新
@@ -145,8 +265,7 @@ Query OK, 0 rows affected, 1 warning (0.01 sec)
 Query OK, 0 rows affected (0.01 sec)
 
 mysql&gt; 
-
-</code></pre><p><strong>修改 schema.xml 实现读写分离策略</strong></p><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+</code></pre><p><strong>修改schema.xml实现读写分离策略</strong></p><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;!DOCTYPE mycat:schema SYSTEM &quot;schema.dtd&quot;&gt;
 &lt;mycat:schema xmlns:mycat=&quot;http://io.mycat/&quot;&gt;
     &lt;schema name=&quot;TESTDB&quot; checkSQLschema=&quot;false&quot; sqlMaxLimit=&quot;100&quot; dataNode=&quot;dn1&quot;&gt;
@@ -161,8 +280,58 @@ mysql&gt;
         &lt;/writeHost&gt;
     &lt;/dataHost&gt;
 &lt;/mycat:schema&gt;
+</code></pre><p><img data-src="/../image.assets/1669482336285.png" alt="1669482336285"></p><p>重启mycat</p><pre><code class="shell">[root@centos7 ~]# mycat restart
+Stopping Mycat-server...
+Stopped Mycat-server.
+Starting Mycat-server...
+</code></pre><p>在Mycat服务器上连接并测试</p><pre><code class="shell">[root@centos8 ~]# mysql -uroot -p123456 -h 192.168.179.157 -P8066
+mysql&gt; show databases;
++----------+
+| DATABASE |
++----------+
+| TESTDB   |   //只能看一个虚拟数据库,数据库内容映射的是reggie内容
++----------+
+1 row in set (0.00 sec)
 
-</code></pre><p><img data-src="../image.assets/1669482336285.png" alt="1669482336285"></p><p>重启 mycat</p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@centos7 ~<span class="token punctuation">]</span><span class="token comment"># mycat restart</span></pre></td></tr><tr><td data-num="2"></td><td><pre>Stopping Mycat-server<span class="token punctuation">..</span>.</pre></td></tr><tr><td data-num="3"></td><td><pre>Stopped Mycat-server.</pre></td></tr><tr><td data-num="4"></td><td><pre>Starting Mycat-server<span class="token punctuation">..</span>.</pre></td></tr></table></figure><p>在 Mycat 服务器上连接并测试</p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@centos8 ~<span class="token punctuation">]</span><span class="token comment"># mysql -uroot -p123456 -h 192.168.179.157 -P8066</span></pre></td></tr><tr><td data-num="2"></td><td><pre>mysql<span class="token operator">></span> show databases<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>+----------+</pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token operator">|</span> DATABASE <span class="token operator">|</span></pre></td></tr><tr><td data-num="5"></td><td><pre>+----------+</pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token operator">|</span> TESTDB   <span class="token operator">|</span>   //只能看一个虚拟数据库,数据库内容映射的是reggie内容</pre></td></tr><tr><td data-num="7"></td><td><pre>+----------+</pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token number">1</span> row <span class="token keyword">in</span> <span class="token builtin class-name">set</span> <span class="token punctuation">(</span><span class="token number">0.00</span> sec<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="9"></td><td><pre></pre></td></tr><tr><td data-num="10"></td><td><pre>mysql<span class="token operator">></span> </pre></td></tr><tr><td data-num="11"></td><td><pre></pre></td></tr><tr><td data-num="12"></td><td><pre>mysql<span class="token operator">></span> use TESTDB<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="13"></td><td><pre>Reading table information <span class="token keyword">for</span> completion of table and <span class="token function">column</span> names</pre></td></tr><tr><td data-num="14"></td><td><pre>You can turn off this feature to get a quicker startup with <span class="token parameter variable">-A</span></pre></td></tr><tr><td data-num="15"></td><td><pre></pre></td></tr><tr><td data-num="16"></td><td><pre>Database changed</pre></td></tr><tr><td data-num="17"></td><td><pre>mysql<span class="token operator">></span> show tables<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="18"></td><td><pre>+------------------+</pre></td></tr><tr><td data-num="19"></td><td><pre><span class="token operator">|</span> Tables_in_reggie <span class="token operator">|</span></pre></td></tr><tr><td data-num="20"></td><td><pre>+------------------+</pre></td></tr><tr><td data-num="21"></td><td><pre><span class="token operator">|</span> address_book     <span class="token operator">|</span></pre></td></tr><tr><td data-num="22"></td><td><pre><span class="token operator">|</span> category         <span class="token operator">|</span></pre></td></tr><tr><td data-num="23"></td><td><pre><span class="token operator">|</span> dish             <span class="token operator">|</span></pre></td></tr><tr><td data-num="24"></td><td><pre><span class="token operator">|</span> dish_flavor      <span class="token operator">|</span></pre></td></tr><tr><td data-num="25"></td><td><pre><span class="token operator">|</span> employee         <span class="token operator">|</span></pre></td></tr><tr><td data-num="26"></td><td><pre><span class="token operator">|</span> order_detail     <span class="token operator">|</span></pre></td></tr><tr><td data-num="27"></td><td><pre><span class="token operator">|</span> orders           <span class="token operator">|</span></pre></td></tr><tr><td data-num="28"></td><td><pre><span class="token operator">|</span> setmeal          <span class="token operator">|</span></pre></td></tr><tr><td data-num="29"></td><td><pre><span class="token operator">|</span> setmeal_dish     <span class="token operator">|</span></pre></td></tr><tr><td data-num="30"></td><td><pre><span class="token operator">|</span> shopping_cart    <span class="token operator">|</span></pre></td></tr><tr><td data-num="31"></td><td><pre><span class="token operator">|</span> user             <span class="token operator">|</span></pre></td></tr><tr><td data-num="32"></td><td><pre>+------------------+</pre></td></tr><tr><td data-num="33"></td><td><pre><span class="token number">11</span> rows <span class="token keyword">in</span> <span class="token builtin class-name">set</span> <span class="token punctuation">(</span><span class="token number">0.01</span> sec<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="34"></td><td><pre></pre></td></tr><tr><td data-num="35"></td><td><pre>mysql<span class="token operator">></span></pre></td></tr></table></figure><h3 id="mha实战案例"><a class="anchor" href="#mha实战案例">#</a> MHA 实战案例</h3><p><img data-src="../image.assets/1669541563329.png" alt="1669541563329"></p><p><strong>主从复制搭建过程省略</strong></p><p><strong>在所有 MySQL 服务器上安装 mha4mysql-node 包</strong></p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre>下载地址</pre></td></tr><tr><td data-num="2"></td><td><pre>mha4mysql-manager</pre></td></tr><tr><td data-num="3"></td><td><pre>mha4mysql-node</pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment">#下载</span></pre></td></tr><tr><td data-num="5"></td><td><pre>https://github.com/yoshinorim/mha4mysql-manager/wiki/Downloads</pre></td></tr><tr><td data-num="6"></td><td><pre>https://github.com/yoshinorim/mha4mysql-node/releases/tag/v0.58</pre></td></tr><tr><td data-num="7"></td><td><pre>https://github.com/yoshinorim/mha4mysql-node/releases/tag/v0.58</pre></td></tr><tr><td data-num="8"></td><td><pre></pre></td></tr><tr><td data-num="9"></td><td><pre>yum <span class="token parameter variable">-y</span> <span class="token function">install</span> mha4mysql-node-0.58-0.el7.centos.noarch.rpm</pre></td></tr></table></figure><p><strong>在管理节点上安装两个包 mha4mysql-manager 和 mha4mysql-node</strong></p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@mha-manager ~<span class="token punctuation">]</span><span class="token comment">#yum -y install mha4mysql-manager-0.58-</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token number">0</span>.el7.centos.noarch.rpm</pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">[</span>root@mha-manager ~<span class="token punctuation">]</span><span class="token comment">#yum -y install mha4mysql-node-0.58-0.el7.centos.noarch.rpm</span></pre></td></tr></table></figure><p><strong>在所有节点实现相互之间 ssh key 验证</strong></p><pre><code>[root@centos7 ~]# ssh-keygen 
+mysql&gt; 
+
+mysql&gt; use TESTDB;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; show tables;
++------------------+
+| Tables_in_reggie |
++------------------+
+| address_book     |
+| category         |
+| dish             |
+| dish_flavor      |
+| employee         |
+| order_detail     |
+| orders           |
+| setmeal          |
+| setmeal_dish     |
+| shopping_cart    |
+| user             |
++------------------+
+11 rows in set (0.01 sec)
+
+mysql&gt; 
+</code></pre><h3 id="MHA实战案例"><a href="#MHA实战案例" class="headerlink" title="MHA实战案例"></a>MHA实战案例</h3><p><img data-src="/../image.assets/1669541563329.png" alt="1669541563329"></p><p><strong>主从复制搭建过程省略</strong></p><p><strong>在所有MySQL服务器上安装mha4mysql-node包</strong></p><pre><code class="shell">下载地址
+mha4mysql-manager
+mha4mysql-node
+#下载
+https://github.com/yoshinorim/mha4mysql-manager/wiki/Downloads
+https://github.com/yoshinorim/mha4mysql-node/releases/tag/v0.58
+https://github.com/yoshinorim/mha4mysql-node/releases/tag/v0.58
+
+yum -y install mha4mysql-node-0.58-0.el7.centos.noarch.rpm
+</code></pre><p><strong>在管理节点上安装两个包mha4mysql-manager和mha4mysql-node</strong></p><pre><code class="shell">[root@mha-manager ~]#yum -y install mha4mysql-manager-0.58-
+0.el7.centos.noarch.rpm
+[root@mha-manager ~]#yum -y install mha4mysql-node-0.58-0.el7.centos.noarch.rpm
+</code></pre><p><strong>在所有节点实现相互之间ssh key验证</strong></p><pre><code>[root@centos7 ~]# ssh-keygen 
 [root@centos7 ~]# ssh-copy-id 127.0.0.1
 [root@centos7 ~]# scp -r .ssh 192.168.179.170:/root/
 [root@centos7 ~]# scp -r .ssh 192.168.179.171:/root/
@@ -223,16 +392,16 @@ candidate_master=1
 hostname=192.168.179.171
 [server3]
 hostname=192.168.179.157
-</code></pre><p>主节点创建账号 user=mhauser #用于远程连接 MySQL 所有节点的用户，需要有管理员的权限<br>password=123456</p><pre><code>mysql&gt; create user mhauser@'192.168.179.%' identified by '123456';
+</code></pre><p>主节点创建账号user&#x3D;mhauser #用于远程连接MySQL所有节点的用户,需要有管理员的权限<br>password&#x3D;123456</p><pre><code>mysql&gt; create user mhauser@&#39;192.168.179.%&#39; identified by &#39;123456&#39;;
 Query OK, 0 rows affected (0.05 sec)
 
 mysql&gt; 
 
-mysql&gt; grant all on *.* to mhauser@'192.168.179.%';
+mysql&gt; grant all on *.* to mhauser@&#39;192.168.179.%&#39;;
 Query OK, 0 rows affected (0.00 sec)
 
 mysql&gt; 
-</code></pre><p>master_ip_failover_script=/usr/local/bin/master_ip_failover 文件内容</p><pre><code>#!/usr/bin/env perl
+</code></pre><p>master_ip_failover_script&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;master_ip_failover文件内容</p><pre><code>#!/usr/bin/env perl
 
 #  Copyright (C) 2011 DeNA Co.,Ltd.
 #
@@ -254,7 +423,7 @@ mysql&gt;
 ## Note: This is a sample script and is not complete. Modify the script based on your environment.
 
 use strict;
-use warnings FATAL =&gt; 'all';
+use warnings FATAL =&gt; &#39;all&#39;;
 
 use Getopt::Long;
 use MHA::DBHelper;
@@ -265,22 +434,22 @@ my (
   $new_master_ip,  $new_master_port,  $new_master_user,
   $new_master_password
 );
-my $vip = '192.168.179.157/24';
+my $vip = &#39;192.168.179.157/24&#39;;
 my $key = &quot;1&quot;;
 my $ssh_start_vip = &quot;/sbin/ifconfig eth0:$key $vip&quot;;
 my $ssh_stop_vip = &quot;/sbin/ifconfig eth0:$key down&quot;;
 
 GetOptions(
-  'command=s'             =&gt; \$command,
-  'ssh_user=s'            =&gt; \$ssh_user,
-  'orig_master_host=s'    =&gt; \$orig_master_host,
-  'orig_master_ip=s'      =&gt; \$orig_master_ip,
-  'orig_master_port=i'    =&gt; \$orig_master_port,
-  'new_master_host=s'     =&gt; \$new_master_host,
-  'new_master_ip=s'       =&gt; \$new_master_ip,
-  'new_master_port=i'     =&gt; \$new_master_port,
-  'new_master_user=s'     =&gt; \$new_master_user,
-  'new_master_password=s' =&gt; \$new_master_password,
+  &#39;command=s&#39;             =&gt; \$command,
+  &#39;ssh_user=s&#39;            =&gt; \$ssh_user,
+  &#39;orig_master_host=s&#39;    =&gt; \$orig_master_host,
+  &#39;orig_master_ip=s&#39;      =&gt; \$orig_master_ip,
+  &#39;orig_master_port=i&#39;    =&gt; \$orig_master_port,
+  &#39;new_master_host=s&#39;     =&gt; \$new_master_host,
+  &#39;new_master_ip=s&#39;       =&gt; \$new_master_ip,
+  &#39;new_master_port=i&#39;     =&gt; \$new_master_port,
+  &#39;new_master_user=s&#39;     =&gt; \$new_master_user,
+  &#39;new_master_password=s&#39; =&gt; \$new_master_password,
 );
 
 exit &amp;main();
@@ -347,17 +516,17 @@ sub usage &#123;
   print
 &quot;Usage: master_ip_failover --command=start|stop|stopssh|status --orig_master_host=host --orig_master_ip=ip --orig_master_port=port --new_master_host=host --new_master_ip=ip --new_master_port=port\n&quot;;
 &#125;
-</code></pre><p>master 修改 mysql 配置文件</p><pre><code>[mysqld]
+</code></pre><p>master修改mysql配置文件</p><pre><code>[mysqld]
 server_id=170
 log-bin=/data/mysql/mysql-bin
 skip_name_resolve=1
-</code></pre><p>slave 节点上修改</p><pre><code>[mysqld]
+</code></pre><p>slave节点上修改</p><pre><code>[mysqld]
 server_id=171 #不同节点此值各不相同
 log-bin=/data/mysql/mysql-bin
 read_only
 relay_log_purge=0
 skip_name_resolve=1
-</code></pre><p>检查环境</p><pre><code class="language-\">masterha_check_ssh --conf=/etc/mastermha/app1.cnf
+</code></pre><p>检查环境</p><pre><code class="\">masterha_check_ssh --conf=/etc/mastermha/app1.cnf
 # 范例
 [root@centos7 ~]# masterha_check_ssh --conf=/etc/mastermha/app1.cnf
 Tue Nov 29 22:21:44 2022 - [warning] Global configuration file /etc/masterha_default.cnf not found. Skipping.
@@ -395,10 +564,9 @@ Tue Nov 29 22:45:13 2022 - [warning] shutdown_script is not defined.
 Tue Nov 29 22:45:13 2022 - [info] Got exit code 0 (Not master dead).
 
 MySQL Replication Health is OK.
-
 </code></pre><p>查看状态</p><pre><code>masterha_check_status --conf=/etc/mastermha/app1.cnf
 app1 is stopped(2:NOT_RUNNING).
-</code></pre><p>启动和停止 mha</p><pre><code># 后台运行
+</code></pre><p>启动和停止mha</p><pre><code># 后台运行
 nohup masterha_manager --conf=/etc/mastermha/app1.cnf --remove_dead_master_conf
 --ignore_last_failover &amp;&gt; /dev/null
 # 前台运行
@@ -409,4 +577,4 @@ remove_dead_master_conf --ignore_last_failover
 Stopped app1 successfully.
 </code></pre><p>查看状态</p><pre><code>[root@centos7 app1]# masterha_check_status --conf=/etc/mastermha/app1.cnf
 app1 (pid:48280) is running(0:PING_OK), master:192.168.179.170
-</code></pre><div class="tags"><a href="/tags/MySQL%E5%9F%BA%E7%A1%80/" rel="tag"><i class="ic i-tag"></i> MySQL基础</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i> </span><span class="text">更新于</span> <time title="修改时间：2023-05-02 22:12:56" itemprop="dateModified" datetime="2023-05-02T22:12:56+08:00">2023-05-02</time></span></div><div id="copyright"><ul><li class="author"><strong>本文作者： </strong>yuan kun <i class="ic i-at"><em>@</em></i>Hide your thoughts</li><li class="link"><strong>本文链接：</strong> <a href="http://blog.itshare.work/MySQL/MySQL%E9%9B%86%E7%BE%A4/" title="MySQL集群">http://blog.itshare.work/MySQL/MySQL集群/</a></li><li class="license"><strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/MySQL/MySQL/" itemprop="url" rel="prev" data-background-image="http:&#x2F;&#x2F;oss.itshare.work&#x2F;itshare-work-images&#x2F;9.jpg" title="MySQL数据库基础和安装使用"><span class="type">上一篇</span> <span class="category"><i class="ic i-flag"></i> MySQL</span><h3>MySQL数据库基础和安装使用</h3></a></div><div class="item right"><a href="/Linux/centos%E7%B3%BB%E7%BB%9Fyum%E9%85%8D%E7%BD%AE/" itemprop="url" rel="next" data-background-image="http:&#x2F;&#x2F;oss.itshare.work&#x2F;itshare-work-images&#x2F;24.jpg" title="Centos系统yum源配置"><span class="type">下一篇</span> <span class="category"><i class="ic i-flag"></i> Linux</span><h3>Centos系统yum源配置</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#mysql%E9%9B%86%E7%BE%A4"><span class="toc-number">1.</span> <span class="toc-text">MySQL 集群</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%9E%B6%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">主从复制架构和原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-number">1.1.1.</span> <span class="toc-text">MySQL 主从复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E7%9A%84%E5%8A%9F%E7%94%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">复制的功用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.3.</span> <span class="toc-text">复制架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.4.</span> <span class="toc-text">主从复制原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%9B%B8%E5%85%B3%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.1.5.</span> <span class="toc-text">主从复制相关线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%9F%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.6.</span> <span class="toc-text">跟复制功能相关的文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.7.</span> <span class="toc-text">实现主从复制配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A7%E8%81%94%E5%A4%8D%E5%88%B6"><span class="toc-number">1.1.8.</span> <span class="toc-text">级联复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%A4%8D%E5%88%B6"><span class="toc-number">1.1.9.</span> <span class="toc-text">半同步复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E5%88%A9%E7%94%A8mycat%E5%AE%9E%E7%8E%B0mysql%E7%9A%84%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="toc-number">1.1.10.</span> <span class="toc-text">实战案例：利用 Mycat 实现 MySQL 的读写分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mha%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B"><span class="toc-number">1.1.11.</span> <span class="toc-text">MHA 实战案例</span></a></li></ol></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li><a href="/MySQL/MySQL/" rel="bookmark" title="MySQL数据库基础和安装使用">MySQL数据库基础和安装使用</a></li><li class="active"><a href="/MySQL/MySQL%E9%9B%86%E7%BE%A4/" rel="bookmark" title="MySQL集群">MySQL集群</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="image" itemprop="image" alt="yuan kun" data-src="/images/avatar.jpg"><p class="name" itemprop="name">yuan kun</p><div class="description" itemprop="description">解决各种服务器、网络、应用等技术问题，致力于保障系统稳定、高效运行</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">16</span> <span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">7</span> <span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">3</span> <span class="name">标签</span></a></div></nav><div class="social"><span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==" title="https:&#x2F;&#x2F;github.com&#x2F;amehime&#x2F;hexo-theme-shoka"><i class="ic i-github"></i></span></div><ul class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于</a></li><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></div></div></div><ul id="quick"><li class="prev pjax"><a href="/MySQL/MySQL/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/Linux/centos%E7%B3%BB%E7%BB%9Fyum%E9%85%8D%E7%BD%AE/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/Kubernetes/" title="分类于 Kubernetes">Kubernetes</a></div><span><a href="/Kubernetes/Kubernetes%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="Kubernetes读书笔记">Kubernetes读书笔记</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Linux/" title="分类于 Linux">Linux</a></div><span><a href="/Linux/centos%E7%B3%BB%E7%BB%9Fyum%E9%85%8D%E7%BD%AE/" title="Centos系统yum源配置">Centos系统yum源配置</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Kubernetes/" title="分类于 Kubernetes">Kubernetes</a></div><span><a href="/Kubernetes/%E6%90%AD%E5%BB%BAKubernetes%E9%9B%86%E7%BE%A4/" title="搭建Kubernetes集群">搭建Kubernetes集群</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Docker/" title="分类于 Docker">Docker</a></div><span><a href="/Docker/docker-install/" title="Docker安装部署">Docker安装部署</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Linux/" title="分类于 Linux">Linux</a></div><span><a href="/Linux/Disk/" title="磁盘存储和文件系统管理">磁盘存储和文件系统管理</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Ansible/" title="分类于 Ansible">Ansible</a></div><span><a href="/Ansible/Ansible/" title="运维自动化工具Ansible(一)">运维自动化工具Ansible(一)</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Ansible/" title="分类于 Ansible">Ansible</a></div><span><a href="/Ansible/Ansible2/" title="运维自动化工具Ansible(二)">运维自动化工具Ansible(二)</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Docker/" title="分类于 Docker">Docker</a></div><span><a href="/Docker/docker-compose%E9%83%A8%E7%BD%B2MySQL/" title="docker-compose部署MySql">docker-compose部署MySql</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Kubernetes/" title="分类于 Kubernetes">Kubernetes</a></div><span><a href="/Kubernetes/Kubernetes%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Kubernetes常用命令">Kubernetes常用命令</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Docker/" title="分类于 Docker">Docker</a></div><span><a href="/Docker/Docker%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" title="Docker镜像加速">Docker镜像加速</a></span></li></ul></div></div><div class="status"><div class="copyright">&copy; 2022 – <span itemprop="copyrightYear">2023</span> <span class="with-love"><i class="ic i-sakura rotate"></i> </span><span class="author" itemprop="copyrightHolder">yuan kun @ Cookie</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i> </span><span title="站点总字数">281k 字</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="ic i-coffee"></i> </span><span title="站点阅读时长">4:16</span></div><div class="powered-by">基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL={path:"MySQL/MySQL集群/",favicon:{show:"（●´3｀●）やれやれだぜ",hide:"(´Д｀)大変だ！"},search:{placeholder:"文章搜索",empty:"关于 「 ${query} 」，什么也没搜到",stats:"${time} ms 内找到 ${hits} 条结果"},valine:!0,fancybox:!0,copyright:'复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',ignores:[function(e){return e.includes("#")},function(e){return new RegExp(LOCAL.path+"$").test(e)}]}</script><script src="https://cdn.polyfill.io/v2/polyfill.js"></script><script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script><script src="/js/app.js?v=0.2.5"></script></body></html><!-- rebuild by hrmmi -->
+</code></pre><div class="tags"><a href="/tags/MySQL%E5%9F%BA%E7%A1%80/" rel="tag"><i class="ic i-tag"></i> MySQL基础</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i> </span><span class="text">更新于</span> <time title="修改时间：2023-05-02 22:12:56" itemprop="dateModified" datetime="2023-05-02T22:12:56+08:00">2023-05-02</time></span></div><div id="copyright"><ul><li class="author"><strong>本文作者： </strong>yuan kun <i class="ic i-at"><em>@</em></i>Hide your thoughts</li><li class="link"><strong>本文链接：</strong> <a href="http://blog.itshare.work/MySQL/MySQL%E9%9B%86%E7%BE%A4/" title="MySQL集群">http://blog.itshare.work/MySQL/MySQL集群/</a></li><li class="license"><strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/MySQL/MySQL/" itemprop="url" rel="prev" data-background-image="http:&#x2F;&#x2F;oss.itshare.work&#x2F;itshare-work-images&#x2F;9.jpg" title="MySQL数据库基础和安装使用"><span class="type">上一篇</span> <span class="category"><i class="ic i-flag"></i> MySQL</span><h3>MySQL数据库基础和安装使用</h3></a></div><div class="item right"><a href="/Linux/centos%E7%B3%BB%E7%BB%9Fyum%E9%85%8D%E7%BD%AE/" itemprop="url" rel="next" data-background-image="http:&#x2F;&#x2F;oss.itshare.work&#x2F;itshare-work-images&#x2F;8.jpg" title="Centos系统yum源配置"><span class="type">下一篇</span> <span class="category"><i class="ic i-flag"></i> Linux</span><h3>Centos系统yum源配置</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL%E9%9B%86%E7%BE%A4"><span class="toc-number">1.</span> <span class="toc-text">MySQL集群</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%9E%B6%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">主从复制架构和原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-number">1.1.1.</span> <span class="toc-text">MySQL主从复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E7%9A%84%E5%8A%9F%E7%94%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">复制的功用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.3.</span> <span class="toc-text">复制架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.4.</span> <span class="toc-text">主从复制原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%9B%B8%E5%85%B3%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.1.5.</span> <span class="toc-text">主从复制相关线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%9F%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E7%9A%84%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">1.1.6.</span> <span class="toc-text">跟复制功能相关的文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.7.</span> <span class="toc-text">实现主从复制配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A7%E8%81%94%E5%A4%8D%E5%88%B6"><span class="toc-number">1.1.8.</span> <span class="toc-text">级联复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%A4%8D%E5%88%B6"><span class="toc-number">1.1.9.</span> <span class="toc-text">半同步复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%88%A9%E7%94%A8Mycat%E5%AE%9E%E7%8E%B0MySQL%E7%9A%84%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="toc-number">1.1.10.</span> <span class="toc-text">实战案例：利用Mycat实现MySQL的读写分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MHA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B"><span class="toc-number">1.1.11.</span> <span class="toc-text">MHA实战案例</span></a></li></ol></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li><a href="/MySQL/MySQL/" rel="bookmark" title="MySQL数据库基础和安装使用">MySQL数据库基础和安装使用</a></li><li class="active"><a href="/MySQL/MySQL%E9%9B%86%E7%BE%A4/" rel="bookmark" title="MySQL集群">MySQL集群</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="image" itemprop="image" alt="yuan kun" data-src="/images/avatar.jpg"><p class="name" itemprop="name">yuan kun</p><div class="description" itemprop="description">解决各种服务器、网络、应用等技术问题，致力于保障系统稳定、高效运行</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">16</span> <span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">7</span> <span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">3</span> <span class="name">标签</span></a></div></nav><div class="social"><span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==" title="https:&#x2F;&#x2F;github.com&#x2F;amehime&#x2F;hexo-theme-shoka"><i class="ic i-github"></i></span></div><ul class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于</a></li><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></div></div></div><ul id="quick"><li class="prev pjax"><a href="/MySQL/MySQL/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/Linux/centos%E7%B3%BB%E7%BB%9Fyum%E9%85%8D%E7%BD%AE/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/MySQL/" title="分类于 MySQL">MySQL</a></div><span><a href="/MySQL/MySQL%E9%9B%86%E7%BE%A4/" title="MySQL集群">MySQL集群</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Linux/" title="分类于 Linux">Linux</a></div><span><a href="/Linux/Disk/" title="磁盘存储和文件系统管理">磁盘存储和文件系统管理</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Docker/" title="分类于 Docker">Docker</a></div><span><a href="/Docker/Docker%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" title="Docker镜像加速">Docker镜像加速</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Linux/" title="分类于 Linux">Linux</a></div><span><a href="/Linux/DNS/" title="DNS服务">DNS服务</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Linux/" title="分类于 Linux">Linux</a></div><span><a href="/Linux/centos%E7%B3%BB%E7%BB%9Fyum%E9%85%8D%E7%BD%AE/" title="Centos系统yum源配置">Centos系统yum源配置</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/zabbix/" title="分类于 zabbix">zabbix</a></div><span><a href="/zabbix/zabbix5%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85/" title="zabbix5部署安装">zabbix5部署安装</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Kubernetes/" title="分类于 Kubernetes">Kubernetes</a></div><span><a href="/Kubernetes/k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/" title="Kubernetes详细教程">Kubernetes详细教程</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Ansible/" title="分类于 Ansible">Ansible</a></div><span><a href="/Ansible/Ansible2/" title="运维自动化工具Ansible(二)">运维自动化工具Ansible(二)</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Ansible/" title="分类于 Ansible">Ansible</a></div><span><a href="/Ansible/Ansible/" title="运维自动化工具Ansible(一)">运维自动化工具Ansible(一)</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/MySQL/" title="分类于 MySQL">MySQL</a></div><span><a href="/MySQL/MySQL/" title="MySQL数据库基础和安装使用">MySQL数据库基础和安装使用</a></span></li></ul></div></div><div class="status"><div class="copyright">&copy; 2022 – <span itemprop="copyrightYear">2023</span> <span class="with-love"><i class="ic i-sakura rotate"></i> </span><span class="author" itemprop="copyrightHolder">yuan kun @ Cookie</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i> </span><span title="站点总字数">287k 字</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="ic i-coffee"></i> </span><span title="站点阅读时长">4:21</span></div><div class="powered-by">基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL={path:"MySQL/MySQL集群/",favicon:{show:"（●´3｀●）やれやれだぜ",hide:"(´Д｀)大変だ！"},search:{placeholder:"文章搜索",empty:"关于 「 ${query} 」，什么也没搜到",stats:"${time} ms 内找到 ${hits} 条结果"},valine:!0,fancybox:!0,copyright:'复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',ignores:[function(e){return e.includes("#")},function(e){return new RegExp(LOCAL.path+"$").test(e)}]}</script><script src="https://cdn.polyfill.io/v2/polyfill.js"></script><script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script><script src="/js/app.js?v=0.2.5"></script></body></html><!-- rebuild by hrmmi -->
